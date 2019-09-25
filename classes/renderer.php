@@ -41,7 +41,7 @@ class cataloguedata implements \templatable, \renderable {
 
 class renderer extends \plugin_renderer_base {
 
-  public function render(cataloguedata $catdata) {
+  public function render(\renderable $catdata) {
     $data = $catdata->export_for_template($this);
 
     switch($catdata->template) {
