@@ -28,8 +28,8 @@
 // Replace modulecatalogue with the name of your module and remove this line.
 
 
-//require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once($CFG->dirroot . "/config.php");
+require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
+//require_once($CFG->dirroot . "/config.php");
 
 require_once(dirname(__FILE__).'/lib.php');
 
