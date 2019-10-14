@@ -45,3 +45,8 @@ $string['modulecode'] = 'Module code';
 $string['template'] = 'Template';
 
 $string['nocataloguedata'] = 'No module catalogue data available';
+
+$string['catalogue_username'] = 'Username';
+$string['catalogue_username_desc'] = 'Username used to authenticate with Module catalogue API';
+$string['catalogue_password'] = 'Password';
+$string['catalogue_password_desc'] = 'Password used to authenticate with Module catalogue API';

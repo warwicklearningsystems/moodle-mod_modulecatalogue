@@ -291,7 +291,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
           $modcat->name = "Module catalogue {$modcat->id}";
           $DB->set_field('modulecatalogue', 'name', $modcat->name, array('id'=>$modcat->id));
         }
-        $info->name = $label->name;
+        $info->name = $modcat->name;
 
         // TODO: if $modcat->modulecode is empty, we could infer module code from $COURSE->idnumber
         // (i.e. splitting characters before the '-', if there are five of them in
@@ -300,6 +300,10 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
 
         if($modulecode != '') {
 
+          // Get data from API and store
+          get_modulecatalogue_data($modulecode);
+
+          // Get data from DB
           if ($moddata = $DB->get_records_menu('modulecatalogue_data',
             array('modulecode' => $modulecode), '', 'labelkey, labelvalue')) {
 

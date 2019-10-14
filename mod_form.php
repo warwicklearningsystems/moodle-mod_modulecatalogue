@@ -54,7 +54,7 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addElement('select', 'template', get_string('template', 'modulecatalogue'), $TEMPLATEOPTIONS);
 
         $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), array('size' => '64'));
-
+        $mform->setType('modulecode', PARAM_ALPHANUMEXT);
 
         // Add standard grading elements.
         //$this->standard_grading_coursemodule_elements();

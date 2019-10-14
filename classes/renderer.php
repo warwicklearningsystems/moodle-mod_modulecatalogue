@@ -17,7 +17,11 @@ class cataloguedata implements \templatable, \renderable {
    */
   public function __construct($cataloguedata, $template) {
 
-    $validproperties = array('principalaims', 'learningoutcomes');
+    $validproperties = array('code', 'name', 'principal_aims', 'learning_outcomes', 'principal_learning_outcomes');
+
+    foreach($validproperties as $p) {
+      $this->$p = '';
+    }
 
     foreach($cataloguedata as $k => $v) {
       if ( in_array($k, $validproperties) ) {
@@ -31,8 +35,11 @@ class cataloguedata implements \templatable, \renderable {
   public function export_for_template(\renderer_base $output) {
     $data = array(
       'classes'     => '',
-      'principalaims' => $this->principalaims,
-      'learningoutcomes' => $this->learningoutcomes,
+      'principalaims' => $this->principal_aims,
+      'learningoutcomes' => $this->learning_outcomes,
+      'principial_learningoutcomes' => $this->principal_learning_outcomes,
+      'code' => $this->code,
+      'name' => $this->name
     );
     return $data;
   }

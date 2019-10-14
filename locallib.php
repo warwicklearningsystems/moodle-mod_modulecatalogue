@@ -36,3 +36,66 @@ defined('MOODLE_INTERNAL') || die();
  *    return new stdClass();
  *}
  */
+
+/**
+ * Retrieves assignment data from Tabula API
+ *
+ * @param string Module code
+ * @return object information on assignments
+ */
+function get_modulecatalogue_data($modulecode) {
+
+  global $DB;
+
+  $cataloguedata = array();
+
+  if($modulecode != '') {
+
+    $url = 'https://moodle-admin-test.warwick.ac.uk/api/v1/module/' . $modulecode;
+
+    $username = get_config('mod_modulecatalogue', 'apiusername');
+    $password = get_config('mod_modulecatalogue', 'apipassword');
+
+    $curldata = download_file_content($url, array('Authorization' => 'Basic ' .
+      (string)base64_encode( $username . ":" . $password )), false, true);
+
+    if($curldata->status == 200) {
+      $cataloguedata = json_decode($curldata->results);
+
+      foreach($cataloguedata as $k => $v) {
+
+        if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear' => '19/20', 'labelkey' => $k)) ) {
+
+          // Insert
+          $DB->insert_record('modulecatalogue_data',
+            array('modulecode' => $modulecode,
+                  'academicyear'=> '19/20',
+                  'labelkey' => $k,
+                  'labelvalue' => $v
+            ));
+
+        } else {
+
+          $id = $DB->get_field('modulecatalogue_data', 'id', array('modulecode' => $modulecode, 'academicyear' => '19/20','labelkey' => $k));
+
+          // Update
+          $DB->update_record('modulecatalogue_data',
+            array('modulecode' => $modulecode,
+              'academicyear'=> '19/20',
+              'labelkey' => $k,
+              'labelvalue' => $v,
+              'id' => $id
+            ));
+
+        }
+
+      }
+
+
+    }
+
+  }
+
+
+  return $cataloguedata;
+}

@@ -77,9 +77,9 @@ $PAGE->set_heading(format_string($course->fullname));
 echo $OUTPUT->header();
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($modulecatalogue->intro) {
-    echo $OUTPUT->box(format_module_intro('modulecatalogue', $modulecatalogue, $cm->id), 'generalbox mod_introbox', 'modulecatalogueintro');
-}
+//if ($modulecatalogue->intro) {
+//    echo $OUTPUT->box(format_module_intro('modulecatalogue', $modulecatalogue, $cm->id), 'generalbox mod_introbox', 'modulecatalogueintro');
+//}
 
 $cacheddata = modulecatalogue_get_coursemodule_info($cm);
 
