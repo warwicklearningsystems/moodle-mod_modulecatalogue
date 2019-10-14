@@ -29,9 +29,7 @@
 
 
 //require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-//require_once($CFG->dirroot . "/config.php");
-
-require_once('/home/rboyatt/devel/moodle/moodle36/config.php');
+require_once($CFG->dirroot . "/config.php");
 
 require_once(dirname(__FILE__).'/lib.php');
 
