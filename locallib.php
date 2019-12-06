@@ -51,13 +51,14 @@ function get_modulecatalogue_data($modulecode) {
 
   if($modulecode != '') {
 
-    $url = 'https://moodle-admin-test.warwick.ac.uk/api/v1/module/' . $modulecode;
 
-    $username = get_config('mod_modulecatalogue', 'apiusername');
-    $password = get_config('mod_modulecatalogue', 'apipassword');
+    $url = 'https://courses-dev.warwick.ac.uk/modules/2020/' . $modulecode . '.json';
 
-    $curldata = download_file_content($url, array('Authorization' => 'Basic ' .
-      (string)base64_encode( $username . ":" . $password )), false, true);
+    //$curldata = download_file_content($url, array('Authorization' => 'Basic ' .
+    //  (string)base64_encode( $username . ":" . $password )), false, true);
+
+    $curldata = download_file_content($url, null, false, true);
+
 
     if($curldata->status == 200) {
       $cataloguedata = json_decode($curldata->results);

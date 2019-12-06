@@ -50,11 +50,16 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
         $TEMPLATEOPTIONS = array('fullentry1' => 'Official module content description',
-                            'shortentry1' => 'Short module catalogue summary');
+                            'shortentry1' => 'Short module catalogue summary',
+                            'fancyentry' => 'Fancy summary',
+                            'catalogue1' => 'Catalogue 1 entry');
         $mform->addElement('select', 'template', get_string('template', 'modulecatalogue'), $TEMPLATEOPTIONS);
 
         $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), array('size' => '64'));
         $mform->setType('modulecode', PARAM_ALPHANUMEXT);
+
+	$mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), array('size' => '128'));
+        $mform->setType('adminsupport', PARAM_ALPHANUMEXT);
 
         // Add standard grading elements.
         //$this->standard_grading_coursemodule_elements();

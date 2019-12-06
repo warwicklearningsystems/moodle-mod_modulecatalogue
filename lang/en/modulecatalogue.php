@@ -42,6 +42,7 @@ $string['pluginadministration'] = 'modulecatalogue administration';
 $string['pluginname'] = 'Module catalogue';
 
 $string['modulecode'] = 'Module code';
+$string['adminsupport'] = 'Admin support';
 $string['template'] = 'Template';
 
 $string['nocataloguedata'] = 'No module catalogue data available';

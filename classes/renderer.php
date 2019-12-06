@@ -37,7 +37,7 @@ class cataloguedata implements \templatable, \renderable {
       'classes'     => '',
       'principalaims' => $this->principal_aims,
       'learningoutcomes' => $this->learning_outcomes,
-      'principial_learningoutcomes' => $this->principal_learning_outcomes,
+      'principial_learning_outcomes' => $this->principal_learning_outcomes,
       'code' => $this->code,
       'name' => $this->name
     );
@@ -54,6 +54,12 @@ class renderer extends \plugin_renderer_base {
     switch($catdata->template) {
       case 'shortentry1':
         $template = 'mod_modulecatalogue/shortentry1';
+        break;
+      case 'fancyentry':
+        $template = 'mod_modulecatalogue/fancyentry';
+        break;
+      case 'catalogue1':
+        $template = 'mod_modulecatalogue/catalogue1';
         break;
       case 'fullentry1':
       default:
