@@ -300,7 +300,7 @@ function get_modulecatalogue_data($modulecode) {
             if(!($v instanceof stdClass)){
               if (!(is_array($v))){
                   if (!(is_null($v))){                  
-                      $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear'=> '19/20', 'labelkey' => $k,'labelvalue' => $v,'id' => $id ));
+                      $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear'=> '20/21', 'labelkey' => $k,'labelvalue' => $v,'id' => $id ));
                   }
               }
               

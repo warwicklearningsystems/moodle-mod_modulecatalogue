@@ -1,36 +1,35 @@
+<head>
+    <link rel="stylesheet" type="text/css" />
+</head>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-5">BS127: Agents of Infectious Disease</h1>
+    <h1 class="display-5"> {{ code }}: {{ name }}</h1>
     <p class="lead">{{ principal_aims }}</p>
 
     <p>
-	<H5>Principal aims</H5>
-	    This module introduces students to important aspects of the topic of infection, considering some of the agents themselves and their interactions with host species
+	<H5>Outline Syllabus</H5>
+	    {{ outlineSyllabus }}
     </p>
 	<p>
 	<H5>Principal Learning Outcomes</H5>
 	    <ul>
-	    <li>Upon completion of the module, students should be able to understand:\r\nthe role of various structures associated with the bacterial cell in causing disease, </li>
-	    <li>a range of diseases caused by bacteria</li>
-	    <li>the structure of viruses and how this relates to the capacity of viruses to cause disease</li>
-	    <li>the host response to viral challenge"</li>
-	    <li>the mechanisms by which diseases spread</li>
-	    <li>how epidemiological theory is used to understand the behaviour of pathogens in populations</li>
+	    <li> {{ learningOutcome0 }} </li>
+	    <li> {{ learningOutcome1 }} </li>
+	    <li> {{ learningOutcome2 }} </li>
+	    <li> {{ learningOutcome3 }} </li>
+            <li> {{ learningOutcome4 }} </li>
+            <li> {{ learningOutcome5 }} </li> 
 	    </ul>
+            
 	</p>
 	<H6>Additional information</H6>
 	<p>
 	    <ul class="unstyled">
-	    <li>Module leader: Robert Spooner - email <a href="mailto:r.a.spooner@warwick.ac.uk">r.a.spooner@warwick.ac.uk</a></li>
+	    <li>Module leader: {{ leadername }} - email <a href="mailto:{{ leaderemail }}">{{ leaderemail }} </a></li>
 	    <li>Lectures: Monday 9am L3, Tuesday 10am OC0.03, Wednesday 3pm GLT1</li>
 	</p>
-    <H6>Pre-requisites</H6>
-    <p>
-        <ul>
-            <li>BS100: Infectious Diseases - <a href="https://moodle-test.warwick.ac.uk">module taken in 19/20</a></li>
-        </ul>
-    </p>
-
+    <H6>Indicative Reading List</H6>
+    {{ indicativeReadingList }}  <a href= {{ readingListUrl }} > {{ readingListUrl }} </a></li>
 
   </div>
 </div>

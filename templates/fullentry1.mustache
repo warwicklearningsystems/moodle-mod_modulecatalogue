@@ -1,16 +1,58 @@
 <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-5">{{ code }}: {{ name }}</h1>
-    <p class="lead">{{ principal_aims }}</p>
+    <div class="container">
+        <h1 class="display-5">{{ code }}: {{ name }}</h1>
+        <h3 class="display-5"> Number of Credits: {{ creditValue }}</h3>
+        <h4 class="display-5"> Academic Year: {{ academic_year }}</h4>
+        <p class="lead"> Aims:</p>
+        <tr>  {{ principal_aims }} </tr>
+        <p class="lead"> Total Study Hours: {{ totalStudyHours }} </p>
+        <p class="lead"> Syllabus </p>
+        <p> {{ outlineSyllabus }}  </p>
 
-    <p>
-	<H4>Principal aims</H4>
-		{{ principalaims }}
+        <p class="lead"> Assessments </p>
 
-    </p>
-	<p>
-	<H4>Principal Learning Outcomes</H4>
-		{{ principial_learning_outcomes }}
-	</p>
-  </div>
+        <section>
+            {{#assesmentGrplength0}} 
+                <p> 
+                    {{ assesmentGrpname0 }} {{assesmentGrptype0}} <em> </em> {{ assesmentGrpweighting0 }}
+                    Duration Exam: {{ assesmentGrplength0 }}
+                    Description: {{ assesmentGrpdescription0 }}
+                </p>
+            {{/assesmentGrplength0}}
+            {{^assesmentGrplength0}} 
+                <td>
+                    <em> {{ assesmentGrpname0 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}}
+                </td>
+            {{/assesmentGrplength0}}
+        </section>
+        <section>
+            {{#assesmentGrplength1}}
+                <p> 
+                    {{ assesmentGrpname1 }} {{assesmentGrptype1}} <em> </em> {{ assesmentGrpweighting1 }} 
+                    Description: {{ assesmentGrpdescription1 }}
+                </p>
+            {{/assesmentGrplength1}}
+            {{^assesmentGrplength1}}
+                <td>
+                    <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} 
+                </td>
+            {{/assesmentGrplength1}}
+        </section>
+       <section>
+            {{#assesmentGrplength2}}
+                <p> 
+                    {{ assesmentGrpname2 }} {{assesmentGrptype2}} <em> </em> {{ assesmentGrpweighting2 }} 
+                    Description: {{ assesmentGrpdescription2 }}
+                </p>
+            {{/assesmentGrplength2}}
+            {{^assesmentGrplength2}}
+                <td>
+                    <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting2}} 
+                </td>
+            {{/assesmentGrplength2}}
+        </section>
+
+        <p>Subject Specific Skills</p>
+        {{ subjectSpecificSkills}}
+    </div>
 </div>

@@ -61,7 +61,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e90fe', end
                 height:40px;
                 margin-left:3px;
                 font-size: .9375rem;
-    			font-weight: 400;
+    		font-weight: 400;
 /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1e90fe+0,1876d0+100 */
 background: #1e90fe; /* Old browsers */
 background: -moz-linear-gradient(top,  #1e90fe 0%, #1876d0 100%); /* FF3.6-15 */
@@ -79,31 +79,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e90fe', end
 
                         <div id="wmshead-content" class="p-3 p-md-5 view" style="background-color: transparent; padding-top: 2.0rem!important; padding-bottom: 1.2rem !important;">
                             <div id="head-img-outer">
-                                <div id="head-img-inner" style="max-width: 300px; float: right; margin-right: .5rem; margin-left: .5rem;">
-                                    <img src="https://moodle.warwick.ac.uk/draftfile.php/18320/user/draft/170183346/012019-07-31_12h02_55.png" alt="food" style="
-	padding: .5rem;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 2rem;
-        -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
-    box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;
-    " class="img-responsive atto_image_button_right" width="407" height="433">
-                                </div>
-                            </div>
-                            <div class="col-md-8 px-0">
-                                <h2 style="color:#1876d0; letter-spacing:-1px;font-weight:400;">{{ code }}: {{ name }}</h2>
 
-                                <p class="my-3" style="font-size:1.1em;"></p>
-                                <h4>{{ principalaims }}</h4>
-                                <p></p>
+    </div>
+    <div class="col-md-8 px-0">
+       <h2 style="color:#1876d0; letter-spacing:-1px;font-weight:400;">{{ code }}: {{ name }}</h2>
 
-                            </div>
-                        </div>
+            <p class="my-3" style="font-size:1.1em;"></p>
+                <h5>Principal Aims: {{ principal_aims }}</h5>
+                    <p>
+                        {{ outlineSyllabus }}
+                    </p>
 
-                    </div>
+        </div>
+        </div>
+
+        </div>
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
@@ -113,8 +103,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e90fe', end
                             <div id="head-contact-box" style="padding:0px 10px;font-size:1.1em;" class="my-3">
 
                                 <ul id="ac-contact" style="list-style-type:none; margin-bottom:15px;padding-left:0px !important;">
-                                    <li><strong style="font-size: 1.1em;">Course Tutor:</strong><span style="font-size: 1.1em;">&nbsp;Steve Gascoigne&nbsp; S.Gascoigne@warwick.ac.uk</span><br></li><br><b>Student Administration:</b><span>&nbsp;CLLundergraduate@warwick.ac.uk</span>
-                                    <li></li>
+                                    <li><strong style="font-size: 1.1em;">Course Tutor:</strong><span style="font-size: 1.1em;">&nbsp; {{ leadername }} &nbsp; {{ leaderemail }} </span><br></li><br><b>Student Administration:</b><span>&nbsp;CLLundergraduate@warwick.ac.uk</span>
+                                    <li>Department: {{ department }} </li>
+                                    <li>Faculty: {{ facultyname }} </li>
                                 </ul>
 
                             </div>
