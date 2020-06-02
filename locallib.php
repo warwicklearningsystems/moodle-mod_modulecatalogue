@@ -40,7 +40,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param string Module code
  * @return object information on assignments
  */
-function get_modulecatalogue_data($modulecode) {
+function get_modulecatalogue_data($modulecode, $academicyear) {
 
   global $DB;
 
@@ -48,29 +48,30 @@ function get_modulecatalogue_data($modulecode) {
 
   if($modulecode != '') {
 
+    //  print_r($academicyear);
+    
+    //$url = 'https://courses-dev.warwick.ac.uk/modules/2020/' . $modulecode . '.json';
+    $url = 'https://courses-dev.warwick.ac.uk/modules/' .$academicyear ."/" .$modulecode . '.json';
 
-    $url = 'https://courses-dev.warwick.ac.uk/modules/2020/' . $modulecode . '.json';
-
+  //  print_r($url);
     //$curldata = download_file_content($url, array('Authorization' => 'Basic ' .
     //  (string)base64_encode( $username . ":" . $password )), false, true);
 
     $curldata = download_file_content($url, null, false, true);
-
-
+   
     if($curldata->status == 200) {
       $cataloguedata = json_decode($curldata->results);
-
          
       foreach($cataloguedata as $k => $v) {
 
-        if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear' => '20/21', 'labelkey' => $k)) ) {
+        if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear' => $academicyear, 'labelkey' => $k)) ) {
 
         // Insert
           
           if(!($v instanceof stdClass)){
               if (!(is_array($v))){
                   if (!(is_null($v))){
-                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                   }                                
               }
               else{
@@ -81,21 +82,26 @@ function get_modulecatalogue_data($modulecode) {
                               $k = "locations" .$k;
                               if( !$DB->record_exists('modulecatalogue_data', 
                                 array('modulecode' => $modulecode, 
-                                'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                               }
                           }
                       }
 
                   }
                   if($k == 'learningOutcomes'){
+                     
+                      
                       foreach($cataloguedata->learningOutcomes as $k => $v){
-                       $k = "$k";      
+                          if ($k == 0){
+                              $v = ltrim($v, "By the end of the module, students should be able to:");
+                          }
+                      // if (substr($v, $start))     
                        $k = "learningOutcome" .$k;                        
                         if( !$DB->record_exists('modulecatalogue_data', 
                           array('modulecode' => $modulecode, 
-                          'academicyear' => '20/21', 'labelkey' => $k)) ){
-                            $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                          'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                            $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                         }
                       }
                       
@@ -109,9 +115,9 @@ function get_modulecatalogue_data($modulecode) {
                                   $k = "studyAmounts" .$k ."$x";
                                   if( !$DB->record_exists('modulecatalogue_data', 
                                         array('modulecode' => $modulecode, 
-                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
+                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
                                       if (!(is_null($v))){
-                                          $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                          $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                                       }
                                   }
                               }
@@ -127,9 +133,9 @@ function get_modulecatalogue_data($modulecode) {
                               $k = "postRequisiteModules" ."$k";
                               if( !$DB->record_exists('modulecatalogue_data', 
                                         array('modulecode' => $modulecode, 
-                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
+                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
                                   if (!(is_null($v))){
-                                      $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                      $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                                   }
                               }
                           }
@@ -146,22 +152,22 @@ function get_modulecatalogue_data($modulecode) {
                                      if ($k == 'totalExamWeighting'){
                                          if( !$DB->record_exists('modulecatalogue_data', 
                                                         array('modulecode' => $modulecode, 
-                                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                                          }
                                      }
                                      if ($k == 'totalCourseworkWeighting'){
                                          if( !$DB->record_exists('modulecatalogue_data', 
                                                         array('modulecode' => $modulecode, 
-                                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                                          }
                                      }
                                      if ($k == 'groupName'){
                                          if( !$DB->record_exists('modulecatalogue_data', 
                                                         array('modulecode' => $modulecode, 
-                                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                                          }
                                      }                                     
                                      $array = array_values($array[components]);
@@ -178,9 +184,9 @@ function get_modulecatalogue_data($modulecode) {
                                                  $k = "assesmentGrp" .$k ."$x";
                                                  if( !$DB->record_exists('modulecatalogue_data', 
                                                         array('modulecode' => $modulecode, 
-                                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
+                                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
                                                            
-                                                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                                                         
                                                 }                                                          
                                              }
@@ -192,54 +198,7 @@ function get_modulecatalogue_data($modulecode) {
                       }                     
                   } //end of assessment groups
                                    
-                   if ($k == 'availability'){
-                      foreach($cataloguedata->availability as $k => $v){
-                          if($v instanceof stdClass){
-                              
-                              for ($x = 0; $x <= 10; $x++){
-                                  $object = $cataloguedata->availability[0];
-                                  foreach($object as $k => $v){
-                                      $subObject = $v;
-                                   
-                                      foreach($subObject as $k => $v){
-                                         if(is_array($v)){
-                                             for ($x = 0; $x <= 10; $x++){                                           
-                                                 $array = $v[$x];
-                                                 
-                                                 foreach($array as $k => $v){
-                                                     if (!(is_array($v))){
-                                                       
-                                                         $k = "Availability" .$k ."$x";
-                                                       
-                                                         if( !$DB->record_exists('modulecatalogue_data', 
-                                                            array('modulecode' => $modulecode, 
-                                                            'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                                                $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
-                                                        }
-                                                     }
-                                                     else{
-                                                         $array = $v[0];
-                                                         foreach($array as $k => $v){
-                                                             $k = "Availability" .$k ."$x";
-                                                             if( !$DB->record_exists('modulecatalogue_data', 
-                                                                array('modulecode' => $modulecode, 
-                                                                'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                                                    if (!(is_null($v))){
-                                                                        $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
-                                                                    }
-                                                                }
-                                                         }
-                                                     }
-                                                     
-                                                 }
-                                             }
-                                         }
-                                  }
-                              }
-                        }
-                    }
-                }
-             }
+                       
         }
             
           } else {
@@ -249,8 +208,8 @@ function get_modulecatalogue_data($modulecode) {
                         $k = "department" .$k;
                         if( !$DB->record_exists('modulecatalogue_data', 
                                 array('modulecode' => $modulecode, 
-                                    'academicyear' => '20/21', 'labelkey' => $k)) ){
-                            $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                                    'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                            $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
                         }
                      }
                      else{
@@ -258,8 +217,8 @@ function get_modulecatalogue_data($modulecode) {
                              $k = "faculty" .$k;
                                 if( !$DB->record_exists('modulecatalogue_data', 
                                     array('modulecode' => $modulecode, 
-                                        'academicyear' => '20/21', 'labelkey' => $k)) ){
-                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));                                    
+                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));                                    
                                 }                                                 
                          }
                      }
@@ -271,8 +230,8 @@ function get_modulecatalogue_data($modulecode) {
                     $k = "level" .$k;
                     if( !$DB->record_exists('modulecatalogue_data', 
                         array('modulecode' => $modulecode, 
-                        'academicyear' => '20/21', 'labelkey' => $k)) ){
-                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));                                    
+                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));                                    
                     }
                 }
             }  
@@ -282,25 +241,25 @@ function get_modulecatalogue_data($modulecode) {
                     $k = "leader" .$k;
                     if( !$DB->record_exists('modulecatalogue_data', 
                         array('modulecode' => $modulecode, 
-                        'academicyear' => '20/21', 'labelkey' => $k)) ){
-                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));                        
+                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));                        
                     }                    
                 }
             }
           }
         
 
-         // $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+         // $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
 
         } else {
 
-            $id = $DB->get_field('modulecatalogue_data', 'id', array('modulecode' => $modulecode, 'academicyear' => '20/21','labelkey' => $k));
+            $id = $DB->get_field('modulecatalogue_data', 'id', array('modulecode' => $modulecode, 'academicyear' => $academicyear,'labelkey' => $k));
             
            
             if(!($v instanceof stdClass)){
               if (!(is_array($v))){
                   if (!(is_null($v))){                  
-                      $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear'=> '20/21', 'labelkey' => $k,'labelvalue' => $v,'id' => $id ));
+                      $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear'=> $academicyear, 'labelkey' => $k,'labelvalue' => $v,'id' => $id ));
                   }
               }
               
@@ -309,7 +268,7 @@ function get_modulecatalogue_data($modulecode) {
 
           // Update
         
-         // $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k,'labelvalue' => $v, 'id' => $id ));
+         // $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k,'labelvalue' => $v, 'id' => $id ));
 
         }
 
@@ -330,8 +289,8 @@ function insertLocations( $cataloguedata){
         foreach($object as $k => $v){
             print_r("am here ");
             $k = "locations" .$k;
-            if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear' => '20/21', 'labelkey' => $k)) ){
-                $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+            if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
             }
         }
     }                      

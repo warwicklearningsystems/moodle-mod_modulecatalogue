@@ -44,7 +44,7 @@ $string['pluginname'] = 'Module catalogue';
 $string['modulecode'] = 'Module code';
 $string['adminsupport'] = 'Admin support';
 $string['template'] = 'Template';
-
+$string['academicyear'] = 'Academic Year';
 $string['nocataloguedata'] = 'No module catalogue data available';
 
 $string['catalogue_username'] = 'Username';

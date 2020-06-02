@@ -17,32 +17,58 @@ class cataloguedata implements \templatable, \renderable {
    */
   public function __construct($cataloguedata, $template) {
 
-  //    print_r($cataloguedata);
+   
+   // print_r($cataloguedata);
     $validproperties = array('code', 'name', 'aims', 'title', 'principal_aims', 'academicYear', 'creditValue', 'departmentname', 'facultyname', 
         'learningOutcome0', 'learningOutcome1', 'learningOutcome2', 'learningOutcome3', 
-        'learningOutcome4', 'learningOutcome5', 'leadername', 'leaderemail', 'outlineSyllabus', 
+        'learningOutcome4', 'learningOutcome5', 'learningOutcome6', 'leadername', 'leaderemail', 'outlineSyllabus', 
         'indicativeReadingList', 'readingListUrl', 'studyAmountstype0', 'studyAmountstype1','subjectSpecificSkills',
         'studyAmountsrequiredDescription0', 'studyAmountsrequiredDescription0', 'studyAmountsrequiredDuration0',
         'studyAmountsrequiredDescription1','studyAmountsrequiredDuration1', 'totalStudyHours', 
         'assesmentGrpname0', 'assesmentGrpweighting0', 'assesmentGrpexam0','assesmentGrpdescription0', 'assesmentGrplength0', 'assesmentGrptype0',
         'assesmentGrpname1', 'assesmentGrpweighting1', 'assesmentGrpexam1', 'assesmentGrpdescription1', 'assesmentGrplength1', 'assesmentGrptype1',
-        'assesmentGrpname2', 'assesmentGrpweighting2', 'assesmentGrpexam2','assesmentGrpdescription2', 'assesmentGrplength2', 'assesmentGrptype2');
+        'assesmentGrpname2', 'assesmentGrpweighting2', 'assesmentGrpexam2','assesmentGrpdescription2', 'assesmentGrplength2', 'assesmentGrptype2',
+        'assesmentGrpname3', 'assesmentGrpweighting3', 'assesmentGrpexam3','assesmentGrpdescription3', 'assesmentGrplength3', 'assesmentGrptype3',
+        'assesmentGrpname4', 'assesmentGrpweighting4', 'assesmentGrpexam4','assesmentGrpdescription4', 'assesmentGrplength4', 'assesmentGrptype4',
+        );
+    
 
     foreach($validproperties as $p) {
       $this->$p = '';
     }
-
+    
+  //  $learningOutcome = list();
+    $results = array();
+    $x = 0;
+    
+    foreach($cataloguedata as $k => $v){  
+ 
+        if ((substr($k, 0, 15)) == 'learningOutcome'){
+           $results[$x] = $v;
+           $x = $x + 1;
+        }
+    }
+   
    // print_r($p);
     foreach($cataloguedata as $k => $v) {
       if ( in_array($k, $validproperties) ) {
         $this->$k = $v;
       }
     }
+    
+    foreach($cataloguedata as $k => $v) {
+        if(substr($k, 1, 0) == 'assesmentGrpname'){
+            $x = $x + 1;
+        }
+    }
 
     $this->template = $template;
   }
 
   public function export_for_template(\renderer_base $output) {
+      $results = array();
+      $x = 0;
+      
     $data = array(
       'classes'     => '',
       'principal_aims' => $this->aims,
@@ -58,6 +84,7 @@ class cataloguedata implements \templatable, \renderable {
       'learningOutcome3' => $this->learningOutcome3,
       'learningOutcome4' => $this->learningOutcome4,
       'learningOutcome5' => $this->learningOutcome5,
+      'learningOutcome6' => $this->learningOutcome6,
       'leadername' => $this->leadername,
       'leaderemail' => $this->leaderemail,
       'outlineSyllabus' => $this->outlineSyllabus,
@@ -76,23 +103,40 @@ class cataloguedata implements \templatable, \renderable {
       'assesmentGrpexam0' => $this->assesmentGrpexam0,
       'assesmentGrpdescription0' => $this->assesmentGrpdescription0,
       'assesmentGrplength0' => $this->assesmentGrplength0,
+        
       'assesmentGrptype1' => $this->assesmentGrptype1,
       'assesmentGrpname1' => $this->assesmentGrpname1,
       'assesmentGrpweighting1' => $this->assesmentGrpweighting1,
       'assesmentGrpexam1' => $this->assesmentGrpexam1,
       'assesmentGrpdescription1' => $this->assesmentGrpdescription1,
       'assesmentGrplength1' => $this->assesmentGrplength1,
+        
       'assesmentGrptype2' => $this->assesmentGrptype2,
       'assesmentGrpname2' => $this->assesmentGrpname2,
       'assesmentGrpweighting2' => $this->assesmentGrpweighting2,
       'assesmentGrpexam2' => $this->assesmentGrpexam2,
       'assesmentGrpdescription2' => $this->assesmentGrpdescription2,
       'assesmentGrplength2' => $this->assesmentGrplength2,
+        
+      'assesmentGrptype3' => $this->assesmentGrptype3,
+      'assesmentGrpname3' => $this->assesmentGrpname3,
+      'assesmentGrpweighting3' => $this->assesmentGrpweighting3,
+      'assesmentGrpexam3' => $this->assesmentGrpexam3,
+      'assesmentGrpdescription3' => $this->assesmentGrpdescription3,
+      'assesmentGrplength3' => $this->assesmentGrplength3,
+        
+      'assesmentGrptype4' => $this->assesmentGrptype4,
+      'assesmentGrpname4' => $this->assesmentGrpname4,
+      'assesmentGrpweighting4' => $this->assesmentGrpweighting4,
+      'assesmentGrpexam4' => $this->assesmentGrpexam4,
+      'assesmentGrpdescription4' => $this->assesmentGrpdescription4,
+      'assesmentGrplength4' => $this->assesmentGrplength4,
+        
       'subjectSpecificSkills' => $this->subjectSpecificSkills
     );
-   // print_r($data);
+   
     return $data;
-    
+
   }
 }
 

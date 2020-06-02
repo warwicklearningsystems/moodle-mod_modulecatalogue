@@ -113,9 +113,12 @@ class mod_modulecatalogue_external extends external_api {
 
     $params = self::validate_parameters(self::modulecatalogue_list_strings_parameters(),
       array('modulecode' => $modulecode));
+    
+    $params = self::validate_parameters(self::modulecatalogue_list_strings_parameters(),
+      array('academicyear' => $academicyear));
 
     $modulestrings = array();
-    $values = $DB->get_records('modulecatalogue_data', array('modulecode' => $params['modulecode']));
+    $values = $DB->get_records('modulecatalogue_data', array('modulecode' => $params['modulecode']), array('academicyear' => $params['academicyear']));
 
     foreach($values as $v) {
       $g = new stdClass();

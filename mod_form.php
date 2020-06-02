@@ -53,10 +53,15 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
                             'shortentry1' => 'Short module catalogue summary',
                             'fancyentry' => 'Fancy summary',
                             'catalogue1' => 'Catalogue 1 entry');
+
+        $ACADEMICYEAROPTIONS = array("2019" => "19/20", "2020" => "20/21", "2021" => "21/22", "2022" => "22/23", "2023" => "23/24", "2024" => "24/25", "2025" => "25/26", "2026" => "26/27", "2027" => "27/28", "2028" => "28/29","2029" => "29/30", "2030" => "30/31");
+        
         $mform->addElement('select', 'template', get_string('template', 'modulecatalogue'), $TEMPLATEOPTIONS);
 
         $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), array('size' => '64'));
         $mform->setType('modulecode', PARAM_ALPHANUMEXT);
+        
+        $mform->addElement('select', 'academicyear', get_string('academicyear', 'modulecatalogue'), $ACADEMICYEAROPTIONS);      
 
 	$mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), array('size' => '128'));
         $mform->setType('adminsupport', PARAM_ALPHANUMEXT);

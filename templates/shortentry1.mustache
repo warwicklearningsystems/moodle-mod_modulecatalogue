@@ -11,45 +11,21 @@
            {{ outlineSyllabus }}
     </p>
 
-           <section>
-            {{#assesmentGrplength0}} 
-                <p> 
-                    {{ assesmentGrpname0 }} {{assesmentGrptype0}} <em> </em> {{ assesmentGrpweighting0 }}
-                    Duration Exam: {{ assesmentGrplength0 }}
-                    Description: {{ assesmentGrpdescription0 }}
-                </p>
-            {{/assesmentGrplength0}}
-            {{^assesmentGrplength0}} 
-                <td>
-                    <em> {{ assesmentGrpname0 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}}
-                </td>
-            {{/assesmentGrplength0}}
-        </section>
         <section>
-            {{#assesmentGrplength1}}
-                <p> 
-                    {{ assesmentGrpname1 }} {{assesmentGrptype1}} <em> </em> {{ assesmentGrpweighting1 }} 
-                    Description: {{ assesmentGrpdescription1 }}
-                </p>
-            {{/assesmentGrplength1}}
-            {{^assesmentGrplength1}}
-                <td>
-                    <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} 
-                </td>
-            {{/assesmentGrplength1}}
-        </section>
-       <section>
-            {{#assesmentGrplength2}}
-                <p> 
-                    {{ assesmentGrpname2 }} {{assesmentGrptype2}} <em> </em> {{ assesmentGrpweighting2 }} 
-                    Description: {{ assesmentGrpdescription2 }}
-                </p>
-            {{/assesmentGrplength2}}
-            {{^assesmentGrplength2}}
-                <td>
-                    <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting2}} 
-                </td>
-            {{/assesmentGrplength2}}
+            {{#assesmentGrplength0}} <p> {{ assesmentGrpname0 }} {{assesmentGrptype0}} {{ assesmentGrpweighting0 }}  Duration Exam: {{ assesmentGrplength0 }} Description: {{ assesmentGrpdescription0 }} </p> {{/assesmentGrplength0}}
+            {{^assesmentGrplength0}} <td> <em> {{ assesmentGrpname0 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} </td> {{/assesmentGrplength0}}
+
+            {{#assesmentGrplength1}} <p> {{ assesmentGrpname1 }} {{assesmentGrptype1}} <em> </em> {{ assesmentGrpweighting1 }} Description: {{ assesmentGrpdescription1 }} </p> {{/assesmentGrplength1}}
+            {{^assesmentGrplength1}} <td> <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} </td> {{/assesmentGrplength1}}
+
+            {{#assesmentGrplength2}} <p> {{ assesmentGrpname2 }} {{assesmentGrptype2}} <em> </em> {{ assesmentGrpweighting2 }} Description: {{ assesmentGrpdescription2 }} </p> {{/assesmentGrplength2}}
+            {{^assesmentGrplength2}} <td> <em> {{ assesmentGrpname2 }} &nbsp &nbsp </em> {{ assesmentGrpweighting2}} </td> {{/assesmentGrplength2}}
+
+            {{#assesmentGrplength3}} <p>  {{ assesmentGrpname3 }} {{assesmentGrptype3}} <em> </em> {{ assesmentGrpweighting3 }} Description: {{ assesmentGrpdescription3 }} </p> {{/assesmentGrplength3}}
+            {{^assesmentGrplength3}} <td> <em> {{ assesmentGrpname3 }} &nbsp &nbsp </em> {{ assesmentGrpweighting3}} </td> {{/assesmentGrplength3}}
+
+            {{#assesmentGrplength4}} <p>  {{ assesmentGrpname4 }} {{assesmentGrptype4}} <em> </em> {{ assesmentGrpweighting4 }} Description: {{ assesmentGrpdescription4 }} </p> {{/assesmentGrplength4}}
+            {{^assesmentGrplength4}} <td> <em> {{ assesmentGrpname4 }} &nbsp &nbsp </em> {{ assesmentGrpweighting4}} </td> {{/assesmentGrplength4}}
         </section>
   </div>
 </div>

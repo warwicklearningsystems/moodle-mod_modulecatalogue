@@ -281,7 +281,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
 
     // Retrieve details on this catalogue instance including template and module code
     if ($modcat = $DB->get_record('modulecatalogue',
-      array('id'=>$coursemodule->instance), 'id, name, template, modulecode')) {
+      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear')) {
 
         // Build information ready for display...
         $info = new cached_cm_info();
@@ -297,26 +297,28 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         // (i.e. splitting characters before the '-', if there are five of them in
         // pattern [A-Z][A-Z][A-Z0-9][A-Z0-9][A-Z0-9]
         $modulecode = $modcat->modulecode;
-
+        $academicyear = $modcat->academicyear;
+               
         if($modulecode != '') {
 
           // Get data from API and store
-          get_modulecatalogue_data($modulecode);
+          get_modulecatalogue_data($modulecode, $academicyear);
 
           // Get data from DB
+          
           if ($moddata = $DB->get_records_menu('modulecatalogue_data',
-            array('modulecode' => $modulecode), '', 'labelkey, labelvalue')) {
+            array('modulecode' => $modulecode, 'academicyear' => $academicyear),'', 'labelkey, labelvalue')) {
 
             // Build data set ready for rendering
             $t = new \mod_modulecatalogue\output\cataloguedata($moddata, $modcat->template);
-
+           // print_r($moddata);
             // Render item for display
             $catdisplay = $PAGE->get_renderer('mod_modulecatalogue');
             $info->content = $catdisplay->render($t);
 
           } else {
             // No catalogue data to retrieve
-            $info->content = get_string('nocataloguedata', 'modulecatalogue');
+            $info->content = get_string('nocataloguedata', 'modulecatalogue') .' Course Code: ' .$modulecode ."Academic Year: " .$academicyear;
           }
 
         } else {
