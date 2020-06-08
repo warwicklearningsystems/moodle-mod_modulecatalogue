@@ -280,6 +280,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
     global $DB, $COURSE, $PAGE;
 
     // Retrieve details on this catalogue instance including template and module code
+    // MOO-1813: modified query to DB method to now use the academicyear from the table mdl_modulecatalogue.
     if ($modcat = $DB->get_record('modulecatalogue',
       array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear')) {
 
@@ -297,7 +298,9 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         // (i.e. splitting characters before the '-', if there are five of them in
         // pattern [A-Z][A-Z][A-Z0-9][A-Z0-9][A-Z0-9]
         $modulecode = $modcat->modulecode;
-        $academicyear = $modcat->academicyear;
+      	//MOO-1813: set the value of $academicyear to the value from the data stored in mdl_modulecatalogue
+        $academicyear = $modcat->academicyear; 
+      
                
         if($modulecode != '') {
 
@@ -307,7 +310,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
           // Get data from DB
           
           if ($moddata = $DB->get_records_menu('modulecatalogue_data',
-            array('modulecode' => $modulecode, 'academicyear' => $academicyear),'', 'labelkey, labelvalue')) {
+            array('modulecode' => $modulecode, 'academicyear' => $academicyear),'', 'labelkey, labelvalue')) { //MOO-1813: Modified get_records_menu to use newly added $academicyear
 
             // Build data set ready for rendering
             $t = new \mod_modulecatalogue\output\cataloguedata($moddata, $modcat->template);
@@ -318,6 +321,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
 
           } else {
             // No catalogue data to retrieve
+            // MOO-1813: Modified functionality to provide more meaningful information if no records exist.
             $info->content = get_string('nocataloguedata', 'modulecatalogue') .' Course Code: ' .$modulecode ."Academic Year: " .$academicyear;
           }
 
