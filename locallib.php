@@ -218,7 +218,6 @@ function get_modulecatalogue_data($modulecode) {
 
   }
 
-
   return $cataloguedata;
 }
 
