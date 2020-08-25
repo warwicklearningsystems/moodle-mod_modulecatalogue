@@ -168,7 +168,7 @@ function write_to_database( $key, $value, $modulecode, $academicyear){
   }
   else{
     $id = $DB->get_field('modulecatalogue_data', 'id', array('modulecode' => $modulecode, 'academicyear' => $academicyear,'labelkey' => $key));
-    if (!(is_null($v))){
+    if (!(is_null($id))){
       $DB->update_record('modulecatalogue_data',
         array('modulecode' => $modulecode,
           'academicyear'=> $academicyear,
