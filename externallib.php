@@ -113,9 +113,14 @@ class mod_modulecatalogue_external extends external_api {
 
     $params = self::validate_parameters(self::modulecatalogue_list_strings_parameters(),
       array('modulecode' => $modulecode));
+    
+    //MOO-1813: Added extra parameter $academicyear to the array of parameters
+    $params = self::validate_parameters(self::modulecatalogue_list_strings_parameters(),
+      array('academicyear' => $academicyear));
 
     $modulestrings = array();
-    $values = $DB->get_records('modulecatalogue_data', array('modulecode' => $params['modulecode']));
+    //MOO-1813: get records from database using the newly added $academicyear to the array of values
+    $values = $DB->get_records('modulecatalogue_data', array('modulecode' => $params['modulecode']), array('academicyear' => $params['academicyear'])); //MOO-1811: Made changes to make the academic year an additional parameter to be entered
 
     foreach($values as $v) {
       $g = new stdClass();

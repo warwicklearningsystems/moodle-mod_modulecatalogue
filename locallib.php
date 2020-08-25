@@ -40,7 +40,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param string Module code
  * @return object information on assignments
  */
-function get_modulecatalogue_data($modulecode) {
+function get_modulecatalogue_data($modulecode, $academicyear) {
 
   global $DB;
 
@@ -48,7 +48,7 @@ function get_modulecatalogue_data($modulecode) {
 
   if($modulecode != '') {
     
-    $url = 'https://courses-dev.warwick.ac.uk/modules/2020/' . $modulecode . '.json';
+     $url = 'https://courses.warwick.ac.uk/modules/' .$academicyear ."/" .$modulecode . '.json'; //MOO-1813 Modified URL to use new parameter added
    // $url = 'https://courses-dev.warwick.ac.uk/modules/' .'20/21' ."/" .$modulecode . '.json';
 
     //$curldata = download_file_content($url, array('Authorization' => 'Basic ' .
@@ -61,13 +61,16 @@ function get_modulecatalogue_data($modulecode) {
          
       foreach($cataloguedata as $k => $v) {
 
-        if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear' => '20/21', 'labelkey' => $k)) ) {
+          //MOO-1813 Modified query to db to include $academicYear
+        if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear' => $academicyear, 'labelkey' => $k)) ) {
 
           // MOO-1808 Insert new data from JSON into database    
           if(!($v instanceof stdClass)){
               if (!(is_array($v))){
                   if (!(is_null($v))){
-                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                         'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                         'labelkey' => $k, 'labelvalue' => $v)); 
                   }                                
               }
               else{
@@ -80,8 +83,15 @@ function get_modulecatalogue_data($modulecode) {
                                     $k = $sectionName .$k;
                                     if( !$DB->record_exists('modulecatalogue_data', 
                                         array('modulecode' => $modulecode, 
+<<<<<<< HEAD
+                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){ ////MOO-1813 Modified db query statement to include $academicYear
+                                            $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                                                'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                                                'labelkey' => $k, 'labelvalue' => $v));
+=======
                                         'academicyear' => '20/21', 'labelkey' => $k)) ){
                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                                     }
                                 }                          
                            }
@@ -93,8 +103,15 @@ function get_modulecatalogue_data($modulecode) {
                                 $k = "learningOutcome" .$k;                        
                                 if( !$DB->record_exists('modulecatalogue_data', 
                                     array('modulecode' => $modulecode, 
+<<<<<<< HEAD
+                                    'academicyear' => $academicyear, 'labelkey' => $k)) ){ //MOO-1813 Modified DB query statement to include $academicYear
+                                            $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                                                'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                                                'labelkey' => $k, 'labelvalue' => $v));
+=======
                                     'academicyear' => '20/21', 'labelkey' => $k)) ){
                                             $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                                  }
                              }
                       case 'studyAmounts' :
@@ -105,9 +122,17 @@ function get_modulecatalogue_data($modulecode) {
                                         $k = "studyAmounts" .$k ."$x";
                                         if( !$DB->record_exists('modulecatalogue_data', 
                                             array('modulecode' => $modulecode, 
+<<<<<<< HEAD
+                                            'academicyear' => $academicyear, 'labelkey' => $k)) ){ //MOO-1813 Modified DB Query statement to include $academicYear
+                                                if (!(is_null($v))){
+                                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                                                        'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                                                        'labelkey' => $k, 'labelvalue' => $v));
+=======
                                             'academicyear' => '20/21', 'labelkey' => $k)) ){
                                                 if (!(is_null($v))){
                                                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                                                 }
                                             }
                                         }
@@ -121,9 +146,17 @@ function get_modulecatalogue_data($modulecode) {
                                         $k = "postRequisiteModules" ."$k";
                                         if( !$DB->record_exists('modulecatalogue_data', 
                                             array('modulecode' => $modulecode, 
+<<<<<<< HEAD
+                                            'academicyear' => $academicyear, 'labelkey' => $k)) ){ //MOO-1813 Modified DB Query statement to include $academicYear
+                                                if (!(is_null($v))){
+                                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                                                        'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                                                        'labelkey' => $k, 'labelvalue' => $v));
+=======
                                             'academicyear' => '20/21', 'labelkey' => $k)) ){
                                                 if (!(is_null($v))){
                                                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                                                 }
                                         }
                                 }
@@ -137,6 +170,33 @@ function get_modulecatalogue_data($modulecode) {
                                          switch ($k){
                                              case 'totalExamWeighting' || 'totalCourseworkWeighting' || 'groupName':
                                                  if( !$DB->record_exists('modulecatalogue_data', 
+<<<<<<< HEAD
+                                                        array('modulecode' => $modulecode, 
+                                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){ //MOO-1813 Modified DB Query statement to include $academicYear
+                                                      $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                                                          'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                                                          'labelkey' => $k, 'labelvalue' => $v));
+                                                 }
+                                         }
+                                         
+                                         $array = array_values($array[components]);
+                                         for ($x = 0; $x <= 10; $x++){
+                                            $object = $array[$x];
+                                            foreach($object as $k => $v){
+                                                if ($k != 'components'){
+                                                    if (is_null($v)){
+                                                        $v = "";
+                                                    }                                                
+                                                    if ($k == 'weighting'){
+                                                        $v = "Weighting: " .$v ."%";
+                                                    }
+                                                    $k = "assesmentGrp" .$k ."$x";
+                                                    if( !$DB->record_exists('modulecatalogue_data', 
+                                                        array('modulecode' => $modulecode, 
+                                                        'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                                                           //MOO-1813 Modified insert statement to include $academicYear
+                                                               $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
+=======
                                                         array('modulecode' => $modulecode, 
                                                         'academicyear' => '20/21', 'labelkey' => $k)) ){
                                                       $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
@@ -160,6 +220,7 @@ function get_modulecatalogue_data($modulecode) {
                                                         'academicyear' => '20/21', 'labelkey' => $k)) ){
                                                            
                                                                $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                                                         
                                                     }                                                          
                                                 }
@@ -182,8 +243,15 @@ function get_modulecatalogue_data($modulecode) {
                               $k = "department" .$k;
                               if( !$DB->record_exists('modulecatalogue_data', 
                                 array('modulecode' => $modulecode, 
+<<<<<<< HEAD
+                                    'academicyear' => $academicyear, 'labelkey' => $k)) ){ //MOO-1813 Modified DB Query statement to include $academicYear
+                                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,
+                                        'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                                        'labelkey' => $k, 'labelvalue' => $v));
+=======
                                     'academicyear' => '20/21', 'labelkey' => $k)) ){
                                     $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                               }
                           }
                       }
@@ -192,17 +260,28 @@ function get_modulecatalogue_data($modulecode) {
           }
         
 
+<<<<<<< HEAD
+         // MOO 1808 $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
+=======
          // MOO 1808 $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
 
         } else {
 
             //MOO-1808 Update any records in Database if any data in JSON file has changed
+<<<<<<< HEAD
+            $id = $DB->get_field('modulecatalogue_data', 'id', array('modulecode' => $modulecode, 
+                'academicyear' => $academicyear,'labelkey' => $k)); //MOO-1813 Modified DB query statement to include $academicYear
+=======
             $id = $DB->get_field('modulecatalogue_data', 'id', array('modulecode' => $modulecode, 'academicyear' => '20/21','labelkey' => $k));
+>>>>>>> 909a613150518678ad4fc348f9711c2436f9b21a
                       
             if(!($v instanceof stdClass)){
               if (!(is_array($v))){
                   if (!(is_null($v))){                  
-                      $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode, 'academicyear'=> '20/21', 'labelkey' => $k,'labelvalue' => $v,'id' => $id ));
+                      $DB->update_record('modulecatalogue_data', array('modulecode' => $modulecode, 
+                          'academicyear'=> $academicyear, //MOO-1813 Modified insert statement to include $academicYear
+                          'labelkey' => $k,'labelvalue' => $v,'id' => $id ));
                   }
               }
               
@@ -227,8 +306,8 @@ function insertLocations( $cataloguedata){
         foreach($object as $k => $v){
             print_r("am here ");
             $k = "locations" .$k;
-            if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear' => '20/21', 'labelkey' => $k)) ){
-                $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> '20/21', 'labelkey' => $k, 'labelvalue' => $v));
+            if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
             }
         }
     }                      

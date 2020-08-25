@@ -44,7 +44,7 @@ $string['pluginname'] = 'Module catalogue';
 $string['modulecode'] = 'Module code';
 $string['adminsupport'] = 'Admin support';
 $string['template'] = 'Template';
-
+$string['academicyear'] = 'Academic Year'; //MOO-1813 Added legend for dropdown list box in parameter entry screen
 $string['nocataloguedata'] = 'No module catalogue data available';
 
 $string['catalogue_username'] = 'Username';
