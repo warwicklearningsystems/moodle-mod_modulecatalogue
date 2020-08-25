@@ -1,10 +1,56 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h3>MA101: Introduction</h3>
+    <h3> {{ code }} : {{ name }} </h3>
     <p>
 	<H4>Principal aims</H4>
-		{{ principalaims }}
+		{{ principal_aims }}
     </p>
+
+    <p> 
+        <h4>Syllabus</h4>
+           {{ outlineSyllabus }}
+    </p>
+
+           <section>
+            {{#assesmentGrplength0}} 
+                <p> 
+                    {{ assesmentGrpname0 }} {{assesmentGrptype0}} <em> </em> {{ assesmentGrpweighting0 }}
+                    Duration Exam: {{ assesmentGrplength0 }}
+                    Description: {{ assesmentGrpdescription0 }}
+                </p>
+            {{/assesmentGrplength0}}
+            {{^assesmentGrplength0}} 
+                <td>
+                    <em> {{ assesmentGrpname0 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}}
+                </td>
+            {{/assesmentGrplength0}}
+        </section>
+        <section>
+            {{#assesmentGrplength1}}
+                <p> 
+                    {{ assesmentGrpname1 }} {{assesmentGrptype1}} <em> </em> {{ assesmentGrpweighting1 }} 
+                    Description: {{ assesmentGrpdescription1 }}
+                </p>
+            {{/assesmentGrplength1}}
+            {{^assesmentGrplength1}}
+                <td>
+                    <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} 
+                </td>
+            {{/assesmentGrplength1}}
+        </section>
+       <section>
+            {{#assesmentGrplength2}}
+                <p> 
+                    {{ assesmentGrpname2 }} {{assesmentGrptype2}} <em> </em> {{ assesmentGrpweighting2 }} 
+                    Description: {{ assesmentGrpdescription2 }}
+                </p>
+            {{/assesmentGrplength2}}
+            {{^assesmentGrplength2}}
+                <td>
+                    <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting2}} 
+                </td>
+            {{/assesmentGrplength2}}
+        </section>
   </div>
 </div>
 
