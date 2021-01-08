@@ -40,6 +40,20 @@ function xmldb_modulecatalogue_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
-
+    
+    /*Moo 1826: Added new column
+     * if ($oldversion < 2020083000)
+     */
+    if ($oldversion < 2020083000)
+    {
+        $table = new xmldb_table('modulecatalogue');
+        $field = new xmldb_field('defaultcodes');
+        $precision = "1";
+        $default = "0";
+        $field->set_attributes(XMLDB_TYPE_INTEGER, $precision, XMLDB_UNSIGNED, XMLDB_NOTNULL, false, $default);
+        if (!$dbman->field_exists($table, $field)){
+            $dbman->add_field($table, $field);
+        }
+    }
     return true;
 }
