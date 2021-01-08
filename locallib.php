@@ -69,7 +69,11 @@ function get_modulecatalogue_data($modulecode, $academicyear) {
               foreach($cataloguedata->$sectionName as $k => $v){
                 if (!($v instanceof stdClass)){
                   $k = $sectionName .$k;
-                  write_to_database($k, $v, $modulecode, $academicyear); //MOO 1828 changes to clear up code
+                  if( !$DB->record_exists('modulecatalogue_data',
+                    array('modulecode' => $modulecode,
+                      'academicyear' => $academicyear, 'labelkey' => $k)) ){
+                    $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
+                  }
                 }
               }
           }
@@ -78,62 +82,62 @@ function get_modulecatalogue_data($modulecode, $academicyear) {
         else{
           if(is_array($v)){
             switch ($k){
-                case "learningOutcomes" :
-                    $value = implode($v, '<br />');
-                    write_to_database($sectionName, $value, $modulecode, $academicyear);
-                    
-                case 'locations':
-                    foreach($cataloguedata->$sectionName as $k => $v){
-                        if ($v instanceof stdClass){
-                            $stdClass = json_decode(json_encode($v));
-                            foreach($stdClass as $k => $v){
-                                $k = Substr($sectionName,0,-1) .$k;
-                                write_to_database($k, $v, $modulecode, $academicyear);
-                            }
-                        }
+              case ($k == 'postRequisiteModules') || ($k == 'locations') || ($k == 'studyAmounts') || ($k == 'learningOutcomes') :
+                $sectionName = $k;
+                if (is_array($v)){
+                  $array_size= count($v); // MOO-1808 determine size of array
+                  //MOO-1808 code to parse through an Array of data structures
+                  foreach($cataloguedata->$sectionName as $k => $v){
+                    $index = $k;
+                    if ($v instanceof stdClass){
+                      $stdClass = json_decode(json_encode($v));
+                      foreach($stdClass as $k => $v){
+                        $k = Substr($sectionName,0,-1) .$k .$index;
+                        write_to_database($k, $v, $modulecode, $academicyear);
+                      }
                     }
-                    
-                case ('postRequisiteModules' ||'preRequisiteModules' || 'studyAmounts'):
-                    if (is_array($v)){
-                        //MOO-1808 code to parse through an Array of data structures
-                        foreach($cataloguedata->$sectionName as $k => $v){
-                            $index = $k;
-                            if ($v instanceof stdClass){
-                                $stdClass = json_decode(json_encode($v));
-                                foreach($stdClass as $k => $v){
-                                    $k = Substr($sectionName,0,-1) .$k .$index;
-                                    write_to_database($k, $v, $modulecode, $academicyear);
-                                }
-                            }
+                    else{
+                      if ($sectionName == 'learningOutcomes'){
+                        if ($index == 0){
+                          $v = ltrim($v, "By the end of the module, students should be able to:");
                         }
+                      }
+                      $k = substr($sectionName, 0,-1) .$index;
+                      write_to_database($k, $v, $modulecode, $academicyear);
                     }
-                    
-                case 'assessmentGroups':
-                    $array = array();$subArray = array();
-                    if (is_array($v)){
-                        foreach($cataloguedata->$sectionName as $k => $v){
-                            if ($v instanceof stdClass){
-                                foreach($cataloguedata->assessmentGroups[0] as $k => $v){
-                                    if(is_array($v)){
-                                        if ($k == 'components'){
-                                            $array = $v;
-                                            for ($x = 0; $x <=  count($array)-1; $x++){
-                                                $subArray = get_object_vars($array[$x]);
-                                                foreach($subArray as $k => $v){
-                                                    $k = "assesmentGrp" .$k ."$x";
-                                                    write_to_database($k, $v, $modulecode, $academicyear);
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        write_to_database($k, $v, $modulecode, $academicyear);
-                                    }
-                                }
+                  }
+                }
+              // MOO-1808 Insert new data from JSON into database: logic to handle assessments - this has to be done separately due to its complex structure.
+              case ($k == 'assessmentGroups'):
+                $sectionName = $k;
+                if (is_array($v)){
+                  foreach($cataloguedata->$sectionName as $k => $v){
+                    if ($v instanceof stdClass){
+                      foreach($cataloguedata->assessmentGroups[0] as $k => $v){
+                        $array = array($k => $v);
+                        if(is_array($v)){
+                          $count_array = count($v);
+                          $array = array_values($array[components]);
+                          for ($x = 0; $x <=  $count_array; $x++){
+                            $object = $array[$x];
+                            foreach($object as $k => $v){
+                              $k = "assesmentGrp" .$k ."$x";
+                              if ($k == 'weighting')$v = "Weighting: " .$v ."%";
+                              write_to_database($k, $v, $modulecode, $academicyear);
                             }
+                          }
                         }
+                        else{
+                          switch ($k){
+                            case 'totalExamWeighting' || 'totalCourseworkWeighting' || 'groupName':
+                              write_to_database($k, $v, $modulecode, $academicyear);
+                          }
+                        }
+
+                      }
                     }
-                    
+                  }
+                }
             }
           }
           // MOO-1808 Insert new data from JSON into database: logic to insert all root data in json file.

@@ -20,7 +20,8 @@ class cataloguedata implements \templatable, \renderable {
    
    // print_r($cataloguedata);
     $validproperties = array('code', 'name', 'aims', 'title', 'principal_aims', 'academicYear', 'creditValue', 'departmentname', 'facultyname', 
-        'learningOutcomes', 'leadername', 'leaderemail', 'outlineSyllabus', 
+        'learningOutcome0', 'learningOutcome1', 'learningOutcome2', 'learningOutcome3', 
+        'learningOutcome4', 'learningOutcome5', 'learningOutcome6', 'leadername', 'leaderemail', 'outlineSyllabus', 
         'indicativeReadingList', 'readingListUrl', 'studyAmountstype0', 'studyAmountstype1','subjectSpecificSkills',
         'studyAmountsrequiredDescription0', 'studyAmountsrequiredDescription0', 'studyAmountsrequiredDuration0',
         'studyAmountsrequiredDescription1','studyAmountsrequiredDuration1', 'totalStudyHours', 
@@ -39,7 +40,16 @@ class cataloguedata implements \templatable, \renderable {
   //  $learningOutcome = list();
     $results = array();
     $x = 0;
+    
+    foreach($cataloguedata as $k => $v){  
+ 
+        if ((substr($k, 0, 15)) == 'learningOutcome'){
+           $results[$x] = $v;
+           $x = $x + 1;
+        }
+    }
    
+   // print_r($p);
     foreach($cataloguedata as $k => $v) {
       if ( in_array($k, $validproperties) ) {
         $this->$k = $v;
@@ -68,7 +78,13 @@ class cataloguedata implements \templatable, \renderable {
       'name' => $this->title,
       'academic_year' => $this->academicYear,
       'creditValue' => $this->creditValue,
-      'learningOutcomes' => explode(("<br />"),nl2br($this->learningOutcomes)),  
+      'learningOutcome0' => $this->learningOutcome0,
+      'learningOutcome1' => $this->learningOutcome1,
+      'learningOutcome2' => $this->learningOutcome2, 
+      'learningOutcome3' => $this->learningOutcome3,
+      'learningOutcome4' => $this->learningOutcome4,
+      'learningOutcome5' => $this->learningOutcome5,
+      'learningOutcome6' => $this->learningOutcome6,
       'leadername' => $this->leadername,
       'leaderemail' => $this->leaderemail,
       'outlineSyllabus' => $this->outlineSyllabus,

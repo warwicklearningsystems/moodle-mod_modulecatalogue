@@ -335,36 +335,3 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         return null;
     }
 }
-/*
- * MOO-1826 Inserted function to retrieve course metadata.
- * retrieves all the default codes needed for module
- */
-function get_course_metadata($courseid) {
-    $handler = \core_customfield\handler::get_handler('core_course', 'course');
-    // This is equivalent to the line above.
-    //$handler = \core_course\customfield\course_handler::create();
-    $datas = $handler->get_instance_data($courseid);
-    
-    $metadata = [];
-    foreach ($datas as $data) {
-        if (empty($data->get_value())) {
-            continue;
-        }
-        $cat = $data->get_field()->get_category()->get('name');
-        $metadata[$data->get_field()->get('name')] = $data->get_value();
-    }
-
-    return $metadata;
-}
-/*
- * MOO 1826: get_full_year() function to retrieve full academic year from default parameters
- * $academic year is in format XX/XX needs to be in XXXX format
- */
-function get_full_year($academic_year){
-    
-    $academicyear = '';
-    if (!(is_null(strpos($academic_year, '/')))){
-         $academicyear = '20' .substr($academic_year, 0, stripos($academic_year, '/'));
-    }
-    return $academicyear;
-}

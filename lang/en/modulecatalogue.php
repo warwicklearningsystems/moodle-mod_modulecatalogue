@@ -40,23 +40,12 @@ $string['modulecataloguename_help'] = 'This is the content of the help tooltip a
 $string['modulecatalogue'] = 'Module catalogue';
 $string['pluginadministration'] = 'modulecatalogue administration';
 $string['pluginname'] = 'Module catalogue';
-$string['defaultcodes'] = 'Use default module code and academic year';
-$string['defaultcodes_help'] = 'Check \'Yes\' if you wish to use the current Course code and academic year.<br />
-this will automatically retrieve the current Course code setup in Course Settings.<br />
-If No default course code is vailable or have not yet been setup, you will be required to use new course code.<br />
-To not use the default code, change this option back to \'No\', to enter new course code and academic year';
-$string['modulecode'] = 'Module code';
-$string['modulecode_help'] = 'Please enter Module code: <br /> This must be in the format AANNN/NN where AA is alpha characters representing the Department <br />  NNN represents the unique course numerical code, <br /> followed by a dash and the number of credits of the course, for example CS118-15';
-$string['adminsupport'] = 'Admin support';
-$string['adminsupport_help'] = 'Please enter admin support email address for contact';
-$string['template'] = 'Template';
-$string['template_help'] = 'Please select which template to use, depending on the amount of information required';
-$string['academicyear'] = 'Academic Year'; //MOO-1813 Added legend for dropdown list box in parameter entry screen
-$string['academicyear_help'] = 'Please select Academic Year from the list. <br /> Default will be current academic year';
 
+$string['modulecode'] = 'Module code';
+$string['adminsupport'] = 'Admin support';
+$string['template'] = 'Template';
+$string['academicyear'] = 'Academic Year'; //MOO-1813 Added legend for dropdown list box in parameter entry screen
 $string['nocataloguedata'] = 'No module catalogue data available';
-$string['usedefaultcode'] = 'Use new Code and Academic Year';
-$string['autoupdatenote'] = '<em><i>Module Code and Academic Year are stored in the Course parameters</i></em>';
 
 $string['catalogue_username'] = 'Username';
 $string['catalogue_username_desc'] = 'Username used to authenticate with Module catalogue API';
