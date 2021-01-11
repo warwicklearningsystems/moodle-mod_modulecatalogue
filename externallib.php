@@ -36,9 +36,10 @@ class mod_modulecatalogue_external extends external_api {
   public static function modulecatalogue_add_string_parameters() {
     return new external_function_parameters(
       array(
-        'modulecode' => new external_value(PARAM_TEXT, 'Module code', VALUE_REQUIRED),
-        'key' => new external_value(PARAM_TEXT, 'Key name', VALUE_REQUIRED),
-        'value' => new external_value(PARAM_TEXT, 'Value', VALUE_REQUIRED)
+          'modulecode' => new external_value(PARAM_TEXT, 'Module code', VALUE_REQUIRED),
+          'key' => new external_value(PARAM_TEXT, 'Key name', VALUE_REQUIRED),
+          'value' => new external_value(PARAM_TEXT, 'Value', VALUE_REQUIRED),
+          'defaultcodes' => new external_value(PARAM_INT, 'Default Codes', VALUE_REQUIRED),
       )
     );
   }

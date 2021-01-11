@@ -13,21 +13,14 @@
 	<p>
 	<H5>Principal Learning Outcomes</H5>
         <p>By the end of the module, students should be able to: </p>
-	    <ul>
+        <ul>
             {{ $results.0 }}
             <section>
-            {{ #learningOutcome0 }} <p> {{ learningOutcome0 }} </p> {{ /learningOutcome0 }}
-            {{ #learningOutcome1 }} <p> {{ learningOutcome1 }} </p> {{ /learningOutcome1 }}
-            {{ #learningOutcome2 }} <p> {{ learningOutcome2 }} </p> {{ /learningOutcome2 }}
-	    {{ #learningOutcome3 }} <p> {{ learningOutcome3 }} </p> {{ /learningOutcome3 }}
-            {{ #learningOutcome4 }} <p> {{ learningOutcome4 }} </p> {{ /learningOutcome4 }}
-            {{ #learningOutcome5 }} <p> {{ learningOutcome5 }} </p> {{ /learningOutcome5 }}
+            {{#learningOutcomes}} <p class="normal-paragraph"> {{.}} </p> {{/learningOutcomes}}
             </section>                     
-	    </ul>
-            <section>
-            {{ #learningOutcome6 }} <p> {{ learningOutcome6 }} </p> {{ /learningOutcome6 }}
-            </section>
-	</p>
+	</ul>
+        </p>
+
 	<H6>Additional information</H6>
 	<p>
 	    <ul class="unstyled">
