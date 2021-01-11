@@ -42,10 +42,14 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
      * Defines forms elements
      */
     public function definition() {
-        global $CFG;
+        global $CFG, $COURSE; 
 
         $mform = $this->_form;
-
+        $module_Code = "";
+        $academic_year = "";
+        
+        $checkdisable = true;
+        
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
@@ -55,18 +59,66 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
                             'catalogue1' => 'Catalogue 1 entry');
 
        // MOO-1813: list of options in dropdown list box. user presented in format xx/xx as in 20/21 but stored as xxxx as in 2020 as JSON data uses 4 digit years.
-        $ACADEMICYEAROPTIONS = array("2019" => "19/20", "2020" => "20/21", "2021" => "21/22", "2022" => "22/23", "2023" => "23/24", "2024" => "24/25", "2025" => "25/26", "2026" => "26/27", "2027" => "27/28", "2028" => "28/29","2029" => "29/30", "2030" => "30/31");
-        
+        $ACADEMICYEAROPTIONS = array(2019 => "19/20", 2020 => "20/21", 2021 => "21/22", 2022 => "22/23", 2023 => "23/24", 2024 => "24/25", 2025 => "25/26", 2026 => "26/27", 2027 => "27/28", 2028 => "28/29",2029 => "29/30", 2030 => "30/31");
         $mform->addElement('select', 'template', get_string('template', 'modulecatalogue'), $TEMPLATEOPTIONS);
-
-        $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), array('size' => '64'));
+        $mform->addHelpButton('template', 'template', 'modulecatalogue');
+        
+        //MOO-1826 get course metadata to retrieve current default codes;
+        $metadata = get_course_metadata($COURSE->id);
+        if (isset($metadata)){
+            
+            foreach($metadata as $k => $v){
+                switch ($k){
+                    case 'Module Code':
+                        $module_Code = $v;
+                    case 'Academic Year':
+                        $academic_year = $v;
+                }
+            }
+        }
+        
+        $moduleCode = $module_Code;
+        $academicYear = $academic_year;
+        
+        $mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), array('size' => '128'));
+        $mform->setType('adminsupport', PARAM_ALPHANUMEXT);
+        $mform->addHelpButton('adminsupport', 'adminsupport', 'modulecatalogue');
+        
+        //MOO-1826 Inserted options for default codes;
+        $autopopulateoptions = array(
+                0 => get_string('no'),
+                1 => get_string('yes'),
+            ); 
+        
+        $mform->addElement('select', 'defaultcodes', get_string('defaultcodes', 'modulecatalogue'), $autopopulateoptions);
+        $mform->addHelpButton('defaultcodes', 'defaultcodes', 'modulecatalogue');
+        
+        //MOO-1826 customize module code to prevent unwanted entries been entered and force users to enter right format;
+        $str = 'autoupdate';
+        $options = ['size' => 8, 'maxlength' => 8, 'pattern'=>"[A-Za-z]{2}[0-9]{3}[-]{1}[0-9]{1,2}", 'title'=>"Please enter the course code as in AANNN-NN", 'required']; 
+        $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), $options);
+        $mform->addHelpButton('modulecode', 'modulecode', 'modulecatalogue');
+       
+        //MOO-1826 Inserted options for default codes 
+        
         $mform->setType('modulecode', PARAM_ALPHANUMEXT);
         //MOO-1813: New dropdown list box for user to enter academic year.
         $mform->addElement('select', 'academicyear', get_string('academicyear', 'modulecatalogue'), $ACADEMICYEAROPTIONS);      
-
-	$mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), array('size' => '128'));
-        $mform->setType('adminsupport', PARAM_ALPHANUMEXT);
-
+        $mform->addHelpButton('academicyear', 'academicyear', 'modulecatalogue');
+        
+	if (((is_null($module_Code)) || (is_null($academic_year))) || (!(isset($metadata)))){        
+            $mform->setDefault('autoupdate',1);
+            $mform->setDefault('defaultcodes', 0);
+        } else{
+            $mform->setDefault('modulecode', $moduleCode);
+            $key = array_search($academicYear, $ACADEMICYEAROPTIONS);
+            $mform->setDefault('academicyear', $key);
+            $mform->setDefault('defaultcodes', 1);
+        }
+        
+        $mform->addElement('static', 'autoupdatenote', '', get_string('autoupdatenote', 'modulecatalogue'));
+        $mform->disabledIf('modulecode', 'defaultcodes', 'eq', 1);
+        $mform->disabledIf('academicyear', 'defaultcodes', 'eq', 1);       
         // Add standard grading elements.
         //$this->standard_grading_coursemodule_elements();
 
