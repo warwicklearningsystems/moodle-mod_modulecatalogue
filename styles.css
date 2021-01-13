@@ -1,0 +1,289 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12-Jan-2021, 17:14:13
+    Author     : fae60
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Jan-2021, 17:45:24
+    Author     : fae60
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-Sep-2020, 10:46:43
+    Author     : fae60
+*/
+#page-mod-modulecatalogue .qcontainer .fitemtitle,
+#page-mod-modulecatalogue #id_questionhdr .fitemtitle {
+    display: none;
+}
+
+#page-mod-modulecatalogue .qcontainer .qnums {
+    font-weight: bold;
+    float: left;
+    color: gray;
+}
+
+#page-mod-modulecatalogue .qcontainer .fstatic {
+    width: 97%;
+    margin-right: 1em;
+    margin-left: 5px;
+    /* Set a negative margin-bottom to save some vertical space! */
+    margin-bottom: -10px;
+}
+
+#page-mod-modulecatalogue.mform .fitem fieldset.felement {
+    margin-left: 0;
+    padding-left: 1%;
+    margin-bottom: 0;
+}
+
+#page-mod-modulecatalogue-preview fieldset,
+#page-mod-modulecatalogue-complete fieldset {
+    margin-bottom: 0;
+}
+
+#page-mod-modulecatalogue-questions .mform .fitem .fitemtitle {
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+#page-mod-modulecatalogue-questions .moving {
+    border: medium dotted maroon;
+}
+
+#page-mod-modulecatalogue .lead {
+    margin-bottom: 20px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.display-5 {
+    color: #003399;
+}
+
+.italized{
+    font-style: italic;
+}
+
+.bolded_italized{
+    font-style: italic;
+    color: #002f8f;
+}
+
+.bolded{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.course-cde{
+    color:#1876d0; 
+    letter-spacing:-1px;
+    font-weight:400;
+    line-height:80%
+}
+.normal-paragraph{
+    text-align: justify;
+}
+
+.parag-just {
+    font-size: 1.15em;
+    padding: 10px;
+    width: 95%;
+    margin: 10px auto;
+    text-align: justify;
+    color: #002775;
+}
+
+.smallheader { 
+    font-style: italic;
+    font-weight: bold;
+}
+
+.skillssubject {
+    font-size: 0.875em;
+}
+
+.content{
+    font-size: 0.87em;
+    font-style: italic;
+    color: #008;
+}
+
+ul.b {
+    list-style-type: square;
+}
+
+ol.c {
+    list-style-type: upper-roman;
+}
+
+ol.d {
+    list-style-type: lower-alpha;
+}
+
+.wms-head-cll{
+  /*  webkit-box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;*/
+    box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;
+  /*  moz-box-shadow: 0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;*/
+    border-top: 1px solid rgba(0,0,0,.125);
+    border-left: 1px solid rgba(0,0,0,.125);
+    border-right: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem!important;
+    background:#e2f3fb;
+    margin-bottom:6px;
+}
+
+.rounded {
+    background-color:#e2f3fb;
+    background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-bot-bg.png'), url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-tophead-bg.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position:right bottom, right top;
+    min-height: 320px;
+    overflow:auto;
+}
+
+.header-title{
+    padding: 10px 10px 0px 10px;
+    letter-spacing:-1px;
+}
+
+.nav-link {
+    color:#fff;
+    margin-top:7px;
+    height:40px;
+    margin-left:3px;
+    font-size: .9375rem;
+    font-weight: 400;   
+}
+
+.p-3 p-md-5{
+    background-color: transparent; 
+    padding-top: 1.0rem!important; 
+    padding-bottom: 1.2rem !important;
+}
+
+.contact {
+    width: auto;   
+    background-color: rgba(255,255,255,.8);
+    padding: 15px; 
+    margin:15px; 
+    min-height:240px;
+    border-radius: 10px;
+    box-shadow: 5px 5px #a0f8f8;
+}
+
+.tabcolor{
+    width: auto;
+    padding: 15px;
+    margin: 15px;
+    min-height: 300px;
+}
+
+.contacts-area{
+    list-style-type:none; 
+    margin-bottom:15px;
+    padding-left:0px !important;
+}
+
+.war-bot{
+    background: url('https://warwick.ac.uk/study/cll/currentstudents/bot-w-white-bluerun-cll.png') no-repeat right bottom; 
+    min-height: 50px;
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+ 
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+        
+        th {
+            padding-top: 3px;
+            padding-bottom: 3px;
+            text-align: justify;
+            background-color: #86A5EC;
+            color: white;
+            empty-cells:initial;
+        }
+	
+	tr { border: 1px solid #ddd; padding: 3px; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #ddd; 
+		position: relative;
+		padding-left: 50%;
+                font-size-adjust: 0.58;
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+}
+
+#table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+    border-spacing: 0;
+    empty-cells:initial;
+    border: 1px solid #ddd;
+}
+
+#table td, table th {
+    border: 1px solid #ddd;
+    padding: inherit;
+}
+
+#table th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+    background-color: #86A5EC;
+    color: white;
+}
+
+#table tr{
+    padding: 3px;
+}
+
+#table tr:nth-child(odd) {
+  background-color: honeydew;
+}
+
+#table tr:hover {background-color: #def2f8;}
+

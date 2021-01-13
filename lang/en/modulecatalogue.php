@@ -47,8 +47,12 @@ If No default course code is vailable or have not yet been setup, you will be re
 To not use the default code, change this option back to \'No\', to enter new course code and academic year';
 $string['modulecode'] = 'Module code';
 $string['modulecode_help'] = 'Please enter Module code: <br /> This must be in the format AANNN/NN where AA is alpha characters representing the Department <br />  NNN represents the unique course numerical code, <br /> followed by a dash and the number of credits of the course, for example CS118-15';
-$string['adminsupport'] = 'Admin support';
+
+$string['adminsupport'] = 'Admin support e-Mail Address';
 $string['adminsupport_help'] = 'Please enter admin support email address for contact';
+$string['adminsupportname'] = 'Admin support Contact name';
+$string['adminsupportname_help'] = 'Please enter name of the appropriate administrator support staff or team';
+
 $string['template'] = 'Template';
 $string['template_help'] = 'Please select which template to use, depending on the amount of information required';
 $string['academicyear'] = 'Academic Year'; //MOO-1813 Added legend for dropdown list box in parameter entry screen

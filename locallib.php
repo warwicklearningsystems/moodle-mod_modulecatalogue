@@ -41,7 +41,7 @@ defined('MOODLE_INTERNAL') || die();
  * @return object information on assignments
  */
 
-function get_modulecatalogue_data($modulecode, $academicyear) {
+function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $adminemail) {
 
   global $DB;
 
@@ -59,6 +59,10 @@ function get_modulecatalogue_data($modulecode, $academicyear) {
 
     if($curldata->status == 200) {
       $cataloguedata = json_decode($curldata->results);
+      
+      //MOO-1888 Added necessary code to store admin name and email to database
+      write_to_database('adminname', $adminname, $modulecode, $academicyear);
+      write_to_database('adminemail', $adminemail, $modulecode, $academicyear);
 
       foreach($cataloguedata as $k => $v) {
         // MOO-1808 Insert new data from JSON into database: First deal with the Stdclass object as that throws exception errors
