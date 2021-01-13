@@ -40,6 +40,8 @@ class mod_modulecatalogue_external extends external_api {
           'key' => new external_value(PARAM_TEXT, 'Key name', VALUE_REQUIRED),
           'value' => new external_value(PARAM_TEXT, 'Value', VALUE_REQUIRED),
           'defaultcodes' => new external_value(PARAM_INT, 'Default Codes', VALUE_REQUIRED),
+          'adminsupport' => new external_value(PARAM_EMAIL, 'Admin Support', VALUE_REQUIRED),
+          'adminsupportname' => new external_value(PARAM_TEXT, 'Admin Support Name', VALUE_REQUIRED)
       )
     );
   }

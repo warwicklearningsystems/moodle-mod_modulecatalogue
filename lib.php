@@ -300,10 +300,14 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
     // Retrieve details on this catalogue instance including template and module code
     // MOO-1813: modified query to DB method to now use the academicyear from the table mdl_modulecatalogue.
     if ($modcat = $DB->get_record('modulecatalogue',
-      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear, defaultcodes')) {
+      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear, defaultcodes, adminsupport, adminsupportname')) {
 
         // Build information ready for display...
         $info = new cached_cm_info();
+        
+        //Moo 1888 Added new fields to be stored in database
+        $adminemail = $modcat->adminsupport;
+        $adminname = $modcat->adminsupportname;
         
         //Moo 1826 set variables to that of the default codes.
         if ($modcat->defaultcodes == 1){
@@ -335,7 +339,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         if($modulecode != '') {
 
           // Get data from API and store
-          get_modulecatalogue_data($modulecode, $academicyear);
+          get_modulecatalogue_data($modulecode, $academicyear, $adminname, $adminemail);
 
           // Get data from DB
           

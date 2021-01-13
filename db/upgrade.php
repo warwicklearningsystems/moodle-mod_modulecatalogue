@@ -57,6 +57,24 @@ function xmldb_modulecatalogue_upgrade($oldversion) {
             $dbman->add_field($table, $field1);
         }
     }
+    
+    /*
+     * MOO-1888 Added two new columns to the table modulecatalogue
+     * to add admin email and administrator name to initial setup screen
+     */
+    if ($oldversion < 2020090400){
+        $table = new xmldb_table('modulecatalogue'); 
+        $field = new xmldb_field('adminsupport');
+        $field1 = new xmldb_field('adminsupportname');
+        $precision = "100";
+        $default = "";
+        $field->set_attributes(XMLDB_TYPE_CHAR, $precision, false, XMLDB_NOTNULL, false, $default);
+        $field1->set_attributes(XMLDB_TYPE_CHAR, $precision, false, XMLDB_NOTNULL, false, $default);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+            $dbman->add_field($table, $field1);
+        }
+    }
 
     return true;
 }

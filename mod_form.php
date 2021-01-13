@@ -80,8 +80,16 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $moduleCode = $module_Code;
         $academicYear = $academic_year;
         
-        $mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), array('size' => '128'));
-        $mform->setType('adminsupport', PARAM_ALPHANUMEXT);
+        //MOO-1888: Added text box for adminsupport name to hold name of admin support.
+        $options = ['size' => 80, 'maxlength' => 80, 'pattern'=>"[a-zA-Z][a-zA-Z\s]*", 'title'=>"Please use only Alphabetic characters"];
+        $mform->addElement('text', 'adminsupportname', get_string('adminsupportname', 'modulecatalogue'), $options);
+        $mform->setType('adminsupportname', PARAM_TEXT);
+        $mform->addHelpButton('adminsupportname', 'adminsupportname', 'modulecatalogue');
+        
+        //MOO-1888: Modified existing text box for adminsupport to hold email address and validation.
+        $options = ['size' => 80, 'maxlength' => 80, 'pattern'=>"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", 'title'=>"Please include the '@' in the e-Mail address."];
+        $mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), $options);
+        $mform->setType('adminsupport', core_user::get_property_type('email'));
         $mform->addHelpButton('adminsupport', 'adminsupport', 'modulecatalogue');
         
         //MOO-1826 Inserted options for default codes;
