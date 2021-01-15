@@ -1,34 +1,27 @@
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-5">{{ code }}: {{ name }}</h1>
-        <h3 class="display-5"> Number of Credits: {{ creditValue }}</h3>
-        <h4 class="display-5"> Academic Year: {{ academic_year }}</h4>
-        <p class="lead"> Aims:</p>
-        <tr>  {{ principal_aims }} </tr>
-        <p class="lead"> Total Study Hours: {{ totalStudyHours }} </p>
-        <p class="lead"> Syllabus </p>
-        <p> {{ outlineSyllabus }}  </p>
-
-        <p class="lead"> Assessments </p>
-
-        <section>
-            {{#assesmentGrplength0}} <p> {{ assesmentGrpname0 }} {{assesmentGrptype0}} {{ assesmentGrpweighting0 }}  Duration Exam: {{ assesmentGrplength0 }} Description: {{ assesmentGrpdescription0 }} </p> {{/assesmentGrplength0}}
-            {{^assesmentGrplength0}} <td> <em> {{ assesmentGrpname0 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} </td> {{/assesmentGrplength0}}
-
-            {{#assesmentGrplength1}} <p> {{ assesmentGrpname1 }} {{assesmentGrptype1}} <em> </em> {{ assesmentGrpweighting1 }} Description: {{ assesmentGrpdescription1 }} </p> {{/assesmentGrplength1}}
-            {{^assesmentGrplength1}} <td> <em> {{ assesmentGrpname1 }} &nbsp &nbsp </em> {{ assesmentGrpweighting1}} </td> {{/assesmentGrplength1}}
-
-            {{#assesmentGrplength2}} <p> {{ assesmentGrpname2 }} {{assesmentGrptype2}} <em> </em> {{ assesmentGrpweighting2 }} Description: {{ assesmentGrpdescription2 }} </p> {{/assesmentGrplength2}}
-            {{^assesmentGrplength2}} <td> <em> {{ assesmentGrpname2 }} &nbsp &nbsp </em> {{ assesmentGrpweighting2}} </td> {{/assesmentGrplength2}}
-
-            {{#assesmentGrplength3}} <p>  {{ assesmentGrpname3 }} {{assesmentGrptype3}} <em> </em> {{ assesmentGrpweighting3 }} Description: {{ assesmentGrpdescription3 }} </p> {{/assesmentGrplength3}}
-            {{^assesmentGrplength3}} <td> <em> {{ assesmentGrpname3 }} &nbsp &nbsp </em> {{ assesmentGrpweighting3}} </td> {{/assesmentGrplength3}}
-
-            {{#assesmentGrplength4}} <p>  {{ assesmentGrpname4 }} {{assesmentGrptype4}} <em> </em> {{ assesmentGrpweighting4 }} Description: {{ assesmentGrpdescription4 }} </p> {{/assesmentGrplength4}}
-            {{^assesmentGrplength4}} <td> <em> {{ assesmentGrpname4 }} &nbsp &nbsp </em> {{ assesmentGrpweighting4}} </td> {{/assesmentGrplength4}}
-        </section>
-
-        <p class="lead">Subject Specific Skills</p>
-        {{ subjectSpecificSkills}}
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
+</head>
+   
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h3 class="display-5">{{ code }}: {{ name }}</h3>
+            <h4 class="display-5"> Number of Credits: {{ creditValue }}</h4>
+            <h4 class="display-5"> Academic Year: {{ academic_year }}</h4>
+            <h5 class="display-5"> Principal Aims </h5>
+            <p>{{#principal_aims}} <p class="normal-paragraph"> {{.}} </p> {{/principal_aims}}</p>
+            <p class="lead"> Total Study Hours: {{ totalStudyHours }} hours </p>
+            <p class="normal-paragraph"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ.</p>
+        <article>
+            {{#outlineSyllabusShort}} <li class="paragraph-list"><i> {{.}}</i> </li> {{/outlineSyllabusShort}}
+                <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
+                    <div class="read-more-content">
+                        {{#outlineSyllabus}} <li class="paragraph-list"> <i>{{.}}</i> </li> {{/outlineSyllabus}}
+                    </div>
+            <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
+        </article>
+        <h5 class="display-5"> Subject Specific Skills </h5>
+        <p ="normal-paragraph"> Students will gain a basic understanding of research skills such as:</p>
+        {{#subjectSpecificSkills}} <li class="normal-paragraph"> {{.}} </li> {{/subjectSpecificSkills}}
+        </div>
     </div>
-</div>
+

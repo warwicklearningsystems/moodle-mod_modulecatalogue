@@ -146,7 +146,16 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
           }
           // MOO-1808 Insert new data from JSON into database: logic to insert all root data in json file.
           else{
-            write_to_database($k, $v, $modulecode, $academicyear);
+              /*
+               * MOO 1935 Modified else code to fix presentation of information as separated paragraphs.
+               */
+              if (($k == 'outlineSyllabus') || ($k == 'indicativeReadingList') || ($k == 'aims') ||
+                      ($k == 'introductoryDescription') || ($k == 'subjectSpecificSkills') || ($k == 'privateStudyDescription')){
+                  $value = implode(expand_array($v),'<br />');
+                  write_to_database($k, $value, $modulecode, $academicyear);
+              } else{
+                  write_to_database($k, $v, $modulecode, $academicyear);
+              }    
           }
 
         }
@@ -157,6 +166,11 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
   return $cataloguedata;
 }
 
+/*
+ * MOO-1808 write-to-database function to write/modify database entry
+ * if record exists, update_record is triggered to update record
+ * else, if no record exists, insert_record inserts new record.
+ */
 function write_to_database( $key, $value, $modulecode, $academicyear){
 
   global $DB;
@@ -187,11 +201,32 @@ function insertLocations( $cataloguedata){
     foreach($cataloguedata->locations as $k => $v){
         $object = $cataloguedata->locations[0];
         foreach($object as $k => $v){
-            print_r("am here ");
             $k = "locations" .$k;
             if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear' => $academicyear, 'labelkey' => $k)) ){
                 $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
             }
         }
     }                      
+}
+
+/*
+ * MOO 1935 expand array function introduced.
+ * this method will take a string, convert to an array
+ * removing any empty elements and return the array.
+ */
+function expand_array($value){
+   
+    $valueArray = array();   
+    $valueArray = explode(("<br />"),nl2br($value));    
+    $i = 0;
+                 
+    //clean up and remove any null or empty values from the array
+    foreach ($valueArray as $value){
+        if ((strlen($value)) <= 3) {
+            unset($valueArray[$i]);
+        }
+        $i++;
+    }
+    //re-index the array 
+    return array_values($valueArray);
 }

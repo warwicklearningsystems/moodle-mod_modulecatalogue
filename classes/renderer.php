@@ -63,10 +63,11 @@ class cataloguedata implements \templatable, \renderable {
   public function export_for_template(\renderer_base $output) {
       $results = array();
       $x = 0;
+      $delimiter = '<br />';
       
     $data = array(
         'classes'     => '',
-        'principal_aims' => $this->aims,
+        'principal_aims' => explode(($delimiter), $this->aims),
         'department' => $this->departmentname,
         'facultyname' => $this->facultyname,
         'code' => $this->code,
@@ -77,10 +78,11 @@ class cataloguedata implements \templatable, \renderable {
         'leadername' => $this->leadername,
         'leaderemail' => $this->leaderemail,
         'locationname' => $this->locationname,
-        'outlineSyllabus' => $this->outlineSyllabus,
-        'indicativeReadingList' => $this->indicativeReadingList,
+        'outlineSyllabus' => array_slice(explode(($delimiter), $this->outlineSyllabus), 6),
+        'outlineSyllabusShort' => array_slice(explode(($delimiter), $this->outlineSyllabus), 0, 5),
+        'indicativeReadingList' => explode(($delimiter), $this->indicativeReadingList),
         'readingListUrl' => $this->readingListUrl,
-        'introductoryDescription' => $this->introductoryDescription,
+        'introductoryDescription' => explode(($delimiter), $this->introductoryDescription),
         'totalStudyHours' => $this->totalStudyHours,
         'assesmentGrptype0' => $this->assesmentGrptype0,
         'assesmentGrpname0' => $this->assesmentGrpname0,
@@ -115,8 +117,8 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpexam4' => $this->assesmentGrpexam4,
         'assesmentGrpdescription4' => $this->assesmentGrpdescription4,
         'assesmentGrplength4' => $this->assesmentGrplength4,
-        
-        'subjectSpecificSkills' => $this->subjectSpecificSkills,
+        'privateStudyDescription' => explode(($delimiter), $this->privateStudyDescription),
+        'subjectSpecificSkills' => explode(($delimiter), $this->subjectSpecificSkills),
         'adminemail' => $this->adminemail,
         'adminname' => $this->adminname
     );

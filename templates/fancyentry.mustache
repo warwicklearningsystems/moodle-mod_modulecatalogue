@@ -1,13 +1,21 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
-
 <div id="allwmshead" class="wms-head-cll">
     <div id="head-temp-container" class="rounded">
         <div id="head-temp-container" class="rounded">
             <ul style="list-style: none;" class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-syllabus" role="tab" aria-controls="pills-syllabus" aria-selected="false">Learning Outcomes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  id="pills-assessment-tab" data-toggle="pill" href="#pills-assessment" role="tab" aria-controls="pills-assessment" aria-selected="false">Assessment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  id="pills-study-tab" data-toggle="pill" href="#pills-study" role="tab" aria-controls="pills-study" aria-selected="false">Study Requirements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
@@ -18,9 +26,74 @@
                 <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div id="wmshead-content" class="p-3 p-md-5" >
                         <h2 class="course-cde" >{{ code }}: {{ name }}</h2>
-                        <h5 class="parag-just" > Principal Aims: {{ principal_aims }}</h5>
+                        <h5 class="display-5"> Principal Aims </h5>
+                        {{#principal_aims}} <ul class="normal-paragraph"> {{.}} </ul>{{/principal_aims}}
                         <h5 class="section-heading" > Outline Syllabus </h5>
-                        <p class="normal-paragraph"> {{ outlineSyllabus }} </p>
+                        <article>
+                            {{#outlineSyllabusShort}} <li class="paragraph-list"><i> {{.}}</i> </li> {{/outlineSyllabusShort}}
+                                <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
+                            <div class="read-more-content">
+                                {{#outlineSyllabus}} <li class="paragraph-list"> <i>{{.}}</i> </li> {{/outlineSyllabus}}
+                            </div>
+                            <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-syllabus" role="tabpanel" aria-labelledby="pills-syllabus-tab">
+                     <div class="tabcolor" >
+                        <h4 class="display-5">Principal Learning Outcomes </h4>
+                        <p>By the end of the module, students should be able to: </p>
+                        {{#learningOutcomes}} <ul class="normal-paragraph"> {{.}} </ul> {{/learningOutcomes}}
+                     </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-assessment" role="tabpanel" aria-labelledby="pills-assessment-tab">
+                    <div class="tabcolor" >
+                        <h4 class="display-5"> Assessment Schedule</h4>
+                            <section>
+                                <table id="table">
+                                    <tr>
+                                        <th> Assessment Name </th>
+                                        <th> Assessment Type </th>
+                                        <th> Duration </th>
+                                        <th> Weight </th>
+                                        <th> Description </th> 
+                                    </tr>
+                                    <tr>{{#assesmentGrpname0}}
+                                        <td> {{ assesmentGrptype0 }} </<td>
+                                        <td> {{ assesmentGrpname0 }} </<td>
+                                        <td> {{ assesmentGrplength0 }} </<td>
+                                        <td> {{ assesmentGrpweighting0 }} </<td>
+                                        <td> {{ assesmentGrpdescription0 }} </<td>
+                                    {{/assesmentGrpname0}}</tr>
+                                    <tr>{{#assesmentGrpname1}}
+                                        <td> {{assesmentGrptype1}} </<td>
+                                        <td> {{ assesmentGrpname1 }} </<td>
+                                        <td> {{ assesmentGrplength1 }} </<td>
+                                        <td> {{ assesmentGrpweighting1 }} </<td>
+                                        <td> {{ assesmentGrpdescription1 }} </<td>
+                                    {{/assesmentGrpname1}}</tr>
+                                    <tr>{{#assesmentGrpname2}}
+                                        <td> {{assesmentGrptype2}} </<td>
+                                        <td> {{ assesmentGrpname2 }} </<td>
+                                        <td> {{ assesmentGrplength2 }} </<td>
+                                        <td> {{ assesmentGrpweighting2 }} </<td>
+                                        <td> {{ assesmentGrpdescription2 }} </<td>
+                                    {{/assesmentGrpname2}}</tr>
+                                </table>
+                            </section>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-study" role="tabpanel" aria-labelledby="pills-study-tab">
+                    <div class="tabcolor" >
+                        <h4 class="display-5"> Private Study Description </h4>
+                        {{#privateStudyDescription}} <ul class="normal-paragraph"> {{.}} </ul> {{/privateStudyDescription}}
+                        <h4 class="display-5"> Specific Skills </h4>
+                        {{#subjectSpecificSkills}} <ul class="normal-paragraph"> {{.}} </ul> {{/subjectSpecificSkills}}
+                        <h4 class="display-5"> Indicative Reading List </h4>
+                        {{#indicativeReadingList}} <ul class="normal-paragraph"> {{.}} </ul> {{/indicativeReadingList}}
                     </div>
                 </div>
 
