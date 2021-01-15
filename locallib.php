@@ -201,7 +201,6 @@ function insertLocations( $cataloguedata){
     foreach($cataloguedata->locations as $k => $v){
         $object = $cataloguedata->locations[0];
         foreach($object as $k => $v){
-            print_r("am here ");
             $k = "locations" .$k;
             if( !$DB->record_exists('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear' => $academicyear, 'labelkey' => $k)) ){
                 $DB->insert_record('modulecatalogue_data', array('modulecode' => $modulecode,'academicyear'=> $academicyear, 'labelkey' => $k, 'labelvalue' => $v));
