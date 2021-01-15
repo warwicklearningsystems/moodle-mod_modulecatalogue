@@ -101,13 +101,19 @@ and open the template in the editor.
     text-align: justify;
 }
 
+.indented_paragraph{
+    text-align: justify;
+    padding-left: 30px;
+}
+
 .parag-just {
-    font-size: 1.15em;
+    font-size: 1.05em;
     padding: 10px;
     width: 95%;
     margin: 10px auto;
     text-align: justify;
     color: #002775;
+    margin-left: 30px;
 }
 
 .smallheader { 
@@ -185,7 +191,10 @@ ol.d {
     margin:15px; 
     min-height:240px;
     border-radius: 10px;
-    box-shadow: 5px 5px #a0f8f8;
+    box-shadow: 7px 7px #d2edf9;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #86A5EC;
 }
 
 .tabcolor{
@@ -282,8 +291,57 @@ only screen and (max-width: 760px),
 }
 
 #table tr:nth-child(odd) {
-  background-color: honeydew;
+  background-color: #e2f3fb;
 }
 
 #table tr:hover {background-color: #def2f8;}
 
+/* MOO 1935*/
+.read-more-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+}
+
+.read-more-toggle {
+  display: none;
+}
+
+.read-more-toggle-label {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  padding: 5px;
+  margin: .5em;
+  font-size: .8em;
+  background: #0066CC;
+  color: white;
+}
+
+.read-more-toggle-label:after {
+  content: "More";
+  display: inline-block;
+}
+
+.read-more-toggle:checked + .read-more-content {
+  display: block;
+  /* css animation won't work with "auto"; set to some height larger
+	than the content */
+  max-height: 1000px;
+}
+
+.read-more-toggle:checked + .read-more-content + .read-more-toggle-label:after {
+  content: "Less";
+}
+
+article {
+  border-bottom: 1px solid grey;
+}
+
+article p {
+  margin-bottom: .5em;
+}
+
+.paragraph-list{
+    margin-left: 30px;
+}

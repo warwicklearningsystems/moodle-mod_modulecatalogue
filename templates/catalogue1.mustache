@@ -1,34 +1,24 @@
 <head>
     <link rel="stylesheet" type="text/css" />
 </head>
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-5"> {{ code }}: {{ name }}</h1>
-    <p class="lead">{{ principal_aims }}</p>
 
-    <p>
-	<H5>Outline Syllabus</H5>
-	    {{ outlineSyllabus }}
-    </p>
-	<p>
-	<H5>Principal Learning Outcomes</H5>
-        <p>By the end of the module, students should be able to: </p>
-        <ul>
-            {{ $results.0 }}
-            <section>
-            {{#learningOutcomes}} <p class="normal-paragraph"> {{.}} </p> {{/learningOutcomes}}
-            </section>                     
-	</ul>
-        </p>
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h3 class="display-5">{{ code }}: {{ name }}</h3>
+            <h5 class="display-5"> Principal Aims </h5>
+            <p>{{#principal_aims}} <ul class="normal-paragraph"> {{.}} </ul> {{/principal_aims}}</p>
+            <hr>
+            <h5 class="display-5"> Principal Learning Outcomes </h5>
+            <p class="normal-paragraph">By the end of the module, students should be able to: </p>
+            {{#learningOutcomes}} <ul class="normal-paragraph"> {{.}} </ul> {{/learningOutcomes}}
+            <hr>
+            <h5 class="display-5"> Indicative Reading list </h5>
+            <a href= {{ readingListUrl }} > {{ readingListUrl }} </a></li>
+            <hr>
+            <h5 class="display-5"> Additional Information </h5>
+            <p>Module leader: {{ leadername }} - email <a href="mailto:{{ leaderemail }}">{{ leaderemail }} </a></p>
 
-	<H6>Additional information</H6>
-	<p>
-	    <ul class="unstyled">
-	    <li>Module leader: {{ leadername }} - email <a href="mailto:{{ leaderemail }}">{{ leaderemail }} </a></li>
-	    <li>Lectures: Monday 9am L3, Tuesday 10am OC0.03, Wednesday 3pm GLT1</li>
-	</p>
-    <H6>Indicative Reading List</H6>
-    {{ indicativeReadingList }}  <a href= {{ readingListUrl }} > {{ readingListUrl }} </a></li>
-
-  </div>
-</div>
+        </div>
+    </div>
+</body>
