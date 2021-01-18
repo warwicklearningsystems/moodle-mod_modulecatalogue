@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
+
 <div id="allwmshead" class="wms-head-cll">
     <div id="head-temp-container" class="rounded">
         <div id="head-temp-container" class="rounded">
@@ -27,16 +28,16 @@
                     <div id="wmshead-content" class="p-3 p-md-5" >
                         <h2 class="course-cde" >{{ code }}: {{ name }}</h2>
                         <h5 class="display-5"> Principal Aims </h5>
-                        {{#principal_aims}} <ul class="normal-paragraph"> {{.}} </ul>{{/principal_aims}}
+                        <ul style="list-style-type: circle"> {{#principal_aims}} <li class="normal-paragraph"> {{.}} </li>{{/principal_aims}} </ul>
                         <h5 class="section-heading" > Outline Syllabus </h5>
-                        <article>
-                            {{#outlineSyllabusShort}} <li class="paragraph-list"><i> {{.}}</i> </li> {{/outlineSyllabusShort}}
+                        <article><ul style="list-style-type: disk">
+                            {{#outlineSyllabusShort}} <li class="paragraph-list"> {{.}} </li> {{/outlineSyllabusShort}}
                                 <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
                             <div class="read-more-content">
-                                {{#outlineSyllabus}} <li class="paragraph-list"> <i>{{.}}</i> </li> {{/outlineSyllabus}}
+                                {{#outlineSyllabus}} <li class="paragraph-list"> {{.}} </li> {{/outlineSyllabus}}
                             </div>
                             <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
-                        </article>
+                        </ul></article>
                     </div>
                 </div>
 
@@ -44,7 +45,8 @@
                      <div class="tabcolor" >
                         <h4 class="display-5">Principal Learning Outcomes </h4>
                         <p>By the end of the module, students should be able to: </p>
-                        {{#learningOutcomes}} <ul class="normal-paragraph"> {{.}} </ul> {{/learningOutcomes}}
+                        <ul style="list-style-type: disk">
+                        {{#learningOutcomes}} <li class="paragraph-list"> {{.}} </li> {{/learningOutcomes}}</ul>
                      </div>
                 </div>
 
@@ -89,11 +91,11 @@
                 <div class="tab-pane fade" id="pills-study" role="tabpanel" aria-labelledby="pills-study-tab">
                     <div class="tabcolor" >
                         <h4 class="display-5"> Private Study Description </h4>
-                        {{#privateStudyDescription}} <ul class="normal-paragraph"> {{.}} </ul> {{/privateStudyDescription}}
+                        <ul style="list-style-type: circle"> {{#privateStudyDescription}} <li class="paragraph-list"> {{.}} </li> {{/privateStudyDescription}}</ul>
                         <h4 class="display-5"> Specific Skills </h4>
-                        {{#subjectSpecificSkills}} <ul class="normal-paragraph"> {{.}} </ul> {{/subjectSpecificSkills}}
+                        <ul style="list-style-type: disk"> {{#subjectSpecificSkills}} <li class="paragraph-list"> {{.}} </li> {{/subjectSpecificSkills}}</ul>
                         <h4 class="display-5"> Indicative Reading List </h4>
-                        {{#indicativeReadingList}} <ul class="normal-paragraph"> {{.}} </ul> {{/indicativeReadingList}}
+                        <ul style="list-style-type: disk">{{#indicativeReadingList}} <li class="paragraph-list"> {{.}} </li> {{/indicativeReadingList}}</ul>
                     </div>
                 </div>
 
@@ -109,7 +111,7 @@
                                     </tr>
                                     <tr>
                                         <td class="bolded"> Course Tutor e_Mail address:</td>
-                                        <td class="italized"> {{ leaderemail }} </td>
+                                        <td class="italized"> <a href="mailto:{{ leaderemail }}"> {{ leaderemail }} </a> </td>
                                     </tr>
                                     {{#adminname}}<tr>
                                         <td class="bolded"> Student Administrator Name:  </td>
@@ -117,7 +119,7 @@
                                     </tr>{{/adminname}}
                                     {{#adminemail}}<tr>
                                         <td class="bolded">Student Administration e-Mail:  </td>
-                                        <td class="italized"> {{ adminemail }} </td>
+                                        <td class="italized"> <a href="mailto:{{ adminemail }}">{{ adminemail }} </a> </td>
                                     </tr>{{/adminemail}}
                                     <tr>
                                         <td class="bolded"> Department: </td>
