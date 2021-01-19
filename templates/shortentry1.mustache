@@ -3,6 +3,9 @@
 </head>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
+<div class="alertinformation">{{#alert}}
+    {{#alertmessage}}{{.}}{{/alertmessage}} <a href= {{ urllink }} > {{ urllink }} </a>
+         {{/alert}}</div>
     <h3> {{ code }} : {{ name }} </h3>
     <h5 class="display-5"> Outline Syllabus </h5>
     <p class="normal-paragraph"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ.</p>

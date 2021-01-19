@@ -10,6 +10,9 @@
                     <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link"  id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false">Description</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-syllabus" role="tab" aria-controls="pills-syllabus" aria-selected="false">Learning Outcomes</a>
                 </li>
                 <li class="nav-item">
@@ -24,9 +27,41 @@
             </ul>
 
             <div class="tab-content" id="pills-tabContent">
+
                 <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div id="wmshead-content" class="p-3 p-md-5" >
-                        <h2 class="course-cde" >{{ code }}: {{ name }}</h2>
+                    <div class="hometab" >
+                        <div class="alertinformation">{{#alert}}
+                            {{#alertmessage}}{{.}}{{/alertmessage}} <a href= {{ urllink }} > {{ urllink }} </a>
+                         {{/alert}}</div>
+                         <h3 class="course-cde" >{{ code }}: {{ name }}</h3>
+                         <hr>
+                         <div class="row">
+                            <div class="column" >
+                                <p>Academic Year: </p>
+                                <p>Department: </p>
+                                <p>Level: </p>
+                                <p>Module leader: </p>
+                                <p>Credit value: </p>
+                                <p>Module duration: </p>
+                                <p>Location: </p> 
+                            </div>
+                            <div class="rightcolumn" >
+                                <p>{{academicyear}}</p>
+                                <p>{{department}}</p>
+                                <p>{{levelname}} </p>
+                                <p>{{leadername}} </p>
+                                <p>{{creditValue}}</p>
+                                <p>{{duration}} </p>
+                                <p>{{locationname}} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                    <div class="tabcolor">
+                        <h5 class="display-5">Introductory Description </h5>
+                        <ul> {{#introductoryDescription}} <li class="normal-paragraph" style="margin-bottom: 10px;"> {{.}} </li> {{/introductoryDescription}}</ul>
                         <h5 class="display-5"> Principal Aims </h5>
                         <ul style="list-style-type: circle"> {{#principal_aims}} <li class="normal-paragraph"> {{.}} </li>{{/principal_aims}} </ul>
                         <h5 class="section-heading" > Outline Syllabus </h5>

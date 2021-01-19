@@ -66,3 +66,11 @@ $string['catalogue_username'] = 'Username';
 $string['catalogue_username_desc'] = 'Username used to authenticate with Module catalogue API';
 $string['catalogue_password'] = 'Password';
 $string['catalogue_password_desc'] = 'Password used to authenticate with Module catalogue API';
+
+/*
+ *  MOO-1983 Added new field, alertinformation to setup module/course wide general information
+ */
+$string['alertinformation'] = 'University Alert on all Courses';
+$string['alertinformation_desc'] = 'General alert applicable to all modules and Courses';
+$string['applyAlert'] = 'Apply alert on all Courses';
+$string['applyAlert_desc'] = 'Use alert on all modules and Courses';

@@ -364,3 +364,64 @@ article p {
 li::marker {
     color: #002775;
 }
+
+/* MOO 1983 Added code for disclosure*/
+
+.container {
+    max-width: 960px;
+}
+
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #e8f2ff;
+}
+
+.jumbotron-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.alertinformation:empty {
+    display: none;
+    visibility: hidden; 
+}
+
+.alertinformation {
+    font-size: 0.88em;
+    background-color: #c5f2ef;
+    text-align: justify;
+    padding: 15px; 
+    border-radius: 10px;
+    box-shadow: 7px 7px #acece8;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #86A5EC;
+    margin-bottom: 10px;
+}
+
+.column {
+  float: left;
+  width: 20%;
+  padding-right: 2px;
+  text-align: right;
+  color: grey;
+}
+
+.rightcolumn {
+  float: left;
+  width: 80%;
+  padding-left: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.hometab {
+    width: auto;
+    padding: 15px;
+    margin: 15px;
+}

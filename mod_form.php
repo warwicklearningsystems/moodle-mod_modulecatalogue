@@ -101,7 +101,7 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         
         //MOO-1826 customize module code to prevent unwanted entries been entered and force users to enter right format;
         $str = 'autoupdate';
-        $options = ['size' => 8, 'maxlength' => 8, 'pattern'=>"[A-Za-z]{2}[0-9]{3}[-]{1}[0-9]{1,2}", 'title'=>"Please enter the course code as in AANNN-NN", 'required']; 
+        $options = ['size' => 8, 'maxlength' => 8, 'pattern'=>"[A-Za-z]{2}[0-9 A-Za-z]{3}[-]{1}[0-9]{1,2}", 'title'=>"Please enter the course code as in AANNN-NN", 'required']; 
         $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), $options);
         $mform->addHelpButton('modulecode', 'modulecode', 'modulecatalogue');
        
