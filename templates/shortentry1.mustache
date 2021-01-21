@@ -10,17 +10,17 @@
     <h5 class="display-5"> Outline Syllabus </h5>
     <p class="normal-paragraph"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ.</p>
     <article>
-            {{#outlineSyllabusShort}} <li class="paragraph-list"><i> {{.}}</i> </li> {{/outlineSyllabusShort}}
+            {{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}
                 <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
                     <div class="read-more-content">
-                        {{#outlineSyllabus}} <li class="paragraph-list"> <i>{{.}}</i> </li> {{/outlineSyllabus}}
+                        {{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}
                     </div>
             <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
     </article>
 
      <h5 class="display-5"> Assessment Schedule </h5>
     <section>
-        <table id="table">
+        <table class="fancy-table">
             <tr>
                 <th> Assessment Name </th>
                 <th> Assessment Type </th>

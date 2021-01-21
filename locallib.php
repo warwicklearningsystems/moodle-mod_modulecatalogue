@@ -166,10 +166,11 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
               /*
                * MOO 1935 Modified else code to fix presentation of information as separated paragraphs.
                */
-              if (($k == 'outlineSyllabus') || ($k == 'indicativeReadingList') || ($k == 'aims') || ($k == 'transferableSkills') ||
-                      ($k == 'introductoryDescription') || ($k == 'subjectSpecificSkills') || ($k == 'privateStudyDescription')){
-                  $value = implode(expand_array($v),'<br />');
-                  write_to_database($k, $value, $modulecode, $academicyear);
+              if (($k == "outlineSyllabus") || ($k == "indicativeReadingList") || ($k == "aims") || ($k == "transferableSkills") || ($k == "introductoryDescription") || ($k == "subjectSpecificSkills") || ($k == "privateStudyDescription")){
+                  if (!(is_null($v))){  /* MOO 2019 remove any null values */
+                      $value = implode(expand_array($v),'<br />');
+                      write_to_database($k, $value, $modulecode, $academicyear);                     
+                  }       
               } else{
                   write_to_database($k, $v, $modulecode, $academicyear);
               }    
@@ -250,9 +251,10 @@ function expand_array($value){
             $valueArray[$i] = ucfirst(trim($value));
         }
         
-        elseif(ord(substr(trim($value), 0, 1)) == 194){
+        elseif((ord(substr(trim($value), 0, 1)) == 194) || (ord(substr(trim($value), 0, 1)) == 239)){
             $valueArray[$i] = ucfirst(substr(trim($value), 3));
         }
+
         $i++;
     }
     //re-index the array 

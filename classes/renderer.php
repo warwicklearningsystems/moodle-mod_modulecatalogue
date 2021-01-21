@@ -35,7 +35,7 @@ class cataloguedata implements \templatable, \renderable {
         'studyAmounttype4', 'studyAmountrequiredDescription4', 'studyAmountrequiredDuration4',
         'preRequisiteModulecode0', 'preRequisiteModuletitle0', 'preRequisiteModulecode1', 'preRequisiteModuletitle1',
         'postRequisiteModulecode0', 'postRequisiteModuletitle0','postRequisiteModulecode0', 'postRequisiteModuletitle0',
-        'alertmessage','urllink','alert'
+        'alertmessage','urllink','alert', 'totalExamWeighting','totalCourseworkWeighting'
         );
     
 
@@ -76,7 +76,7 @@ class cataloguedata implements \templatable, \renderable {
         'levelname' =>$this->levelname,
         'code' => $this->code,
         'name' => $this->title,
-        'academicyear' => $this->academicYear,
+        'academicyear' => $this->academicYear,  /*MOO-1983 renamed to academicYear for consistency*/
         'creditValue' => $this->creditValue,
         'learningOutcomes' => explode(("<br />"),nl2br($this->learningOutcomes)),
         'leadername' => $this->leadername,
@@ -134,12 +134,15 @@ class cataloguedata implements \templatable, \renderable {
         'adminemail' => $this->adminemail,
         'adminname' => $this->adminname,
         
+        /*MOO-1983 Added alert message, alert and urlink */
         'alertmessage' => explode(($delimiter), $this->alertmessage), 
         'urllink' => $this->urllink,
         'alert' => $this->alert,
+        /*MOO-1983 added duration, transferableskills, and exam weighting not added previously*/
         'duration' => $this->duration,
-        'transferableSkills' => explode(($delimiter), $this->transferableSkills)
-        
+        'transferableSkills' => explode(($delimiter), $this->transferableSkills),
+        'totalExamWeighting' => $this->totalExamWeighting,
+        'totalCourseworkWeighting' => $this->totalCourseworkWeighting
     );
    
     return $data;
