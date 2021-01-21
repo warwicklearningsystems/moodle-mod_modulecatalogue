@@ -1,3 +1,4 @@
+
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
@@ -8,6 +9,9 @@
             <ul style="list-style: none;" class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false">Description</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-syllabus" role="tab" aria-controls="pills-syllabus" aria-selected="false">Learning Outcomes</a>
@@ -24,37 +28,86 @@
             </ul>
 
             <div class="tab-content" id="pills-tabContent">
+
                 <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div id="wmshead-content" class="p-3 p-md-5" >
-                        <h2 class="course-cde" >{{ code }}: {{ name }}</h2>
+                        <div class="alertinformation">{{#alert}}
+                            {{#alertmessage}}{{.}}{{/alertmessage}} <a href= {{ urllink }} > {{ urllink }} </a>
+                         {{/alert}}</div>
+                         <h3 class="course-cde"> {{ code }} : {{ name }} </h3>
+                         <hr>
+                         <!--MOO 2019 Replaced for a Bootstrap table-->
+                         <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-3 column">Academic Year:</div>
+                                <div class="col-sm-5 rightcolumn">{{academicyear}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 column">Department:</div>
+                                <div class="col-sm-5 rightcolumn">{{department}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 column">Level:</div>
+                                <div class="col-sm-5 rightcolumn">{{levelname}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 column">Module leader:</div>
+                                <div class="col-sm-5 rightcolumn">{{leadername}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 column">Credit value:</div>
+                                <div class="col-sm-5 rightcolumn">{{creditValue}}</div>
+                            </div>
+                            {{#duration}}<div class="row">
+                                <div class="col-sm-3 column">Module duration:</div>
+                                <div class="col-sm-5 rightcolumn">{{duration}}</div>
+                            </div>{{/duration}}
+                            <div class="row">
+                                <div class="col-sm-3 column">Location:</div>
+                                <div class="col-sm-5 rightcolumn">{{locationname}}</div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                    <div class="tabcolor">
+                        <h5 class="display-5">Introductory Description </h5>
+                        {{#introductoryDescription}} <p class="paragraph-list"> {{.}} </p> {{/introductoryDescription}}
                         <h5 class="display-5"> Principal Aims </h5>
-                        <ul style="list-style-type: circle"> {{#principal_aims}} <li class="normal-paragraph"> {{.}} </li>{{/principal_aims}} </ul>
+                        {{#principal_aims}} <p class="paragraph-list"> {{.}} </p>{{/principal_aims}} 
                         <h5 class="section-heading" > Outline Syllabus </h5>
-                        <article><ul style="list-style-type: disk">
-                            {{#outlineSyllabusShort}} <li class="paragraph-list"> {{.}} </li> {{/outlineSyllabusShort}}
+                        <article>
+                            {{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}
                                 <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
                             <div class="read-more-content">
-                                {{#outlineSyllabus}} <li class="paragraph-list"> {{.}} </li> {{/outlineSyllabus}}
+                                {{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}
                             </div>
                             <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
-                        </ul></article>
+                        </article>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="pills-syllabus" role="tabpanel" aria-labelledby="pills-syllabus-tab">
                      <div class="tabcolor" >
+
                         <h4 class="display-5">Principal Learning Outcomes </h4>
                         <p>By the end of the module, students should be able to: </p>
-                        <ul style="list-style-type: disk">
-                        {{#learningOutcomes}} <li class="paragraph-list"> {{.}} </li> {{/learningOutcomes}}</ul>
+                        {{#learningOutcomes}} <p class="paragraph-list"> {{.}} </p> {{/learningOutcomes}}
+                        <hr>
                      </div>
                 </div>
 
                 <div class="tab-pane fade" id="pills-assessment" role="tabpanel" aria-labelledby="pills-assessment-tab">
                     <div class="tabcolor" >
+                        <h5 class="display-5"> Total Exam Weight</h5>
+                        <p class="normal-paragraph">{{totalExamWeighting}} %</p>
+                        <h5 class="display-5"> Total Course Weight</h5>
+                        <p class="normal-paragraph">{{totalCourseworkWeighting}} %</p>
+
                         <h4 class="display-5"> Assessment Schedule</h4>
                             <section>
-                                <table id="table">
+                                <table class="fancy-table">
                                     <tr>
                                         <th> Assessment Name </th>
                                         <th> Assessment Type </th>
@@ -83,6 +136,20 @@
                                         <td> {{ assesmentGrpweighting2 }} </<td>
                                         <td> {{ assesmentGrpdescription2 }} </<td>
                                     {{/assesmentGrpname2}}</tr>
+                                    <tr>{{#assesmentGrpname3}}
+                                        <td> {{assesmentGrptype3}} </<td>
+                                        <td> {{ assesmentGrpname3 }} </<td>
+                                        <td> {{ assesmentGrplength3 }} </<td>
+                                        <td> {{ assesmentGrpweighting3 }} </<td>
+                                        <td> {{ assesmentGrpdescription3 }} </<td>
+                                    {{/assesmentGrpname3}}</tr>
+                                    <tr>{{#assesmentGrpname4}}
+                                        <td> {{assesmentGrptype4}} </<td>
+                                        <td> {{ assesmentGrpname4 }} </<td>
+                                        <td> {{ assesmentGrplength4 }} </<td>
+                                        <td> {{ assesmentGrpweighting4 }} </<td>
+                                        <td> {{ assesmentGrpdescription4 }} </<td>
+                                    {{/assesmentGrpname4}}</tr>
                                 </table>
                             </section>
                     </div>
@@ -90,12 +157,54 @@
 
                 <div class="tab-pane fade" id="pills-study" role="tabpanel" aria-labelledby="pills-study-tab">
                     <div class="tabcolor" >
-                        <h4 class="display-5"> Private Study Description </h4>
-                        <ul style="list-style-type: circle"> {{#privateStudyDescription}} <li class="paragraph-list"> {{.}} </li> {{/privateStudyDescription}}</ul>
-                        <h4 class="display-5"> Specific Skills </h4>
-                        <ul style="list-style-type: disk"> {{#subjectSpecificSkills}} <li class="paragraph-list"> {{.}} </li> {{/subjectSpecificSkills}}</ul>
-                        <h4 class="display-5"> Indicative Reading List </h4>
-                        <ul style="list-style-type: disk">{{#indicativeReadingList}} <li class="paragraph-list"> {{.}} </li> {{/indicativeReadingList}}</ul>
+                        <h5 class="display-5"> Private Study Description </h5>                        
+                        {{#privateStudyDescription}} <p class="paragraph-list"> {{.}} </p> {{/privateStudyDescription}}
+                        <h5 class="display-5"> Specific Skills </h5>
+                        {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
+                        <h5 class="display-5"> Transferable Skills </h5>
+                        {{#transferableSkills}} <p class="normal-paragraph"> {{.}} </p> {{/transferableSkills}}
+                        <h5 class="display-5"> Indicative Reading List </h5>
+                        {{#indicativeReadingList}}  <p class="normal-paragraph"> {{.}} </p> {{/indicativeReadingList}}
+                        <section>
+                            <h5 class="display-5"> Study Requirements:</h5>
+                            <table class="fancy-table">
+                                <tr>
+                                    <th> Type </th>
+                                    <th> Description </th>
+                                    <th> Duration </th>
+                                </tr>
+                                <tr>{{#studyAmounttype0}}
+                                    <td> {{ studyAmounttype0 }} </<td>
+                                    <td> {{ studyAmountrequiredDescription0 }} </<td>
+                                    <td> {{ studyAmountrequiredDuration0 }} </<td>
+                                {{/studyAmounttype0}}</tr>
+                                <tr>{{#studyAmounttype1}}
+                                    <td> {{ studyAmounttype1 }} </<td>
+                                    <td> {{ studyAmountrequiredDescription1 }} </<td>
+                                    <td> {{ studyAmountrequiredDuration1 }} </<td>
+                                {{/studyAmounttype1}}</tr>
+                                <tr>{{#studyAmounttype2}}
+                                    <td> {{ studyAmounttype2 }} </<td>
+                                    <td> {{ studyAmountrequiredDescription2 }} </<td>
+                                    <td> {{ studyAmountrequiredDuration2 }} </<td>
+                                {{/studyAmounttype2}}</tr>
+                                <tr>{{#studyAmounttype3}}
+                                    <td> {{ studyAmounttype3 }} </<td>
+                                    <td> {{ studyAmountrequiredDescription3 }} </<td>
+                                    <td> {{ studyAmountrequiredDuration3 }} </<td>
+                                {{/studyAmounttype3}}</tr>
+                                <tr>{{#studyAmounttype4}}
+                                    <td> {{ studyAmounttype4 }} </<td>
+                                    <td> {{ studyAmountrequiredDescription4 }} </<td>
+                                    <td> {{ studyAmountrequiredDuration4 }} </<td>
+                                {{/studyAmounttype4}}</tr>
+                                <tr>
+                                    <td> total Study Hours </<td>
+                                    <td> {{ totalStudyHours }} Hours </<td>
+                                    <td> PT{{ totalStudyHours }} </<td>
+                                </tr>
+                            </table>
+                        </section>
                     </div>
                 </div>
 
@@ -104,7 +213,7 @@
                         <h4 class="header-title"><i class="fa fa-address-card" aria-hidden="true"> </i><b> Key people and contacts</b></h4>
                             <hr>
                             <div class="head-contact-box">
-                                <table id="table">
+                                <table class="fancy-table">
                                     <tr>
                                         <td><strong class="bolded"> Course Tutor: </strong> </td>
                                         <td class="italized">{{ leadername }} </td>

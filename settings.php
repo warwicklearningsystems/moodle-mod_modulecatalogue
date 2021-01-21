@@ -35,4 +35,18 @@ if ($ADMIN->fulltree) {
   $settings->add( new admin_setting_configpasswordunmask('mod_modulecatalogue/apipassword',
     get_string('catalogue_password',  'mod_modulecatalogue'),
     get_string('catalogue_password_desc',  'mod_modulecatalogue'), '') );
+  
+    /*
+    * MOO-1983 Added new field, alertinformation to setup module/course wide general information
+    */
+    $options = array(0 => get_string('no'), 1 => get_string('yes'));
+    $settings->add(new admin_setting_configselect('mod_modulecatalogue/applyAlert',
+            get_string('applyAlert', 'mod_modulecatalogue'),
+            get_string('applyAlert_desc', 'mod_modulecatalogue'), 0, $options));
+    
+    $settings->add( new admin_setting_configtextarea('mod_modulecatalogue/alertinformation',
+            get_string('alertinformation', 'mod_modulecatalogue'),
+            get_string('alertinformation_desc', 'mod_modulecatalogue'),'', PARAM_TEXT, 100, 5 ));
 }
+
+

@@ -20,8 +20,8 @@ class cataloguedata implements \templatable, \renderable {
    
    // print_r($cataloguedata);
     $validproperties = array('code', 'name', 'aims', 'title', 'principal_aims', 'academicYear', 'creditValue', 'departmentname', 'facultyname', 
-        'learningOutcomes', 'leadername', 'leaderemail', 'outlineSyllabus','locationname',
-        'indicativeReadingList', 'readingListUrl', 'subjectSpecificSkills',
+        'learningOutcomes', 'leadername', 'leaderemail', 'outlineSyllabus','locationname', 'duration', 
+        'indicativeReadingList', 'readingListUrl', 'subjectSpecificSkills','levelname','transferableSkills',
         'totalStudyHours', 'adminname', 'adminemail','privateStudyDescription','introductoryDescription',   
         'assesmentGrpname0', 'assesmentGrpweighting0', 'assesmentGrpexam0','assesmentGrpdescription0', 'assesmentGrplength0', 'assesmentGrptype0',
         'assesmentGrpname1', 'assesmentGrpweighting1', 'assesmentGrpexam1', 'assesmentGrpdescription1', 'assesmentGrplength1', 'assesmentGrptype1',
@@ -32,7 +32,10 @@ class cataloguedata implements \templatable, \renderable {
         'studyAmounttype1', 'studyAmountrequiredDescription1', 'studyAmountrequiredDuration1',
         'studyAmounttype2', 'studyAmountrequiredDescription2', 'studyAmountrequiredDuration2',
         'studyAmounttype3', 'studyAmountrequiredDescription3', 'studyAmountrequiredDuration3',
-        'studyAmounttype4', 'studyAmountrequiredDescription4', 'studyAmountrequiredDuration4'
+        'studyAmounttype4', 'studyAmountrequiredDescription4', 'studyAmountrequiredDuration4',
+        'preRequisiteModulecode0', 'preRequisiteModuletitle0', 'preRequisiteModulecode1', 'preRequisiteModuletitle1',
+        'postRequisiteModulecode0', 'postRequisiteModuletitle0','postRequisiteModulecode0', 'postRequisiteModuletitle0',
+        'alertmessage','urllink','alert', 'totalExamWeighting','totalCourseworkWeighting'
         );
     
 
@@ -70,9 +73,10 @@ class cataloguedata implements \templatable, \renderable {
         'principal_aims' => explode(($delimiter), $this->aims),
         'department' => $this->departmentname,
         'facultyname' => $this->facultyname,
+        'levelname' =>$this->levelname,
         'code' => $this->code,
         'name' => $this->title,
-        'academic_year' => $this->academicYear,
+        'academicyear' => $this->academicYear,  /*MOO-1983 renamed to academicYear for consistency*/
         'creditValue' => $this->creditValue,
         'learningOutcomes' => explode(("<br />"),nl2br($this->learningOutcomes)),
         'leadername' => $this->leadername,
@@ -117,10 +121,28 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpexam4' => $this->assesmentGrpexam4,
         'assesmentGrpdescription4' => $this->assesmentGrpdescription4,
         'assesmentGrplength4' => $this->assesmentGrplength4,
+        
+        'preRequisiteModulecode0'=> $this->preRequisiteModulecode0,
+        'preRequisiteModuletitle0' => $this->preRequisiteModuletitle0,
+        'preRequisiteModulecode1'=> $this->preRequisiteModulecode1,
+        'preRequisiteModuletitle1' => $this->preRequisiteModuletitle1,
+        'postRequisiteModulecode0' => $this->postRequisiteModulecode0,
+        'postRequisiteModuletitle0' => $this->postRequisiteModuletitle0,
+        
         'privateStudyDescription' => explode(($delimiter), $this->privateStudyDescription),
         'subjectSpecificSkills' => explode(($delimiter), $this->subjectSpecificSkills),
         'adminemail' => $this->adminemail,
-        'adminname' => $this->adminname
+        'adminname' => $this->adminname,
+        
+        /*MOO-1983 Added alert message, alert and urlink */
+        'alertmessage' => explode(($delimiter), $this->alertmessage), 
+        'urllink' => $this->urllink,
+        'alert' => $this->alert,
+        /*MOO-1983 added duration, transferableskills, and exam weighting not added previously*/
+        'duration' => $this->duration,
+        'transferableSkills' => explode(($delimiter), $this->transferableSkills),
+        'totalExamWeighting' => $this->totalExamWeighting,
+        'totalCourseworkWeighting' => $this->totalCourseworkWeighting
     );
    
     return $data;

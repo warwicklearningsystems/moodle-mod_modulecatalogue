@@ -63,6 +63,23 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
       //MOO-1888 Added necessary code to store admin name and email to database
       write_to_database('adminname', $adminname, $modulecode, $academicyear);
       write_to_database('adminemail', $adminemail, $modulecode, $academicyear);
+      
+      /*
+       * MOO-1983 Added code to handle alertmessage.
+       * need to extract alertmessage from settings.php then we need to extract any URL link in it.
+       */
+      $alertmessage = get_config('mod_modulecatalogue', 'alertinformation');
+      $applyAlert = get_config('mod_modulecatalogue', 'applyAlert');
+      $all_urls = "";   //MOO-1983 initialize URL link extracted field.
+      
+      // MOO-1983 extract URL link from alertmessage
+      if ($alertmessage != ""){
+          $all_urls = rtrim(url_extract($alertmessage),'.');
+      }
+      
+      write_to_database('alertmessage', implode(expand_array(rtrim($alertmessage,$all_urls)),'<br />') , $modulecode, $academicyear);
+      write_to_database('urllink', $all_urls, $modulecode, $academicyear);
+      write_to_database('alert', $applyAlert, $modulecode, $academicyear);
 
       foreach($cataloguedata as $k => $v) {
         // MOO-1808 Insert new data from JSON into database: First deal with the Stdclass object as that throws exception errors
@@ -149,10 +166,11 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
               /*
                * MOO 1935 Modified else code to fix presentation of information as separated paragraphs.
                */
-              if (($k == 'outlineSyllabus') || ($k == 'indicativeReadingList') || ($k == 'aims') ||
-                      ($k == 'introductoryDescription') || ($k == 'subjectSpecificSkills') || ($k == 'privateStudyDescription')){
-                  $value = implode(expand_array($v),'<br />');
-                  write_to_database($k, $value, $modulecode, $academicyear);
+              if (($k == "outlineSyllabus") || ($k == "indicativeReadingList") || ($k == "aims") || ($k == "transferableSkills") || ($k == "introductoryDescription") || ($k == "subjectSpecificSkills") || ($k == "privateStudyDescription")){
+                  if (!(is_null($v))){  /* MOO 2019 remove any null values */
+                      $value = implode(expand_array($v),'<br />');
+                      write_to_database($k, $value, $modulecode, $academicyear);                     
+                  }       
               } else{
                   write_to_database($k, $v, $modulecode, $academicyear);
               }    
@@ -225,8 +243,31 @@ function expand_array($value){
         if ((strlen($value)) <= 3) {
             unset($valueArray[$i]);
         }
+        /*
+         * MOO-1983 Added logic to capitalize first character if not capitalized 
+         * and replace leading bullet point for the HTML type
+         */
+        if (preg_match("/[a-z]/", substr(trim($value),0,1))){
+            $valueArray[$i] = ucfirst(trim($value));
+        }
+        
+        elseif((ord(substr(trim($value), 0, 1)) == 194) || (ord(substr(trim($value), 0, 1)) == 239)){
+            $valueArray[$i] = ucfirst(substr(trim($value), 3));
+        }
+
         $i++;
     }
     //re-index the array 
     return array_values($valueArray);
+}
+
+/*
+ * MOO-1983 Added function url_extract, to check if the alert information 
+ * provided includes a URL link. The field needs to be extracted and displayed
+ */
+function url_extract($value){
+    $matches = "";
+    preg_match_all('!https?://\S+!', $value, $matches);
+    $all_urls = $matches[0];
+    return implode($all_urls);
 }

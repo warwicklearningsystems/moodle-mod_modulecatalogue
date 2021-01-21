@@ -4,25 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 12-Jan-2021, 17:14:13
-    Author     : fae60
-*/
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
     Created on : 11-Jan-2021, 17:45:24
-    Author     : fae60
-*/
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 17-Sep-2020, 10:46:43
     Author     : fae60
 */
 #page-mod-modulecatalogue .qcontainer .fitemtitle,
@@ -81,11 +63,6 @@ and open the template in the editor.
     font-style: italic;
 }
 
-.bolded_italized{
-    font-style: italic;
-    color: #002f8f;
-}
-
 .bolded{
     font-weight: bold;
     font-size: 1.1em;
@@ -93,12 +70,18 @@ and open the template in the editor.
 
 .course-cde{
     color:#1876d0; 
-    letter-spacing:-1px;
     font-weight:400;
-    line-height:80%
 }
+
+.bullet_list{
+    display: list-item;
+    list-style-type: disc; 
+    list-style-position: outside;
+}
+
 .normal-paragraph{
     text-align: justify;
+    padding-left: 30px;
 }
 
 .indented_paragraph{
@@ -127,20 +110,7 @@ and open the template in the editor.
 
 .content{
     font-size: 0.87em;
-    font-style: italic;
     color: #008;
-}
-
-ul.b {
-    list-style-type: square;
-}
-
-ol.c {
-    list-style-type: upper-roman;
-}
-
-ol.d {
-    list-style-type: lower-alpha;
 }
 
 .wms-head-cll{
@@ -180,8 +150,8 @@ ol.d {
 
 .p-3 p-md-5{
     background-color: transparent; 
-    padding-top: 1.0rem!important; 
-    padding-bottom: 1.0rem !important;
+    padding-top: 1.5rem!important; 
+    padding-bottom: 1.5rem !important;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
@@ -232,18 +202,18 @@ only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
  
 	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
+	fancy-table, thead, tbody, th, td, tr { 
 		display: block; 
 	}
 	
 	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
+	fancy-table thead tr { 
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
         
-        th {
+        fancy-table th {
             padding-top: 3px;
             padding-bottom: 3px;
             text-align: justify;
@@ -252,9 +222,9 @@ only screen and (max-width: 760px),
             empty-cells:initial;
         }
 	
-	tr { border: 1px solid #ddd; padding: 3px; }
+	fancy-table tr { border: 1px solid #ddd; padding: 3px; }
 	
-	td { 
+	fancy-table td { 
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #ddd; 
@@ -263,7 +233,7 @@ only screen and (max-width: 760px),
                 font-size-adjust: 0.58;
 	}
 	
-	td:before { 
+	fancy-table td:before { 
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
@@ -275,7 +245,7 @@ only screen and (max-width: 760px),
 	}
 }
 
-#table {
+.fancy-table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -285,12 +255,12 @@ only screen and (max-width: 760px),
     border: 1px solid #ddd;
 }
 
-#table td, table th {
+.fancy-table td, fancy-table th {
     border: 1px solid #ddd;
     padding: inherit;
 }
 
-#table th {
+.fancy-table th {
     padding-top: 3px;
     padding-bottom: 3px;
     text-align: left;
@@ -298,15 +268,15 @@ only screen and (max-width: 760px),
     color: white;
 }
 
-#table tr{
+.fancy-table tr{
     padding: 3px;
 }
 
-#table tr:nth-child(odd) {
+.fancy-table tr:nth-child(odd) {
   background-color: #e2f3fb;
 }
 
-#table tr:hover {background-color: #def2f8;}
+.fancy-table tr:hover {background-color: #def2f8;}
 
 /* MOO 1935*/
 .read-more-content {
@@ -358,9 +328,71 @@ article p {
     list-style-position: outside;
     text-align: justify;
     font-size: 0.9em;
-    line-height: 1.8em;
+    padding: 0.02em;
+    padding-left: 30px;
 }
 
-li::marker {
-    color: #002775;
+
+/* MOO 1983 Added code for disclosure*/
+
+.container {
+    max-width: 960px;
 }
+
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #e8f2ff;
+}
+
+.jumbotron-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.alertinformation:empty {
+    display: none;
+    visibility: hidden; 
+}
+
+.alertinformation {
+    font-size: 0.88em;
+    background-color: #c5f2ef;
+    text-align: justify;
+    padding: 15px; 
+    border-radius: 10px;
+    box-shadow: 7px 7px #acece8;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #86A5EC;
+    margin-bottom: 10px;
+}
+
+/* MOO 2019 made changes to table 2 columns on first tab*/
+.column {
+  float: left;
+  padding-right: 2px;
+  text-align: right;
+  color: grey;
+  padding: 5px;
+}
+
+.rightcolumn {
+  float: left;
+  padding-left: 20px;
+  padding: 5px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.hometab {
+    width: auto;
+    padding: 15px;
+    margin: 15px;
+}
+
+/* MOO 2019 made changes to table 2 columns on first tab*/
