@@ -85,7 +85,7 @@ class cataloguedata implements \templatable, \renderable {
         'locationname' => $this->locationname,
         'outlineSyllabus' => array_slice(explode(($delimiter), $this->outlineSyllabus), 6),
         'outlineSyllabusShort' => array_slice(explode(($delimiter), $this->outlineSyllabus), 0, 5),
-        
+        /*MOO-2143 Indicative reading list fix to implement as expanding button*/
         'indicativeReadingList' => array_slice(explode(($delimiter), $this->indicativeReadingList), 6),
         'indicativeReadingListSummary' => array_slice(explode(($delimiter), $this->indicativeReadingList), 0, 5),
 
