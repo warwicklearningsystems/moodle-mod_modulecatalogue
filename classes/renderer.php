@@ -137,7 +137,7 @@ class cataloguedata implements \templatable, \renderable {
         'subjectSpecificSkills' => explode(($delimiter), $this->subjectSpecificSkills),
         'adminemail' => $this->adminemail,
         'adminname' => $this->adminname,
-        
+        /*MOO 2143 Changes to Study Hours: incorporated as these where not properly displayed*/
         'studyAmounttype0' => $this->studyAmounttype0,
         'studyAmountrequiredDescription0' =>$this->studyAmountrequiredDescription0,
         'studyAmountrequiredDuration0' =>$this->studyAmountrequiredDuration0,
