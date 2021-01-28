@@ -170,7 +170,10 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                   if (!(is_null($v))){  /* MOO 2019 remove any null values */
                       $value = implode(expand_array($v),'<br />');
                       write_to_database($k, $value, $modulecode, $academicyear);                     
-                  }       
+                  } else{
+                      $value = "No skills defined for this module.";
+                      write_to_database($k, $value, $modulecode, $academicyear);
+                  }      
               } else{
                   write_to_database($k, $v, $modulecode, $academicyear);
               }    

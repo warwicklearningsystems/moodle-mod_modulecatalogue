@@ -7,116 +7,11 @@ and open the template in the editor.
     Created on : 11-Jan-2021, 17:45:24
     Author     : fae60
 */
-#page-mod-modulecatalogue .qcontainer .fitemtitle,
-#page-mod-modulecatalogue #id_questionhdr .fitemtitle {
-    display: none;
-}
-
-#page-mod-modulecatalogue .qcontainer .qnums {
-    font-weight: bold;
-    float: left;
-    color: gray;
-}
-
-#page-mod-modulecatalogue .qcontainer .fstatic {
-    width: 97%;
-    margin-right: 1em;
-    margin-left: 5px;
-    /* Set a negative margin-bottom to save some vertical space! */
-    margin-bottom: -10px;
-}
-
-#page-mod-modulecatalogue.mform .fitem fieldset.felement {
-    margin-left: 0;
-    padding-left: 1%;
-    margin-bottom: 0;
-}
-
-#page-mod-modulecatalogue-preview fieldset,
-#page-mod-modulecatalogue-complete fieldset {
-    margin-bottom: 0;
-}
-
-#page-mod-modulecatalogue-questions .mform .fitem .fitemtitle {
-    text-align: left;
-    margin-left: 10px;
-    margin-bottom: 0;
-}
-
-#page-mod-modulecatalogue-questions .moving {
-    border: medium dotted maroon;
-}
-
-#page-mod-modulecatalogue .lead {
-    margin-bottom: 20px;
-    font-size: 21px;
-    font-weight: 200;
-    line-height: 30px;
-    font-weight: bold;
-}
-
-.display-5 {
-    color: #003399;
-}
-
-.italized{
-    font-style: italic;
-}
-
-.bolded{
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.course-cde{
-    color:#1876d0; 
-    font-weight:400;
-}
-
-.bullet_list{
-    display: list-item;
-    list-style-type: disc; 
-    list-style-position: outside;
-}
-
-.normal-paragraph{
-    text-align: justify;
-    padding-left: 30px;
-}
-
-.indented_paragraph{
-    text-align: justify;
-    padding-left: 30px;
-}
-
-.parag-just {
-    font-size: 1.05em;
-    padding: 10px;
-    width: 95%;
-    margin: 10px auto;
-    text-align: justify;
-    color: #002775;
-    margin-left: 30px;
-}
-
-.smallheader { 
-    font-style: italic;
-    font-weight: bold;
-}
-
-.skillssubject {
-    font-size: 0.875em;
-}
-
-.content{
-    font-size: 0.87em;
-    color: #008;
-}
-
+/* MOO 1813 move code to css */
 .wms-head-cll{
-  /*  webkit-box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;*/
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;
     box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 40px rgba(0,0,0,.1) inset;
-  /*  moz-box-shadow: 0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;*/
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
     border-top: 1px solid rgba(0,0,0,.125);
     border-left: 1px solid rgba(0,0,0,.125);
     border-right: 1px solid rgba(0,0,0,.125);
@@ -125,7 +20,7 @@ and open the template in the editor.
     margin-bottom:6px;
 }
 
-.rounded {
+.rounded{
     background-color:#e2f3fb;
     background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-bot-bg.png'), url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-tophead-bg.png');
     background-repeat: no-repeat, no-repeat;
@@ -134,49 +29,60 @@ and open the template in the editor.
     overflow:auto;
 }
 
-.header-title{
-    padding: 10px 10px 0px 10px;
-    letter-spacing:-1px;
+.war-bot{
+    background: url('https://warwick.ac.uk/study/cll/currentstudents/bot-w-white-bluerun-cll.png') no-repeat right bottom; 
+    min-height: 50px;
 }
 
-.nav-link {
+.top-headbox{
+    background-color:transparent;
+}
+
+.top-headbox{
+    padding-top: 9px;
+}
+
+.nav-link active show{
     color:#fff;
     margin-top:7px;
     height:40px;
     margin-left:3px;
     font-size: .9375rem;
-    font-weight: 400;   
+    font-weight: 400;
 }
 
-.p-3 p-md-5{
+.nav-link{
+    display: block;
+    padding: .5rem 2rem;
+}
+
+.p-3 p-md-4 view{
     background-color: transparent; 
-    padding-top: 1.5rem!important; 
-    padding-bottom: 1.5rem !important;
+    padding-top: 2.0rem!important; 
+    padding-bottom: 1.2rem !important;
+    min-height:240px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff;
-    background-color: #0f6fc5;
-}
-
-@media (min-width: 768px){
-   .p-md-5 {
-        padding: 2rem!important;
-    } 
-}
-
-
-.contact {
+.contact{
     width: auto;   
-    background-color: rgba(255,255,255,.8);
-    padding: 15px; 
-    margin:15px; 
+    background-color: rgba(255,255,255,.8); 
+    padding: 15px; margin:15px; 
     min-height:240px;
     border-radius: 10px;
     box-shadow: 7px 7px #d2edf9;
     border-width: 1px;
     border-style: solid;
     border-color: #86A5EC;
+}
+
+.contact-icon{
+    padding:10px 10px 0px 10px; 
+    letter-spacing:-1px;
+}
+
+.contact-info{
+    padding:0px 10px;
+    font-size: 1.1em;
 }
 
 .tabcolor{
@@ -186,34 +92,76 @@ and open the template in the editor.
     min-height: 300px;
 }
 
-.contacts-area{
-    list-style-type:none; 
-    margin-bottom:15px;
-    padding-left:0px !important;
+.paragraph-list{
+    text-align: justify;
+    font-size: 0.9em;
+    padding: 0.02em;
+    line-height: 2 ;
+    margin-top: 0 ;
+    margin-bottom: 0 ;
 }
 
-.war-bot{
-    background: url('https://warwick.ac.uk/study/cll/currentstudents/bot-w-white-bluerun-cll.png') no-repeat right bottom; 
-    min-height: 50px;
+.bulletlist{
+    list-style-position: outside;
+    list-style-type: disc; 
+    display: list-item; 
+}
+.italized{
+    font-style: italic;
+}
+
+.bolded_italized{
+    font-style: italic;
+    color: #002f8f;
+}
+
+.bolded{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* MOO-1815 Improving appearance*/
+.course-cde{
+    color:#3B5998; 
+    letter-spacing:-1px;
+    font-weight:400;
+    line-height:1.1em;
+}
+
+.display-5 {
+    color: #0A246A;
+}
+
+.normal-paragraph{
+    text-align: justify;
+}
+
+.indented{
+    padding-left: 25px;
+}
+
+.alertinformation:empty {
+    display: none;
+    visibility: hidden; 
 }
 
 @media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+only screen and (max-width: 500px),
+(min-device-width: 0px) and (max-device-width: 475px)  {
  
 	/* Force table to not be like tables anymore */
-	fancy-table, thead, tbody, th, td, tr { 
+	table, thead, tbody, th, td, tr { 
 		display: block; 
 	}
 	
 	/* Hide table headers (but not display: none;, for accessibility) */
-	fancy-table thead tr { 
+	thead tr { 
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
         
-        fancy-table th {
+        th {
             padding-top: 3px;
             padding-bottom: 3px;
             text-align: justify;
@@ -222,9 +170,9 @@ only screen and (max-width: 760px),
             empty-cells:initial;
         }
 	
-	fancy-table tr { border: 1px solid #ddd; padding: 3px; }
+	tr { border: 1px solid #ddd; padding: 3px; }
 	
-	fancy-table td { 
+	td { 
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #ddd; 
@@ -233,7 +181,7 @@ only screen and (max-width: 760px),
                 font-size-adjust: 0.58;
 	}
 	
-	fancy-table td:before { 
+	td:before { 
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
@@ -245,40 +193,7 @@ only screen and (max-width: 760px),
 	}
 }
 
-.fancy-table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    font-size: small;
-    border-spacing: 0;
-    empty-cells:initial;
-    border: 1px solid #ddd;
-}
-
-.fancy-table td, fancy-table th {
-    border: 1px solid #ddd;
-    padding: inherit;
-}
-
-.fancy-table th {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    text-align: left;
-    background-color: #86A5EC;
-    color: white;
-}
-
-.fancy-table tr{
-    padding: 3px;
-}
-
-.fancy-table tr:nth-child(odd) {
-  background-color: #e2f3fb;
-}
-
-.fancy-table tr:hover {background-color: #def2f8;}
-
-/* MOO 1935*/
+/* MOO 1935 implementation see more*/
 .read-more-content {
   max-height: 0;
   overflow: hidden;
@@ -320,25 +235,7 @@ article {
   border-bottom: 1px solid grey;
 }
 
-article p {
-  margin-bottom: .5em;
-}
-
-.paragraph-list{
-    list-style-position: outside;
-    text-align: justify;
-    font-size: 0.9em;
-    padding: 0.02em;
-    padding-left: 30px;
-}
-
-
 /* MOO 1983 Added code for disclosure*/
-
-.container {
-    max-width: 960px;
-}
-
 .jumbotron {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
@@ -348,11 +245,6 @@ article p {
 .jumbotron-fluid {
     padding-right: 0;
     padding-left: 0;
-}
-
-.alertinformation:empty {
-    display: none;
-    visibility: hidden; 
 }
 
 .alertinformation {
@@ -383,6 +275,24 @@ article p {
   padding: 5px;
 }
 
+@media screen and (min-device-width: 0px) and (max-device-width: 470px) {
+    .column {
+        float: left;
+        padding-right: 2px;
+        color: grey;
+        padding: 5px;
+        font-size: 0.9em;
+    }
+    
+    .rightcolumn {
+        float: left;
+        padding-left: 2px;
+        padding: 5px;
+        font-size: 0.9em;
+    }
+    
+}
+
 .row:after {
   content: "";
   display: table;
@@ -396,3 +306,37 @@ article p {
 }
 
 /* MOO 2019 made changes to table 2 columns on first tab*/
+
+/* MOO 1849 presentation*/
+.fancy-table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+    border-spacing: 0;
+    empty-cells:initial;
+    border: 1px solid #ddd;
+}
+
+.fancy-table td, fancy-table th {
+    border: 1px solid #ddd;
+    padding: inherit;
+}
+
+.fancy-table th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+    background-color: #86A5EC;
+    color: white;
+}
+
+.fancy-table tr{
+    padding: 3px;
+}
+
+.fancy-table tr:nth-child(odd) {
+  background-color: #e2f3fb;
+}
+
+.fancy-table tr:hover {background-color: #def2f8;}

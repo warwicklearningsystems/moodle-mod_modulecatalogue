@@ -33,6 +33,7 @@ class cataloguedata implements \templatable, \renderable {
         'studyAmounttype2', 'studyAmountrequiredDescription2', 'studyAmountrequiredDuration2',
         'studyAmounttype3', 'studyAmountrequiredDescription3', 'studyAmountrequiredDuration3',
         'studyAmounttype4', 'studyAmountrequiredDescription4', 'studyAmountrequiredDuration4',
+        'studyAmounttype5', 'studyAmountrequiredDescription5', 'studyAmountrequiredDuration5',
         'preRequisiteModulecode0', 'preRequisiteModuletitle0', 'preRequisiteModulecode1', 'preRequisiteModuletitle1',
         'postRequisiteModulecode0', 'postRequisiteModuletitle0','postRequisiteModulecode0', 'postRequisiteModuletitle0',
         'alertmessage','urllink','alert', 'totalExamWeighting','totalCourseworkWeighting'
@@ -84,7 +85,10 @@ class cataloguedata implements \templatable, \renderable {
         'locationname' => $this->locationname,
         'outlineSyllabus' => array_slice(explode(($delimiter), $this->outlineSyllabus), 6),
         'outlineSyllabusShort' => array_slice(explode(($delimiter), $this->outlineSyllabus), 0, 5),
-        'indicativeReadingList' => explode(($delimiter), $this->indicativeReadingList),
+        /*MOO-2143 Indicative reading list fix to implement as expanding button*/
+        'indicativeReadingList' => array_slice(explode(($delimiter), $this->indicativeReadingList), 6),
+        'indicativeReadingListSummary' => array_slice(explode(($delimiter), $this->indicativeReadingList), 0, 5),
+
         'readingListUrl' => $this->readingListUrl,
         'introductoryDescription' => explode(($delimiter), $this->introductoryDescription),
         'totalStudyHours' => $this->totalStudyHours,
@@ -133,7 +137,25 @@ class cataloguedata implements \templatable, \renderable {
         'subjectSpecificSkills' => explode(($delimiter), $this->subjectSpecificSkills),
         'adminemail' => $this->adminemail,
         'adminname' => $this->adminname,
-        
+        /*MOO 2143 Changes to Study Hours: incorporated as these where not properly displayed*/
+        'studyAmounttype0' => $this->studyAmounttype0,
+        'studyAmountrequiredDescription0' =>$this->studyAmountrequiredDescription0,
+        'studyAmountrequiredDuration0' =>$this->studyAmountrequiredDuration0,
+        'studyAmounttype1' => $this->studyAmounttype1,
+        'studyAmountrequiredDescription1' =>$this->studyAmountrequiredDescription1,
+        'studyAmountrequiredDuration1' =>$this->studyAmountrequiredDuration1,
+        'studyAmounttype2' => $this->studyAmounttype2,
+        'studyAmountrequiredDescription2' =>$this->studyAmountrequiredDescription2,
+        'studyAmountrequiredDuration2' =>$this->studyAmountrequiredDuration2,
+        'studyAmounttype3' => $this->studyAmounttype3,
+        'studyAmountrequiredDescription3' =>$this->studyAmountrequiredDescription3,
+        'studyAmountrequiredDuration3' =>$this->studyAmountrequiredDuration3,
+        'studyAmounttype4' => $this->studyAmounttype4,
+        'studyAmountrequiredDescription4' =>$this->studyAmountrequiredDescription4,
+        'studyAmountrequiredDuration4' =>$this->studyAmountrequiredDuration4,
+        'studyAmounttype5' => $this->studyAmounttype5,
+        'studyAmountrequiredDescription5' =>$this->studyAmountrequiredDescription5,
+        'studyAmountrequiredDuration5' =>$this->studyAmountrequiredDuration5,
         /*MOO-1983 Added alert message, alert and urlink */
         'alertmessage' => explode(($delimiter), $this->alertmessage), 
         'urllink' => $this->urllink,
