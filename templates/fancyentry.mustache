@@ -1,111 +1,119 @@
-
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
+<script>
+    var css = '#head-img-inner br {display: none !important;} @media only screen and (max-width: 600px) {#head-img-inner { max-width:100% !important; margin-right: 0rem !important; margin-left: 0rem !important;}} #top-headbox a.nav-link:hover{background:#2d96fa !important;} ul.accordion.collapsibletopics{width:100%;} .format-collapsibletopics #section-0 .summarytext{margin: 0 .5rem;} @media only screen and (max-width: 1200px) { #head-temp-container{ background-position:-3300px 0px, right top !important; }}',
+        head = document.head || document.getElementsByTagName('head')[0],
+        style = document.createElement('style');
+
+    head.appendChild(style);
+
+    style.type = 'text/css';
+    if (style.styleSheet) {
+        // This is required for IE8 and below.
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+</script>
 
 <div id="allwmshead" class="wms-head-cll">
     <div id="head-temp-container" class="rounded">
-        <div id="head-temp-container" class="rounded">
-            <ul style="list-style: none;" class="nav nav-pills" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false">Description</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-syllabus" role="tab" aria-controls="pills-syllabus" aria-selected="false">Learning Outcomes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  id="pills-assessment-tab" data-toggle="pill" href="#pills-assessment" role="tab" aria-controls="pills-assessment" aria-selected="false">Assessment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  id="pills-study-tab" data-toggle="pill" href="#pills-study" role="tab" aria-controls="pills-study" aria-selected="false">Study Requirements</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="pills-tabContent">
-
-                <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div id="wmshead-content" class="p-3 p-md-5" >
-                        <div class="alertinformation">{{#alert}}
+         <div class="tab-content" id="v-pills-tabContent">
+            <div id="top-headbox" class="top-headbox top-headbox">
+                <ul style="list-style: none;" class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  id="pills-profile-tab" data-toggle="pill" href="#pills-syllabus" role="tab" aria-controls="pills-syllabus" aria-selected="false">Learning Outcomes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  id="pills-assessment-tab" data-toggle="pill" href="#pills-assessment" role="tab" aria-controls="pills-assessment" aria-selected="false">Assessment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  id="pills-study-tab" data-toggle="pill" href="#pills-study" role="tab" aria-controls="pills-study" aria-selected="false">Study Requirements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div id="wmshead-content" class="p-3 p-md-4 view">
+                            <div class="alertinformation">{{#alert}}
                             {{#alertmessage}}{{.}}{{/alertmessage}} <a href= {{ urllink }} > {{ urllink }} </a>
-                         {{/alert}}</div>
-                         <h3 class="course-cde"> {{ code }} : {{ name }} </h3>
-                         <hr>
-                         <!--MOO 2019 Replaced for a Bootstrap table-->
-                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-3 column">Academic Year:</div>
-                                <div class="col-sm-5 rightcolumn">{{academicyear}}</div>
+                            {{/alert}}</div>
+                            <h3 class="course-cde"> {{ code }} : {{ name }} </h3>
+                            <hr>
+                            <!--MOO 2019 Replaced for a Bootstrap table-->
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-2 column">Academic Year:</div>
+                                    <div class="col-sm-5 rightcolumn">{{academicyear}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 column">Department:</div>
+                                    <div class="col-sm-5 rightcolumn">{{department}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 column">Level:</div>
+                                    <div class="col-sm-5 rightcolumn">{{levelname}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 column">Module leader:</div>
+                                    <div class="col-sm-5 rightcolumn">{{leadername}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 column">Credit value:</div>
+                                    <div class="col-sm-5 rightcolumn">{{creditValue}}</div>
+                                </div>
+                                {{#duration}}<div class="row">
+                                    <div class="col-sm-2 column">Module duration:</div>
+                                    <div class="col-sm-5 rightcolumn">{{duration}}</div>
+                                </div>{{/duration}}
+                                <div class="row">
+                                    <div class="col-sm-2 column">Location:</div>
+                                    <div class="col-sm-5 rightcolumn">{{locationname}}</div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-3 column">Department:</div>
-                                <div class="col-sm-5 rightcolumn">{{department}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 column">Level:</div>
-                                <div class="col-sm-5 rightcolumn">{{levelname}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 column">Module leader:</div>
-                                <div class="col-sm-5 rightcolumn">{{leadername}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 column">Credit value:</div>
-                                <div class="col-sm-5 rightcolumn">{{creditValue}}</div>
-                            </div>
-                            {{#duration}}<div class="row">
-                                <div class="col-sm-3 column">Module duration:</div>
-                                <div class="col-sm-5 rightcolumn">{{duration}}</div>
-                            </div>{{/duration}}
-                            <div class="row">
-                                <div class="col-sm-3 column">Location:</div>
-                                <div class="col-sm-5 rightcolumn">{{locationname}}</div>
-                            </div>
-                         </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-                    <div class="tabcolor">
-                        <h5 class="display-5">Introductory Description </h5>
-                        {{#introductoryDescription}} <p class="paragraph-list"> {{.}} </p> {{/introductoryDescription}}
-                        <h5 class="display-5"> Principal Aims </h5>
-                        {{#principal_aims}} <p class="paragraph-list"> {{.}} </p>{{/principal_aims}} 
-                        <h5 class="section-heading" > Outline Syllabus </h5>
-                        <article>
-                            {{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}
+                    <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                        <div id="wmshead-content" class="p-3 p-md-4 view">
+                            <h2 class="course-cde" >{{ code }}: {{ name }}</h2>
+                            <h4 class="display-5"> Principal Aims: </h4>
+                            <div class="indented">{{#principal_aims}} <p class= "paragraph-list"> {{.}} </p> {{/principal_aims}}</div>
+                            <h5 class="section-heading" > Outline Syllabus </h5>
+                            <article>
+                                <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}</div>
                                 <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
-                            <div class="read-more-content">
-                                {{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}
-                            </div>
-                            <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
-                        </article>
+                                <div class="read-more-content">
+                                    <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</div>
+                                </div>
+                                <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
+                            </article>
+                        </div>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-syllabus" role="tabpanel" aria-labelledby="pills-syllabus-tab">
-                     <div class="tabcolor" >
-
-                        <h4 class="display-5">Principal Learning Outcomes </h4>
-                        <p>By the end of the module, students should be able to: </p>
-                        {{#learningOutcomes}} <p class="paragraph-list"> {{.}} </p> {{/learningOutcomes}}
-                        <hr>
-                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-assessment" role="tabpanel" aria-labelledby="pills-assessment-tab">
-                    <div class="tabcolor" >
-                        <h5 class="display-5"> Total Exam Weight</h5>
-                        <p class="normal-paragraph">{{totalExamWeighting}} %</p>
-                        <h5 class="display-5"> Total Course Weight</h5>
-                        <p class="normal-paragraph">{{totalCourseworkWeighting}} %</p>
-
-                        <h4 class="display-5"> Assessment Schedule</h4>
+                    <div class="tab-pane fade" id="pills-syllabus" role="tabpanel" aria-labelledby="pills-syllabus-tab">
+                        <div id="wmshead-content" class="p-3 p-md-4 view">
+                            <h4 class="display-5">Principal Learning Outcomes </h4>
+                            <p>By the end of the module, students should be able to: </p>
+                            <div class="indented">
+                                {{#learningOutcomes}} <p class="paragraph-list"> {{.}} </p> {{/learningOutcomes}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-assessment" role="tabpanel" aria-labelledby="pills-assessment-tab">
+                        <div id="wmshead-content" class="p-3 p-md-4 view">
+                            <h5 class="display-5"> Total Exam Weight</h5>
+                            <p class="normal-paragraph">{{totalExamWeighting}} %</p>
+                            <h5 class="display-5"> Total Course Weight</h5>
+                            <p class="normal-paragraph">{{totalCourseworkWeighting}} %</p>
+                            <h5 class="display-5"> Assessment Schedule</h5>
                             <section>
                                 <table class="fancy-table">
                                     <tr>
@@ -152,70 +160,84 @@
                                     {{/assesmentGrpname4}}</tr>
                                 </table>
                             </section>
+                        </div>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-study" role="tabpanel" aria-labelledby="pills-study-tab">
-                    <div class="tabcolor" >
-                        <h5 class="display-5"> Private Study Description </h5>                        
-                        {{#privateStudyDescription}} <p class="paragraph-list"> {{.}} </p> {{/privateStudyDescription}}
-                        <h5 class="display-5"> Specific Skills </h5>
-                        {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
-                        <h5 class="display-5"> Transferable Skills </h5>
-                        {{#transferableSkills}} <p class="normal-paragraph"> {{.}} </p> {{/transferableSkills}}
-                        <h5 class="display-5"> Indicative Reading List </h5>
-                        {{#indicativeReadingList}}  <p class="normal-paragraph"> {{.}} </p> {{/indicativeReadingList}}
-                        <section>
+                    <div class="tab-pane fade" id="pills-study" role="tabpanel" aria-labelledby="pills-study-tab">
+                        <div id="wmshead-content" class="p-3 p-md-4 view">
+                            <h5 class="display-5"> Private Study Description </h5>
+                            <div class="indented"> {{#privateStudyDescription}} <p class="paragraph-list"> {{.}} </p> {{/privateStudyDescription}}</div>
+                            <h5 class="display-5"> Subject Specific Skills: </h5>
+                            <div class="indented">{{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}</div>
+                            <h5 class="display-5"> Transferable Skills </h5>
+                            <div class="indented">{{#transferableSkills}} <p class="paragraph-list"> {{.}} </p> {{/transferableSkills}}</div>
+                            <h5 class="display-5"> Indicative Reading List </h5> 
+                            <article>
+                                <div class="indented">{{#indicativeReadingListSummary}} <p class="paragraph-list"> {{.}} </p> {{/indicativeReadingListSummary}}</div>
+  
+                                <input id="read-more-toggle-2" class="read-more-toggle" type="checkbox">
+ 
+                                <div class="read-more-content">
+                                <div class="indented">{{#indicativeReadingList}} <p class="paragraph-list"> {{.}} </p> {{/indicativeReadingList}}</div>
+                                </div>
+                                <label class="read-more-toggle-label" for="read-more-toggle-2">Read </label>
+                            </article>
+       
+                            
                             <h5 class="display-5"> Study Requirements:</h5>
-                            <table class="fancy-table">
-                                <tr>
-                                    <th> Type </th>
-                                    <th> Description </th>
-                                    <th> Duration </th>
-                                </tr>
-                                <tr>{{#studyAmounttype0}}
-                                    <td> {{ studyAmounttype0 }} </<td>
-                                    <td> {{ studyAmountrequiredDescription0 }} </<td>
-                                    <td> {{ studyAmountrequiredDuration0 }} </<td>
-                                {{/studyAmounttype0}}</tr>
-                                <tr>{{#studyAmounttype1}}
-                                    <td> {{ studyAmounttype1 }} </<td>
-                                    <td> {{ studyAmountrequiredDescription1 }} </<td>
-                                    <td> {{ studyAmountrequiredDuration1 }} </<td>
-                                {{/studyAmounttype1}}</tr>
-                                <tr>{{#studyAmounttype2}}
-                                    <td> {{ studyAmounttype2 }} </<td>
-                                    <td> {{ studyAmountrequiredDescription2 }} </<td>
-                                    <td> {{ studyAmountrequiredDuration2 }} </<td>
-                                {{/studyAmounttype2}}</tr>
-                                <tr>{{#studyAmounttype3}}
-                                    <td> {{ studyAmounttype3 }} </<td>
-                                    <td> {{ studyAmountrequiredDescription3 }} </<td>
-                                    <td> {{ studyAmountrequiredDuration3 }} </<td>
-                                {{/studyAmounttype3}}</tr>
-                                <tr>{{#studyAmounttype4}}
-                                    <td> {{ studyAmounttype4 }} </<td>
-                                    <td> {{ studyAmountrequiredDescription4 }} </<td>
-                                    <td> {{ studyAmountrequiredDuration4 }} </<td>
-                                {{/studyAmounttype4}}</tr>
-                                <tr>
-                                    <td> total Study Hours </<td>
-                                    <td> {{ totalStudyHours }} Hours </<td>
-                                    <td> PT{{ totalStudyHours }} </<td>
-                                </tr>
-                            </table>
-                        </section>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="contact" >
-                        <h4 class="header-title"><i class="fa fa-address-card" aria-hidden="true"> </i><b> Key people and contacts</b></h4>
-                            <hr>
-                            <div class="head-contact-box">
+                            <section>
                                 <table class="fancy-table">
                                     <tr>
-                                        <td><strong class="bolded"> Course Tutor: </strong> </td>
+                                        <th> Type </th>
+                                        <th> Description </th>
+                                        <th> Duration </th>
+                                    </tr>
+                                    <tr>{{#studyAmounttype0}}
+                                        <td> {{ studyAmounttype0 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription0 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration0 }} </<td>
+                                    {{/studyAmounttype0}}</tr>
+                                    <tr>{{#studyAmounttype1}}
+                                        <td> {{ studyAmounttype1 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription1 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration1 }} </<td>
+                                    {{/studyAmounttype1}}</tr>
+                                    <tr>{{#studyAmounttype2}}
+                                        <td> {{ studyAmounttype2 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription2 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration2 }} </<td>
+                                    {{/studyAmounttype2}}</tr>
+                                    <tr>{{#studyAmounttype3}}
+                                        <td> {{ studyAmounttype3 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription3 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration3 }} </<td>
+                                    {{/studyAmounttype3}}</tr>
+                                    <tr>{{#studyAmounttype4}}
+                                        <td> {{ studyAmounttype4 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription4 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration4 }} </<td>
+                                    {{/studyAmounttype4}}</tr>
+                                    <tr>{{#studyAmounttype5}}
+                                        <td> {{ studyAmounttype5 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription5 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration5 }} </<td>
+                                    {{/studyAmounttype5}}</tr>
+                                    <tr>
+                                        <td> total Study Hours </<td>
+                                        <td> {{ totalStudyHours }} Hours </<td>
+                                        <td> PT{{ totalStudyHours }} </<td>
+                                    </tr>
+                                </table>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="contact">
+                            <h3 class="contact-icon"><i class="fa fa-address-card" aria-hidden="true"> </i><b> Key people and contacts</b></h3>
+                            <hr>
+                            <div id="head-contact-box" class="contact-info">
+                                <table class="fancy-table">
+                                    <tr>
+                                        <td class="bolded"> Course Tutor: </td>
                                         <td class="italized">{{ leadername }} </td>
                                     </tr>
                                     <tr>
@@ -238,16 +260,19 @@
                                         <td class="bolded"> Faculty: </td>
                                         <td class="italized"> {{ facultyname }} </td>
                                     </tr>
-                                    <tr>
+                                     <tr>
                                         <td class="bolded"> Location: </td>
                                         <td class="italized"> {{ locationname }} </td>
                                     </tr>
                                 </table>
-                            </div>    
+                            </div
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
     </div>
-    <div id="war-bot", class="war-bot" ><br></div>
+    
 </div>
+<div id="war-bot" class="war-bot"><br></div>
+
