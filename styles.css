@@ -38,10 +38,6 @@ and open the template in the editor.
     background-color:transparent;
 }
 
-.top-headbox{
-    padding-top: 9px;
-}
-
 .nav-link active show{
     color:#fff;
     margin-top:7px;
