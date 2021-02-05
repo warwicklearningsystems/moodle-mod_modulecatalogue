@@ -2,21 +2,144 @@
     <link rel="stylesheet" type="text/css" />
 </head>
 
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h3 class="display-5">{{ code }}: {{ name }}</h3>
-            <h5 class="display-5"> Principal Aims </h5>
-            <p>{{#principal_aims}} <ul class="normal-paragraph"> {{.}} </ul> {{/principal_aims}}</p>
-            <hr>
-            <h5 class="display-5"> Principal Learning Outcomes </h5>
-            <p class="normal-paragraph">By the end of the module, students should be able to: </p>
-            {{#learningOutcomes}} <ul class="normal-paragraph"> {{.}} </ul> {{/learningOutcomes}}
-            <hr>
-            <h5 class="display-5"> Indicative Reading list </h5>
-            <a href= {{ readingListUrl }} > {{ readingListUrl }} </a></li>
-            <hr>
-            <h5 class="display-5"> Additional Information </h5>
-            <p>Module leader: {{ leadername }} - email <a href="mailto:{{ leaderemail }}">{{ leaderemail }} </a></p>
+<div id="allwmshead" class="wms-head-cll">
+    <div id="wmshead-content" class="p-3 p-md-4 view">
+        <div id="head-temp-container" class="standard_rounded">
+            <div class="alertinformation">{{#alert}}
+                {{#alertmessage}}{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a>
+                {{/alert}}</div>
 
+            <h3 class="display-5">{{ code }}: {{ name }}</h3>
+            <div class="wrap-collabsible">
+                <input id="collapsible1" class="toggle" type="checkbox"> 
+                <label for="collapsible1" class="lbl-toggle" tabindex="0">Principal Aims </label>
+                <div class="collapsible-content">
+                     <div class="content-inner">
+                        <div class="indented">
+                            {{#principal_aims}} <p class="normal-paragraph italized"> {{.}} </p> {{/principal_aims}}
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible2" class="toggle" type="checkbox"> 
+                <label for="collapsible2" class="lbl-toggle" tabindex="1">Principal Learning Outcomes </label>
+                <div class="collapsible-content">   
+                    <div class="content-inner">
+                        <div class="indented">
+                            <p> By the end of the module, students should be able to:</p>
+                            <div class="indented">
+                                {{#learningOutcomes}} <p class="paragraph-list"> {{.}} </p> {{/learningOutcomes}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible3" class="toggle" type="checkbox"> 
+                <label for="collapsible3" class="lbl-toggle" tabindex="2">Indicative Reading List </label>
+                <div class="collapsible-content">   
+                    <div class="content-inner">
+                        <div class="row indented">
+                            <div class="col-sm-4 font_small italized">Please see Talis Aspire link for most up to date list.</div>
+                            <div class="col-sm-3 bolded_italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
+                            <hr>
+                        </div>
+                        <div class="indented">
+                            {{#indicativeReadingList}} <p class="paragraph-list"> {{.}} </p> {{/indicativeReadingList}}                                  
+                        </div>            
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible4" class="toggle" type="checkbox">
+                <label for="collapsible4" class="lbl-toggle" tabindex="3">Outline Syllabus</label>
+                <div class="collapsible-content">
+                    <article>
+                        <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}</div>
+                        <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
+                        <div class="read-more-content">
+                            <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</div>
+                        </div>
+                        <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
+                    </article>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible5" class="toggle" type="checkbox">
+                <label for="collapsible5" class="lbl-toggle" tabindex="4">Assessment Schedule</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                         <div class="indented">
+                            <section>
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th> Assessment Name </th>
+                                        <th> Assessment Type </th>
+                                        <th> Duration </th>
+                                        <th> Weight </th>
+                                        <th> Description </th>
+                                    </tr>
+                                    <tr>{{#assesmentGrpname0}}
+                                        <td>{{ assesmentGrptype0 }}</<td>
+                                        <td>{{ assesmentGrpname0 }}</<td>
+                                        <td>{{ assesmentGrplength0 }}</<td>
+                                        <td>{{ assesmentGrpweighting0 }}</<td>
+                                        <td>{{ assesmentGrpdescription0 }}</<td>
+                                    {{/assesmentGrpname0}}</tr>
+                                    <tr>{{#assesmentGrpname1}}
+                                        <td>{{ assesmentGrptype1 }}</<td>
+                                        <td>{{ assesmentGrpname1 }}</<td>
+                                        <td>{{ assesmentGrplength1 }}</<td>
+                                        <td>{{ assesmentGrpweighting1 }}</<td>
+                                        <td>{{ assesmentGrpdescription1 }}</<td>
+                                    {{/assesmentGrpname1}}</tr>
+                                    <tr>{{#assesmentGrpname2}}
+                                        <td>{{ assesmentGrptype2 }}</<td>
+                                        <td>{{ assesmentGrpname2 }}</<td>
+                                        <td>{{ assesmentGrplength2 }}</<td>
+                                        <td>{{ assesmentGrpweighting2 }}</<td>
+                                        <td>{{ assesmentGrpdescription2 }}</<td>
+                                    {{/assesmentGrpname2}}</tr>
+                                    <tr>{{#assesmentGrpname3}}
+                                        <td>{{ assesmentGrptype3 }}</<td>
+                                        <td>{{ assesmentGrpname3 }}</<td>
+                                        <td>{{ assesmentGrplength3 }}</<td>
+                                        <td>{{ assesmentGrpweighting3 }}</<td>
+                                        <td>{{ assesmentGrpdescription3 }}</<td>
+                                    {{/assesmentGrpname3}}</tr>
+                                    <tr>{{#assesmentGrpname4}}
+                                        <td>{{ assesmentGrptype4 }}</<td>
+                                        <td>{{ assesmentGrpname4 }}</<td>
+                                        <td>{{ assesmentGrplength4 }}</<td>
+                                        <td>{{ assesmentGrpweighting4 }}</<td>
+                                        <td>{{ assesmentGrpdescription4 }}</<td>
+                                    {{/assesmentGrpname4}}</tr>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-3 bolded_italized font_small">Total Exam Weight:</div>
+                                    <div class="col-sm-2 italized font_small">{{totalExamWeighting}} %</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 bolded_italized font_small">Total Course Weight:</div>
+                                    <div class="col-sm-2 italized font_small ">{{totalCourseworkWeighting}} %</div>
+                                </div>
+                            </section>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible6" class="toggle" type="checkbox">
+                <label for="collapsible6" class="lbl-toggle" tabindex="5">Subject Specific Skills</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>

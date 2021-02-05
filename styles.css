@@ -16,19 +16,52 @@ and open the template in the editor.
     border-left: 1px solid rgba(0,0,0,.125);
     border-right: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem!important;
-    background:#e2f3fb;
+    background:white;
     margin-bottom:6px;
 }
 
 .rounded{
     background-color:#e2f3fb;
-    background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-bot-bg.png'), url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-tophead-bg.png');
+    background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-tophead-bg.png');
     background-repeat: no-repeat, no-repeat;
-    background-position:right bottom, right top;
+    background-position:right top;
     min-height: 320px;
     overflow:auto;
 }
 
+.standard_rounded{
+    background-color:white;
+    min-height: 320px;
+    overflow:auto;
+}
+
+.tab-container-tabs{
+    background-color: transparent;
+    min-height: 320px;
+}
+
+.tab_content_background{
+    background-color: darkblue;
+    min-height: 39px;
+    background-repeat: no-repeat;
+    background-position:right top;
+    background-size: cover;
+    background-image: url("pix/banner.jpg");
+    padding-top: 10px;
+}
+
+.reset_width{
+    width: 95%;
+}
+
+.container{
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    
+}
 .war-bot{
     background: url('https://warwick.ac.uk/study/cll/currentstudents/bot-w-white-bluerun-cll.png') no-repeat right bottom; 
     min-height: 50px;
@@ -36,6 +69,10 @@ and open the template in the editor.
 
 .top-headbox{
     background-color:transparent;
+}
+
+.nav_tabs{
+    color: white;
 }
 
 .nav-link active show{
@@ -47,12 +84,25 @@ and open the template in the editor.
     font-weight: 400;
 }
 
+.white_font {
+    color: white;
+}
+
+.nav-item_corners{
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.activated{
+    background-color: blue;
+}
+
 .nav-link{
     display: block;
     padding: .5rem 2rem;
 }
 
-.p-3 p-md-4 view{
+.p-3 p-md-4{
     background-color: transparent; 
     padding-top: 2.0rem!important; 
     padding-bottom: 1.2rem !important;
@@ -62,7 +112,7 @@ and open the template in the editor.
 .contact{
     width: auto;   
     background-color: rgba(255,255,255,.8); 
-    padding: 15px; margin:15px; 
+    padding: 3px; margin:3px; 
     min-height:240px;
     border-radius: 10px;
     box-shadow: 7px 7px #d2edf9;
@@ -139,6 +189,24 @@ and open the template in the editor.
 .alertinformation:empty {
     display: none;
     visibility: hidden; 
+}
+
+.italized{
+    font-style: italic;
+}
+
+.bolded_italized{
+    font-style: italic;
+    color: #002f8f;
+}
+
+.bolded{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.font_small{
+    font-size: 0.9em;
 }
 
 @media 
@@ -233,9 +301,8 @@ article {
 
 /* MOO 1983 Added code for disclosure*/
 .jumbotron {
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-    background-color: #e8f2ff;
+    margin-bottom: 1rem;
+    background-color: white;
 }
 
 .jumbotron-fluid {
@@ -245,7 +312,7 @@ article {
 
 .alertinformation {
     font-size: 0.88em;
-    background-color: #c5f2ef;
+    background-color: #330099;
     text-align: justify;
     padding: 15px; 
     border-radius: 10px;
@@ -254,6 +321,8 @@ article {
     border-style: solid;
     border-color: #86A5EC;
     margin-bottom: 10px;
+    color: white;
+    width: 99%;
 }
 
 /* MOO 2019 made changes to table 2 columns on first tab*/
@@ -263,6 +332,11 @@ article {
   text-align: right;
   color: grey;
   padding: 5px;
+}
+
+.alertlink{
+    color: white;
+    text-decoration: underline;
 }
 
 .rightcolumn {
@@ -312,6 +386,7 @@ article {
     border-spacing: 0;
     empty-cells:initial;
     border: 1px solid #ddd;
+    background-color: #def2f8;
 }
 
 .fancy-table td, fancy-table th {
@@ -323,8 +398,16 @@ article {
     padding-top: 3px;
     padding-bottom: 3px;
     text-align: left;
-    background-color: #86A5EC;
+    background-color: #000066;
     color: white;
+}
+/*MOO 2163 Introduced footer row table*/
+.fancy-table tfoot{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+    background-color: #00ccff;
+    color: darkblue;
 }
 
 .fancy-table tr{
@@ -332,7 +415,91 @@ article {
 }
 
 .fancy-table tr:nth-child(odd) {
-  background-color: #e2f3fb;
+  background-color: white;
 }
 
 .fancy-table tr:hover {background-color: #def2f8;}
+
+/* MOO 2162 introduce code for collapsible tabs */
+.wrap-collabsible {
+    margin-bottom: 1.0rem 0;
+}
+
+.lbl-toggle {
+    display: block;
+    
+    font-size: 1.3rem;
+    text-align: left;
+    
+    padding: 1.5px;
+    text-indent: 10px;
+    color: #0066cc;
+    background: transparent;
+    
+    cursor: pointer;
+    border-width: 1px;
+    border-color: #3195ef;
+    border-style: solid;
+    
+    border-radius: 7px;
+    transition: all 0.25s ease-out;
+}
+
+.toggle{
+    display: none;
+}
+
+.lbl-toggle:hover {
+    color: #7C5A0B;
+}
+
+.lbl-toggle::before {
+    content: ' ';
+    display: inline-block;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+    vertical-align: middle;
+    margin-right: .7rem;
+    transform: translateY(-2px);
+    
+    transition: transform .2s ease-out;
+}
+
+.toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+}
+
+.normal-content{
+    padding-top: 1.2em;
+    padding-left: 2em;
+    padding-right: 1.2em;
+    padding-bottom: 1.2em;
+}
+
+.collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .25s ease-in-out;
+}
+
+.toggle:checked + .lbl-toggle + .collapsible-content {
+    max-height: 150vh;
+}
+
+.toggle:checked + .lbl-toggle {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.collapsible-content .content-inner {
+    background: transparent;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    padding: .5rem 0.7rem;
+    margin-bottom: 5px;
+}
+
+.content-inner{
+    border: none;
+}
