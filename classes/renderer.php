@@ -36,7 +36,7 @@ class cataloguedata implements \templatable, \renderable {
         'studyAmounttype5', 'studyAmountrequiredDescription5', 'studyAmountrequiredDuration5',
         'preRequisiteModulecode0', 'preRequisiteModuletitle0', 'preRequisiteModulecode1', 'preRequisiteModuletitle1',
         'postRequisiteModulecode0', 'postRequisiteModuletitle0','postRequisiteModulecode0', 'postRequisiteModuletitle0',
-        'alertmessage','urllink','alert', 'totalExamWeighting','totalCourseworkWeighting'
+        'alertmessage','urllink','alert', 'totalExamWeighting','totalCourseworkWeighting','url'
         );
     
 
@@ -83,6 +83,7 @@ class cataloguedata implements \templatable, \renderable {
         'leadername' => $this->leadername,
         'leaderemail' => $this->leaderemail,
         'locationname' => $this->locationname,
+        'url' => $this->url,
         'outlineSyllabus' => array_slice(explode(($delimiter), $this->outlineSyllabus), 6),
         'outlineSyllabusShort' => array_slice(explode(($delimiter), $this->outlineSyllabus), 0, 5),
         /*MOO-2143 Indicative reading list fix to implement as expanding button*/

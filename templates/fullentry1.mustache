@@ -2,26 +2,266 @@
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
    
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
+<div id="allwmshead" class="wms-head-cll">
+    <div id="wmshead-content" class="p-3 p-md-4 view">
+        <div id="head-temp-container" class="standard_rounded">
+            <div class="alertinformation">{{#alert}}
+                 {{#alertmessage}}{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a>
+                  {{/alert}}</div>
             <h3 class="display-5">{{ code }}: {{ name }}</h3>
             <h4 class="display-5"> Number of Credits: {{ creditValue }}</h4>
             <h4 class="display-5"> Academic Year: {{ academic_year }}</h4>
-            <h5 class="display-5"> Principal Aims </h5>
-            <p>{{#principal_aims}} <p class="normal-paragraph"> {{.}} </p> {{/principal_aims}}</p>
-            <p class="lead"> Total Study Hours: {{ totalStudyHours }} hours </p>
-            <p class="normal-paragraph"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ.</p>
-        <article>
-            {{#outlineSyllabusShort}} <li class="paragraph-list"><i> {{.}}</i> </li> {{/outlineSyllabusShort}}
-                <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
-                    <div class="read-more-content">
-                        {{#outlineSyllabus}} <li class="paragraph-list"> <i>{{.}}</i> </li> {{/outlineSyllabus}}
+            <hr>
+
+            <div class="wrap-collabsible"> 
+                <input id="collapsible1" class="toggle" type="checkbox"> 
+                <label for="collapsible1" class="lbl-toggle" tabindex="0">Principal Aims </label>
+
+                <div class="collapsible-content">   
+                    <div class="content-inner">
+                        <div class="indented italized">
+                            {{#principal_aims}} <p class="normal-paragraph"> {{.}} </p> {{/principal_aims}}
+                        </div>
                     </div>
-            <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
-        </article>
-        <h5 class="display-5"> Subject Specific Skills </h5>
-        <p ="normal-paragraph"> Students will gain a basic understanding of research skills such as:</p>
-        {{#subjectSpecificSkills}} <li class="normal-paragraph"> {{.}} </li> {{/subjectSpecificSkills}}
+                </div>
+            </div>
+       
+            <div class="wrap-collabsible"> 
+                <input id="collapsible2" class="toggle" type="checkbox"> 
+                <label for="collapsible2" class="lbl-toggle" tabindex="1">Study Requirements </label>
+
+                <div class="collapsible-content"> 
+                    <div class="content-inner">
+                        <div class="indented">
+                            <p> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
+                            <section>
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th> Type </th>
+                                        <th> Description </th>
+                                        <th> Duration </th>
+                                    </tr>
+                                    <tr>{{#studyAmounttype0}}
+                                        <td> {{ studyAmounttype0 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription0 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration0 }} </<td>
+                                    {{/studyAmounttype0}}</tr>
+                                    <tr>{{#studyAmounttype1}}
+                                        <td> {{ studyAmounttype1 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription1 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration1 }} </<td>
+                                    {{/studyAmounttype1}}</tr>
+                                    <tr>{{#studyAmounttype2}}
+                                        <td> {{ studyAmounttype2 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription2 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration2 }} </<td>
+                                    {{/studyAmounttype2}}</tr>
+                                    <tr>{{#studyAmounttype3}}
+                                        <td> {{ studyAmounttype3 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription3 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration3 }} </<td>
+                                    {{/studyAmounttype3}}</tr>
+                                    <tr>{{#studyAmounttype4}}
+                                        <td> {{ studyAmounttype4 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription4 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration4 }} </<td>
+                                    {{/studyAmounttype4}}</tr>
+                                    <tr>{{#studyAmounttype5}}
+                                        <td> {{ studyAmounttype5 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription5 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration5 }} </<td>
+                                    {{/studyAmounttype5}}</tr>
+                                    <tfoot>
+                                        <tr>
+                                            <td> total Study Hours </<td>
+                                            <td> {{ totalStudyHours }} Hours </<td>
+                                            <td> PT{{ totalStudyHours }} </<td> 
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible3" class="toggle" type="checkbox"> 
+                <label for="collapsible3" class="lbl-toggle" tabindex="2">Outline Syllabus </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            <article>
+                                <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}</div>
+                                <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
+                                <div class="read-more-content">
+                                    <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</div>
+                                </div>
+                            </article>
+                            <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible4" class="toggle" type="checkbox">
+                <label for="collapsible4" class="lbl-toggle" tabindex="3">Subject Specific Skills</label>
+                <div class="collapsible-content">
+                    <div class="indented">
+                        {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible5" class="toggle" type="checkbox"> 
+                <label for="collapsible5" class="lbl-toggle" tabindex="4">Indicative Reading List </label>
+                <div class="collapsible-content">
+                    <div class="row indented">
+                        <div class="col-sm-4 font_small italized">Please see Talis Aspire link for most up to date list.</div>
+                        <div class="col-sm-3 bolded_italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
+                        <hr>
+                    </div>
+                    <div class="indented">
+                        {{#indicativeReadingList}} <p class="paragraph-list"> {{.}} </p> {{/indicativeReadingList}}
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible6" class="toggle" type="checkbox">
+                <label for="collapsible6" class="lbl-toggle" tabindex="5">Principal Learning Outcomes </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            <p> By the end of the module, students should be able to:</p>
+                            <div class="indented">
+                                {{#learningOutcomes}} <p class="paragraph-list"> {{.}} </p> {{/learningOutcomes}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible7" class="toggle" type="checkbox"> 
+                <label for="collapsible7" class="lbl-toggle" tabindex="6">Assessment Schedule</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            <section>
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th> Assessment Name </th>
+                                        <th> Assessment Type </th>
+                                        <th> Duration </th>
+                                        <th> Weight </th>
+                                        <th> Description </th>
+                                    </tr>
+                                    <tr>{{#assesmentGrpname0}}
+                                        <td> {{ assesmentGrptype0 }} </<td>
+                                        <td> {{ assesmentGrpname0 }} </<td>
+                                        <td> {{ assesmentGrplength0 }} </<td>
+                                        <td> {{ assesmentGrpweighting0 }} </<td>
+                                        <td> {{ assesmentGrpdescription0 }} </<td>
+                                    {{/assesmentGrpname0}}</tr>
+                                    <tr>{{#assesmentGrpname1}}
+                                        <td> {{assesmentGrptype1}} </<td>
+                                        <td> {{ assesmentGrpname1 }} </<td>
+                                        <td> {{ assesmentGrplength1 }} </<td>
+                                        <td> {{ assesmentGrpweighting1 }} </<td>
+                                        <td> {{ assesmentGrpdescription1 }} </<td>
+                                    {{/assesmentGrpname1}}</tr>
+                                    <tr>{{#assesmentGrpname2}}
+                                        <td> {{assesmentGrptype2}} </<td>
+                                        <td> {{ assesmentGrpname2 }} </<td>
+                                        <td> {{ assesmentGrplength2 }} </<td>
+                                        <td> {{ assesmentGrpweighting2 }} </<td>
+                                        <td> {{ assesmentGrpdescription2 }} </<td>
+                                    {{/assesmentGrpname2}}</tr>
+                                    <tr>{{#assesmentGrpname3}}
+                                        <td> {{assesmentGrptype3}} </<td>
+                                        <td> {{ assesmentGrpname3 }} </<td>
+                                        <td> {{ assesmentGrplength3 }} </<td>
+                                        <td> {{ assesmentGrpweighting3 }} </<td>
+                                        <td> {{ assesmentGrpdescription3 }} </<td>
+                                    {{/assesmentGrpname3}}</tr>
+                                    <tr>{{#assesmentGrpname4}}
+                                        <td> {{assesmentGrptype4}} </<td>
+                                        <td> {{ assesmentGrpname4 }} </<td>
+                                        <td> {{ assesmentGrplength4 }} </<td>
+                                        <td> {{ assesmentGrpweighting4 }} </<td>
+                                        <td> {{ assesmentGrpdescription4 }} </<td>
+                                    {{/assesmentGrpname4}}</tr>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Exam Weight:</div>
+                                    <div class="col-sm-2 italized font_small">{{totalExamWeighting}} %</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Course Weight:</div>
+                                    <div class="col-sm-2 italized font_small ">{{totalCourseworkWeighting}} %</div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible8" class="toggle" type="checkbox"> 
+                <label for="collapsible8" class="lbl-toggle" tabindex="7">Private Study Description </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            {{#privateStudyDescription}} <p class="paragraph-list"> {{.}} </p> {{/privateStudyDescription}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible9" class="toggle" type="checkbox">
+                <label for="collapsible9" class="lbl-toggle" tabindex="8">Transferable Skills </label>
+                <div class="collapsible-content">
+                   <div class="indented">
+                        {{#transferableSkills}} <p class="paragraph-list"> {{.}} </p> {{/transferableSkills}}
+                   </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible10" class="toggle" type="checkbox">
+                <label for="collapsible10" class="lbl-toggle" tabindex="0">Contacts </label>
+                <div class="collapsible-content">
+                   <div class="indented">
+                        <table class="fancy-table">
+                            <tr>
+                                <td class="bolded"> Course Tutor: </td>
+                                <td class="italized">{{ leadername }} </td>
+                            </tr>
+                            <tr>
+                                <td class="bolded"> Course Tutor e_Mail address:</td>
+                                <td class="italized"> <a href="mailto:{{ leaderemail }}"> {{ leaderemail }} </a> </td>
+                            </tr>
+                            {{#adminname}}<tr>
+                                <td class="bolded"> Student Administrator Name:  </td>
+                                <td class="italized"> {{adminname}} </td>
+                            </tr>{{/adminname}}
+                            {{#adminemail}}<tr>
+                                <td class="bolded">Student Administration e-Mail:  </td>
+                                <td class="italized"> <a href="mailto:{{ adminemail }}">{{ adminemail }} </a> </td>
+                            </tr>{{/adminemail}}
+                            <tr>
+                                <td class="bolded"> Department: </td>
+                                <td class="italized"> {{ department }} </td>
+                            </tr>
+                            <tr>
+                                <td class="bolded"> Faculty: </td>
+                                <td class="italized"> {{ facultyname }} </td>
+                            </tr>
+                            <tr>
+                                <td class="bolded"> Location: </td>
+                                <td class="italized"> {{ locationname }} </td>
+                            </tr>
+                        </table>
+                   </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </div>          
+</div>
 

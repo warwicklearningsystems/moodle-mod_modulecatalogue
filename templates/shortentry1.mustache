@@ -1,70 +1,154 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-<div class="alertinformation">{{#alert}}
-    {{#alertmessage}}{{.}}{{/alertmessage}} <a href= {{ urllink }} > {{ urllink }} </a>
-         {{/alert}}</div>
-    <h3> {{ code }} : {{ name }} </h3>
-    <h5 class="display-5"> Outline Syllabus </h5>
-    <p class="normal-paragraph"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ.</p>
-    <article>
-            {{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}
-                <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
-                    <div class="read-more-content">
-                        {{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}
+<div id="allwmshead" class="wms-head-cll">
+    <div id="wmshead-content" class="p-3 p-md-4 view">
+        <div id="head-temp-container" class="standard_rounded">
+            <div class="alertinformation">{{#alert}}
+                {{#alertmessage}}{{.}}{{/alertmessage}} <a href= {{ urllink }} > {{ urllink }} </a>
+                {{/alert}}</div>
+
+            <h3> {{ code }} : {{ name }} </h3>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible1" class="toggle" type="checkbox">
+                <label for="collapsible1" class="lbl-toggle" tabindex="0">Outline Syllabus </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <div class="indented">
+                            <p class="normal-paragraph"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ.</p>
+                            <article>
+                                <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}</div>
+                                <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
+                                <div class="read-more-content">
+                                    <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</div>
+                                </div>
+                                <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
+                            </article>
+                        </div>
                     </div>
-            <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
-    </article>
-
-     <h5 class="display-5"> Assessment Schedule </h5>
-    <section>
-        <table class="fancy-table">
-            <tr>
-                <th> Assessment Name </th>
-                <th> Assessment Type </th>
-                <th> Duration </th>
-                <th> Weight </th>
-                <th> Description </th> 
-            </tr>
-            <tr>{{#assesmentGrpname0}}
-                <td> {{ assesmentGrptype0 }} </<td>
-                <td> {{ assesmentGrpname0 }} </<td>
-                <td> {{ assesmentGrplength0 }} </<td>
-                <td> {{ assesmentGrpweighting0 }} </<td>
-                <td> {{ assesmentGrpdescription0 }} </<td>
-            {{/assesmentGrpname0}}</tr>
-            <tr>{{#assesmentGrpname1}}
-                <td> {{assesmentGrptype1}} </<td>
-                <td> {{ assesmentGrpname1 }} </<td>
-                <td> {{ assesmentGrplength1 }} </<td>
-                <td> {{ assesmentGrpweighting1 }} </<td>
-                <td> {{ assesmentGrpdescription1 }} </<td>
-            {{/assesmentGrpname1}}</tr>
-            <tr>{{#assesmentGrpname2}}
-                <td> {{assesmentGrptype2}} </<td>
-                <td> {{ assesmentGrpname2 }} </<td>
-                <td> {{ assesmentGrplength2 }} </<td>
-                <td> {{ assesmentGrpweighting2 }} </<td>
-                <td> {{ assesmentGrpdescription2 }} </<td>
-            {{/assesmentGrpname2}}</tr>
-            <tr>{{#assesmentGrpname3}}
-                <td> {{assesmentGrptype3}} </<td>
-                <td> {{ assesmentGrpname3 }} </<td>
-                <td> {{ assesmentGrplength3 }} </<td>
-                <td> {{ assesmentGrpweighting3 }} </<td>
-                <td> {{ assesmentGrpdescription3 }} </<td>
-            {{/assesmentGrpname3}}</tr>
-            <tr>{{#assesmentGrpname4}}
-                <td> {{assesmentGrptype4}} </<td>
-                <td> {{ assesmentGrpname4 }} </<td>
-                <td> {{ assesmentGrplength4 }} </<td>
-                <td> {{ assesmentGrpweighting4 }} </<td>
-                <td> {{ assesmentGrpdescription4 }} </<td>
-            {{/assesmentGrpname4}}</tr>
-        </table>
-    </section>
-  </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible">
+                <input id="collapsible2" class="toggle" type="checkbox">
+                <label for="collapsible2" class="lbl-toggle" tabindex="1">Assessment Schedule </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            <section>
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th> Assessment Name </th>
+                                        <th> Assessment Type </th>
+                                        <th> Duration </th>
+                                        <th> Weight </th>
+                                        <th> Description </th>
+                                    </tr>
+                                    <tr>{{#assesmentGrpname0}}
+                                        <td>{{ assesmentGrptype0 }}</<td>
+                                        <td>{{ assesmentGrpname0 }}</<td>
+                                        <td>{{ assesmentGrplength0 }}</<td>
+                                        <td>{{ assesmentGrpweighting0 }}</<td>
+                                        <td> {{assesmentGrpdescription0 }}</<td>
+                                    {{/assesmentGrpname0}}</tr>
+                                    <tr>{{#assesmentGrpname1}}
+                                        <td> {{assesmentGrptype1}} </<td>
+                                        <td> {{ assesmentGrpname1 }} </<td>
+                                        <td> {{ assesmentGrplength1 }} </<td>
+                                        <td> {{ assesmentGrpweighting1 }} </<td>
+                                        <td> {{ assesmentGrpdescription1 }} </<td>
+                                    {{/assesmentGrpname1}}</tr>
+                                    <tr>{{#assesmentGrpname2}}
+                                        <td>{{ assesmentGrptype2 }}</<td>
+                                        <td>{{ assesmentGrpname2 }}</<td>
+                                        <td>{{ assesmentGrplength2 }}</<td>
+                                        <td>{{ assesmentGrpweighting2 }}</<td>
+                                        <td> {{assesmentGrpdescription2 }}</<td>
+                                    {{/assesmentGrpname2}}</tr>
+                                    <tr>{{#assesmentGrpname3}}
+                                        <td>{{ assesmentGrptype3 }}</<td>
+                                        <td>{{ assesmentGrpname3 }}</<td>
+                                        <td>{{ assesmentGrplength3 }}</<td>
+                                        <td>{{ assesmentGrpweighting3 }}</<td>
+                                        <td> {{assesmentGrpdescription3 }}</<td>
+                                    {{/assesmentGrpname3}}</tr>
+                                    <tr>{{#assesmentGrpname4}}
+                                        <td>{{ assesmentGrptype4 }}</<td>
+                                        <td>{{ assesmentGrpname4 }}</<td>
+                                        <td>{{ assesmentGrplength4 }}</<td>
+                                        <td>{{ assesmentGrpweighting4 }}</<td>
+                                        <td> {{assesmentGrpdescription4 }}</<td>
+                                    {{/assesmentGrpname4}}</tr>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Exam Weight:</div>
+                                    <div class="col-sm-2 italized font_small">{{totalExamWeighting}} %</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Course Weight:</div>
+                                    <div class="col-sm-2 italized font_small ">{{totalCourseworkWeighting}} %</div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-collabsible"> 
+                <input id="collapsible3" class="toggle" type="checkbox"> 
+                <label for="collapsible3" class="lbl-toggle" tabindex="2">Study Requirements </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <div class="indented">
+                            <p> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
+                            <section>
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th> Type </th>
+                                        <th> Description </th>
+                                        <th> Duration </th>
+                                    </tr>
+                                    <tr>{{#studyAmounttype0}}
+                                        <td> {{ studyAmounttype0 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription0 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration0 }} </<td>
+                                    {{/studyAmounttype0}}</tr>
+                                    <tr>{{#studyAmounttype1}}
+                                        <td> {{ studyAmounttype1 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription1 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration1 }} </<td>
+                                    {{/studyAmounttype1}}</tr>
+                                    <tr>{{#studyAmounttype2}}
+                                        <td> {{ studyAmounttype2 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription2 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration2 }} </<td>
+                                    {{/studyAmounttype2}}</tr>
+                                    <tr>{{#studyAmounttype3}}
+                                        <td> {{ studyAmounttype3 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription3 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration3 }} </<td>
+                                    {{/studyAmounttype3}}</tr>
+                                    <tr>{{#studyAmounttype4}}
+                                        <td> {{ studyAmounttype4 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription4 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration4 }} </<td>
+                                    {{/studyAmounttype4}}</tr>
+                                    <tr>{{#studyAmounttype5}}
+                                        <td> {{ studyAmounttype5 }} </<td>
+                                        <td> {{ studyAmountrequiredDescription5 }} </<td>
+                                        <td> {{ studyAmountrequiredDuration5 }} </<td>
+                                    {{/studyAmounttype5}}</tr>
+                                    <tfoot>
+                                        <tr>
+                                            <td> total Study Hours </<td>
+                                            <td> {{ totalStudyHours }} Hours </<td>
+                                            <td> PT{{ totalStudyHours }} </<td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-

@@ -53,8 +53,10 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        $TEMPLATEOPTIONS = array('shortentry1' => 'Short module catalogue summary',
-                            'fancyentry' => 'Fancy summary');
+        $TEMPLATEOPTIONS = array('fullentry1' => 'Official module content description',
+            'shortentry1' => 'Short module catalogue summary', 
+            'fancyentry' => 'Fancy summary',
+            'catalogue1' => 'Catalogue 1 entry');
 
        // MOO-1813: list of options in dropdown list box. user presented in format xx/xx as in 20/21 but stored as xxxx as in 2020 as JSON data uses 4 digit years.
         $ACADEMICYEAROPTIONS = array(2019 => "19/20", 2020 => "20/21", 2021 => "21/22", 2022 => "22/23", 2023 => "23/24", 2024 => "24/25", 2025 => "25/26", 2026 => "26/27", 2027 => "27/28", 2028 => "28/29",2029 => "29/30", 2030 => "30/31");
