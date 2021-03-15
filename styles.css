@@ -275,7 +275,7 @@ only screen and (max-width: 500px),
   padding: 5px;
   margin: .5em;
   font-size: .8em;
-  background: #0066CC;
+  background: #000080;
   color: white;
 }
 
@@ -433,7 +433,7 @@ article {
     
     padding: 1.5px;
     text-indent: 10px;
-    color: #0066cc;
+    color: #000;
     background: transparent;
     
     cursor: pointer;
@@ -450,7 +450,7 @@ article {
 }
 
 .lbl-toggle:hover {
-    color: #7C5A0B;
+    color: #000;
 }
 
 .lbl-toggle::before {
