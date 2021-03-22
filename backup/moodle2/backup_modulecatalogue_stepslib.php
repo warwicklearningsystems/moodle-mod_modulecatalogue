@@ -47,7 +47,8 @@ class backup_modulecatalogue_activity_structure_step extends backup_activity_str
 
         // Define the root element describing the modulecatalogue instance.
         $modulecatalogue = new backup_nested_element('modulecatalogue', array('id'), array(
-            'name'));
+            'name', 'template', 'modulecode', 'academicyear', 'defaultcodes', 'intro', 
+            'introformat', 'timemodified','timecreated','adminsupport','adminsupportname'));
 
         // If we had more elements, we would build the tree here.
 
