@@ -75,20 +75,6 @@ function xmldb_modulecatalogue_upgrade($oldversion) {
             $dbman->add_field($table, $field1);
         }
     }
-    
-    if ($oldversion < 2021032201){
-        $default = "";
-        
-        $table = new xmldb_table('modulecatalogue');
-        $field = new xmldb_field('intro');
-        $field1 = new xmldb_field('introformat');
-        $field->set_attributes(XMLDB_TYPE_CHAR, '15', XMLDB_UNSIGNED, false, false, $default);
-        $field1->set_attributes(XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, false, false, "0");
-        if (!$dbman->field_exists($table, $field)){
-            $dbman->add_field($table, $field);
-            $dbman->add_field($table, $field1);
-        }
-    }
 
     return true;
 }

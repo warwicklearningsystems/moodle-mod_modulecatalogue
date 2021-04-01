@@ -49,19 +49,17 @@ require_once($CFG->dirroot . '/mod/modulecatalogue/classes/renderer.php');
  * @return mixed true if the feature is supported, null if unknown
  */
 function modulecatalogue_supports($feature) {
-    switch($feature) {
-        case FEATURE_IDNUMBER:                return true;
-        case FEATURE_GROUPS:                  return false;
-        case FEATURE_GROUPINGS:               return false;
-        case FEATURE_MOD_INTRO:               return false;
-        case FEATURE_COMPLETION_TRACKS_VIEWS: return false;
-        case FEATURE_GRADE_HAS_GRADE:         return false;
-        case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_MOD_ARCHETYPE:           return MOD_ARCHETYPE_RESOURCE;
-        case FEATURE_BACKUP_MOODLE2:          return true;
-        case FEATURE_NO_VIEW_LINK:            return true;
 
-        default: return null;
+    switch($feature) {
+        case FEATURE_MOD_INTRO:               return false;
+        case FEATURE_SHOW_DESCRIPTION:        return false;
+        case FEATURE_GRADE_HAS_GRADE:         return false;
+        case FEATURE_BACKUP_MOODLE2:          return false;
+        case FEATURE_COMPLETION_TRACKS_VIEWS: return false;
+        case FEATURE_GRADE_OUTCOMES:          return false;
+        case FEATURE_NO_VIEW_LINK:            return true; // critical to stop display of link to resource
+        case FEATURE_IDNUMBER:                return false;
+        default:                              return null;
     }
 }
 
@@ -302,27 +300,10 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
     // Retrieve details on this catalogue instance including template and module code
     // MOO-1813: modified query to DB method to now use the academicyear from the table mdl_modulecatalogue.
     if ($modcat = $DB->get_record('modulecatalogue',
-      array('id'=>$coursemodule->instance), 'id, name, modulecode, academicyear, defaultcodes, template, intro, introformat, timecreated, adminsupport, adminsupportname')) {
+      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear, defaultcodes, adminsupport, adminsupportname')) {
 
-        if (empty($modcat->name)) {
-            // modulecatalogue name missing, fix it
-            $modcat->name = "modulecatalogue{$modcat->id}";
-            $DB->set_field('modulecatalogue', 'name', $modcat->name, array('id'=>$modcat->id));
-        }
-        
         // Build information ready for display...
         $info = new cached_cm_info();
-        
-        // no filtering hre because this info is cached and filtered later
-        $info->content = format_module_intro('modulecatalogue', $modcat, $coursemodule->id, false);
-        $info->name  = $modcat->name;
-        $info->template = $modcat->template;
-        $info->modulecode = $modcat->modulecode;
-        $info->academicyear = $modcat->academicyear;
-        $info->defaultcodes = $modcat->defaultcodes;
-        $info->timecreated = $modcat->timecreated;
-        $info->adminsupport = $modcat->adminsupport;
-        $info->adminsupportname = $modcat->adminsupportname;  
         
         //Moo 1888 Added new fields to be stored in database
         $adminemail = $modcat->adminsupport;
