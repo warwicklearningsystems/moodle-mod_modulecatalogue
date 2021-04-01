@@ -1,6 +1,5 @@
 <?php
 
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -17,11 +16,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Provides support for the conversion of moodle1 backup to the moodle2 format
- * Based off of a template @ http://docs.moodle.org/dev/Backup_1.9_conversion_for_developers
+ * Library of interface functions and constants for module modulecatalogue
  *
- * @package mod_modulecatalogue
- * @copyright  2011 Aparup Banerjee <aparup@moodle.com>
+ * All the core Moodle functions, neeeded to allow the module to work
+ * integrated in Moodle should be placed here.
+ *
+ * All the modulecatalogue specific functions, needed to implement all the module
+ * logic, should go to locallib.php. This will help to save some memory when
+ * Moodle is performing actions across all modules.
+ *
+ * @package    mod_modulecatalogue
+ * @copyright  2016 Your Name <frederick.evans@warwick.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
