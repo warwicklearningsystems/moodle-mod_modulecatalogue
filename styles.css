@@ -31,13 +31,13 @@ and open the template in the editor.
 
 .standard_rounded{
     background-color:white;
-    min-height: 320px;
+    min-height: 180px;
     overflow:auto;
 }
 
 .tab-container-tabs{
     background-color: transparent;
-    min-height: 320px;
+    min-height: 180px;
 }
 
 .tab_content_background{

@@ -45,8 +45,6 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         global $CFG, $COURSE; 
 
         $mform = $this->_form;
-        $module_Code = "";
-        $academic_year = "";
         
         $checkdisable = true;
         
@@ -64,22 +62,10 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addHelpButton('template', 'template', 'modulecatalogue');
         
         //MOO-1826 get course metadata to retrieve current default codes;
-        $metadata = get_course_metadata($COURSE->id);
-        if (isset($metadata)){
-            
-            foreach($metadata as $k => $v){
-                switch ($k){
-                    case 'Module Code':
-                        $module_Code = $v;
-                    case 'Academic Year':
-                        $academic_year = $v;
-                }
-            }
-        }
+        require_once(dirname(__FILE__).'/db/metadata.php');
         
-        $moduleCode = $module_Code;
-        $academicYear = $academic_year;
-        
+        $defaultcodes = get_course_metadata($COURSE->id);
+                
         //MOO-1888: Added text box for adminsupport name to hold name of admin support.
         $options = ['size' => 80, 'maxlength' => 80, 'pattern'=>"[a-zA-Z][a-zA-Z\s]*", 'title'=>"Please use only Alphabetic characters"];
         $mform->addElement('text', 'adminsupportname', get_string('adminsupportname', 'modulecatalogue'), $options);
@@ -114,12 +100,12 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addElement('select', 'academicyear', get_string('academicyear', 'modulecatalogue'), $ACADEMICYEAROPTIONS);      
         $mform->addHelpButton('academicyear', 'academicyear', 'modulecatalogue');
         
-	if (((is_null($module_Code)) || (is_null($academic_year))) || (!(isset($metadata)))){        
+	if (((is_null($defaultcodes->moduleCode)) || (is_null($defaultcodes->academicYear))) || (!(isset($defaultcodes)))){        
             $mform->setDefault('autoupdate',1);
             $mform->setDefault('defaultcodes', 0);
         } else{
-            $mform->setDefault('modulecode', $moduleCode);
-            $key = array_search($academicYear, $ACADEMICYEAROPTIONS);
+            $mform->setDefault('modulecode', $defaultcodes->moduleCode);
+            $key = array_search($defaultcodes->academicYear, $ACADEMICYEAROPTIONS);
             $mform->setDefault('academicyear', $key);
             $mform->setDefault('defaultcodes', 1);
         }

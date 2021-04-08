@@ -67,11 +67,6 @@ class restore_modulecatalogue_activity_structure_step extends restore_activity_s
             $data->timemodified = time();
         }
 
-        if ($data->grade < 0) {
-            // Scale found, get mapping.
-            $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
-        }
-
         // Create the modulecatalogue instance.
         $newitemid = $DB->insert_record('modulecatalogue', $data);
         $this->apply_activity_instance($newitemid);
