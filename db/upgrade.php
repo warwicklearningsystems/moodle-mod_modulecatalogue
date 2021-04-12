@@ -76,7 +76,10 @@ function xmldb_modulecatalogue_upgrade($oldversion) {
         }
     }
     
-    if ($oldversion < 2021032201){
+    /*
+     * MOO-2193 changes to enable recycle bin functionality
+     */
+    if ($oldversion < 2021032200){
         $default = "";
         
         $table = new xmldb_table('modulecatalogue');
