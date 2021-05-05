@@ -48,23 +48,18 @@ require_once($CFG->dirroot . '/mod/modulecatalogue/classes/renderer.php');
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-/*
- * MOO 2193 Changes for recycle bin functionality
- */
 function modulecatalogue_supports($feature) {
-    switch($feature) {
-        case FEATURE_IDNUMBER:                return true;
-        case FEATURE_GROUPS:                  return false;
-        case FEATURE_GROUPINGS:               return false;
-        case FEATURE_MOD_INTRO:               return false;
-        case FEATURE_COMPLETION_TRACKS_VIEWS: return false;
-        case FEATURE_GRADE_HAS_GRADE:         return false;
-        case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_MOD_ARCHETYPE:           return MOD_ARCHETYPE_RESOURCE;
-        case FEATURE_BACKUP_MOODLE2:          return true;
-        case FEATURE_NO_VIEW_LINK:            return true;
 
-        default: return null;
+    switch($feature) {
+        case FEATURE_MOD_INTRO:               return false;
+        case FEATURE_SHOW_DESCRIPTION:        return false;
+        case FEATURE_GRADE_HAS_GRADE:         return false;
+        case FEATURE_BACKUP_MOODLE2:          return false;
+        case FEATURE_COMPLETION_TRACKS_VIEWS: return false;
+        case FEATURE_GRADE_OUTCOMES:          return false;
+        case FEATURE_NO_VIEW_LINK:            return true; // critical to stop display of link to resource
+        case FEATURE_IDNUMBER:                return false;
+        default:                              return null;
     }
 }
 
@@ -84,7 +79,6 @@ function modulecatalogue_add_instance(stdClass $modulecatalogue, mod_modulecatal
     global $DB;
 
     $modulecatalogue->timecreated = time();
-    $modulecatalogue->timemodified = time();
     $modulecatalogue->id = $DB->insert_record('modulecatalogue', $modulecatalogue);
 
     return $modulecatalogue->id;
@@ -107,10 +101,7 @@ function modulecatalogue_update_instance(stdClass $modulecatalogue, mod_moduleca
     $modulecatalogue->timemodified = time();
     $modulecatalogue->id = $modulecatalogue->instance;
     $result = $DB->update_record('modulecatalogue', $modulecatalogue);
-      
-    $completiontimeexpected = !empty($modulecatalogue->completionexpected) ? $modulecatalogue->completionexpected : null;
-    \core_completion\api::update_completion_date_event($modulecatalogue->coursemodule, 'modulecatalogue', $modulecatalogue->id, $completiontimeexpected);
-    
+
     return $result;
 }
 
@@ -288,36 +279,31 @@ function modulecatalogue_get_extra_capabilities() {
 function modulecatalogue_get_coursemodule_info($coursemodule) {
     global $DB, $COURSE, $PAGE;
     
-    require_once(dirname(__FILE__).'/db/metadata.php');
+    $metadata = get_course_metadata($COURSE->id);
     
-    $defaultcodes = get_course_metadata($COURSE->id);
+    $academic_year = "";
+    $module_Code = "";
+    
     $usedefault = 0;
+    
+    if (isset($metadata)){
+            foreach($metadata as $k => $v){
+                switch ($k){
+                    case 'Module Code':
+                        $module_Code = $v;
+                    case 'Academic Year':
+                        $academic_year = $v;
+                }
+            } 
+        }
 
     // Retrieve details on this catalogue instance including template and module code
     // MOO-1813: modified query to DB method to now use the academicyear from the table mdl_modulecatalogue.
     if ($modcat = $DB->get_record('modulecatalogue',
-      array('id'=>$coursemodule->instance), 'id, name, modulecode, academicyear, defaultcodes, template, intro, introformat, timecreated, adminsupport, adminsupportname')){
+      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear, defaultcodes, adminsupport, adminsupportname')) {
 
-        //MOO-2193 Insert recycle bin functionality
-         if (empty($modcat->name)) {
-            // modulecatalogue name missing, fix it
-            $modcat->name = "modulecatalogue{$modcat->id}";
-            $DB->set_field('modulecatalogue', 'name', $modcat->name, array('id'=>$modcat->id));
-        }
-        
         // Build information ready for display...
         $info = new cached_cm_info();
-        
-        // no filtering hre because this info is cached and filtered later
-        $info->content = format_module_intro('modulecatalogue', $modcat, $coursemodule->id, false);
-        $info->name  = $modcat->name;
-        $info->template = $modcat->template;
-        $info->modulecode = $modcat->modulecode;
-        $info->academicyear = $modcat->academicyear;
-        $info->defaultcodes = $modcat->defaultcodes;
-        $info->timecreated = $modcat->timecreated;
-        $info->adminsupport = $modcat->adminsupport;
-        $info->adminsupportname = $modcat->adminsupportname;
         
         //Moo 1888 Added new fields to be stored in database
         $adminemail = $modcat->adminsupport;
@@ -325,8 +311,8 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         
         //Moo 1826 set variables to that of the default codes.
         if ($modcat->defaultcodes == 1){
-            $academicyear = get_full_year($defaultcodes->academicYear);
-            $modulecode = $defaultcodes->moduleCode;
+            $academicyear = get_full_year($academic_year);
+            $modulecode = $module_Code;
         } else{
             $modulecode = $modcat->modulecode;
             $academicyear = $modcat->academicyear;
@@ -387,10 +373,6 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
  * this contains all the default codes
  */
 function get_course_metadata($courseid) {
-    
-    //MOO 2193 defaultcodes created as an instance of the class metadata.
-    $defaultcodes = new metadata();
-    
     $handler = \core_customfield\handler::get_handler('core_course', 'course');
     // This is equivalent to the line above.
     //$handler = \core_course\customfield\course_handler::create();
@@ -404,19 +386,8 @@ function get_course_metadata($courseid) {
         $cat = $data->get_field()->get_category()->get('name');
         $metadata[$data->get_field()->get('name')] = $data->get_value();
     }
-    //MOO 2193 if $metadata array is set, we populate the class
-    if (isset($metadata)){
-        foreach($metadata as $k => $v){
-            switch ($k){
-                case 'Module Code':
-                    $defaultcodes->moduleCode = $v;
-                case 'Academic Year':
-                    $defaultcodes->academicYear = $v;
-            }
-        }
-    }
 
-    return $defaultcodes;
+    return $metadata;
 }
 /* Moo-1826 Inserted function to retrieve full academic year from default parameters
  * $academic year is in format XX/XX needs to be in XXXX format

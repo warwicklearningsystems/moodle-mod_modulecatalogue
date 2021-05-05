@@ -17,8 +17,6 @@
         <FIELD NAME="defaultcodes" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="adminsupport" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false" COMMENT="admin support"/>
         <FIELD NAME="adminsupportname" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false" COMMENT="admin supportname"/>
-        <FIELD NAME="intro" SEQUENCE="false" NOTNULL="false" LENGTH="15" TYPE="char"/>
-        <FIELD NAME="introformat" SEQUENCE="false" NOTNULL="false" LENGTH="4" TYPE="int" DEFAULT="0"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

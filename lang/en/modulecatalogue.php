@@ -30,10 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['modulename'] = 'Module catalogue';
 $string['modulenameplural'] = 'Module catalogues';
-$string['modulename_help'] = 'The modulecatalogue module enables users to view the course syllabus and assesment schedule. Module catalogue can help students review: <br />'
-        . '* Assessment schedule <br />'
-        . '* Course syllabus <br />'
-        . '* course outline and outcome <br />';
+$string['modulename_help'] = 'Use the modulecatalogue module for... | The modulecatalogue module allows...';
 $string['modulecatalogue:addinstance'] = 'Add a new modulecatalogue';
 $string['modulecatalogue:submit'] = 'Submit modulecatalogue';
 $string['modulecatalogue:view'] = 'View modulecatalogue';
