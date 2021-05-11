@@ -58,6 +58,7 @@ function modulecatalogue_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS: return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_NO_VIEW_LINK:            return true; // critical to stop display of link to resource
+        case FEATURE_MOD_ARCHETYPE:           return MOD_ARCHETYPE_RESOURCE; //MOO-2154 Changes to make Modulecatalogue a resource
         case FEATURE_IDNUMBER:                return false;
         default:                              return null;
     }
