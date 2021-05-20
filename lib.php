@@ -37,6 +37,7 @@ defined('MOODLE_INTERNAL') || die();
 define('MODULECATALOGUE_ULTIMATE_ANSWER', 42);
 
 require_once($CFG->dirroot . '/mod/modulecatalogue/classes/renderer.php');
+require_once($CFG->dirroot . '/mod/modulecatalogue/db/defaultcodes.php');
 
 /* Moodle core API */
 
@@ -54,7 +55,7 @@ function modulecatalogue_supports($feature) {
         case FEATURE_MOD_INTRO:               return false;
         case FEATURE_SHOW_DESCRIPTION:        return false;
         case FEATURE_GRADE_HAS_GRADE:         return false;
-        case FEATURE_BACKUP_MOODLE2:          return false;
+        case FEATURE_BACKUP_MOODLE2:          return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS: return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_NO_VIEW_LINK:            return true; // critical to stop display of link to resource
@@ -80,6 +81,7 @@ function modulecatalogue_add_instance(stdClass $modulecatalogue, mod_modulecatal
     global $DB;
 
     $modulecatalogue->timecreated = time();
+    $modulecatalogue->timemodified = time();
     $modulecatalogue->id = $DB->insert_record('modulecatalogue', $modulecatalogue);
 
     return $modulecatalogue->id;
@@ -265,8 +267,6 @@ function modulecatalogue_cron () {
 function modulecatalogue_get_extra_capabilities() {
     return array();
 }
-
-
 /**
  * Given a course_module object, this function returns any
  * "extra" information that may be needed when printing
@@ -281,51 +281,43 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
     global $DB, $COURSE, $PAGE;
     
     $metadata = get_course_metadata($COURSE->id);
-    
-    $academic_year = "";
-    $module_Code = "";
-    
-    $usedefault = 0;
-    
+    $defaultCodes = new DefaultCodes(); 
     if (isset($metadata)){
-            foreach($metadata as $k => $v){
-                switch ($k){
-                    case 'Module Code':
-                        $module_Code = $v;
-                    case 'Academic Year':
-                        $academic_year = $v;
-                }
-            } 
-        }
+        $defaultCodes->moduleCode = $metadata['Module Code'];
+        $defaultCodes->academicYear = $metadata['Academic Year'];
+    }
+    $usedefault = 0;
 
     // Retrieve details on this catalogue instance including template and module code
     // MOO-1813: modified query to DB method to now use the academicyear from the table mdl_modulecatalogue.
     if ($modcat = $DB->get_record('modulecatalogue',
-      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear, defaultcodes, adminsupport, adminsupportname')) {
-
-        // Build information ready for display...
-        $info = new cached_cm_info();
-        
-        //Moo 1888 Added new fields to be stored in database
-        $adminemail = $modcat->adminsupport;
-        $adminname = $modcat->adminsupportname;
-        
+      array('id'=>$coursemodule->instance), 'id, name, template, modulecode, academicyear, defaultcodes, adminsupport, adminsupportname, intro, introformat')) {
+               
         //Moo 1826 set variables to that of the default codes.
-        if ($modcat->defaultcodes == 1){
-            $academicyear = get_full_year($academic_year);
-            $modulecode = $module_Code;
-        } else{
-            $modulecode = $modcat->modulecode;
-            $academicyear = $modcat->academicyear;
-        }
-
+        
         // Set name of module catalogue item if empty
         if (empty($modcat->name)) {
           $modcat->name = "Module catalogue {$modcat->id}";
           $DB->set_field('modulecatalogue', 'name', $modcat->name, array('id'=>$modcat->id));
         }
+        
+        $info = new cached_cm_info();
+        $info->content = format_module_intro('modulecatalogue', $modcat, $coursemodule->id, false);
+        
         $info->name = $modcat->name;
-
+        $info->template = $modcat->template;
+        $info->defaultcodes = $modcat->defaultcodes;   
+        if ($modcat->defaultcodes == 1){
+            $info->modulecode = $defaultCodes->moduleCode;
+            $info->academicyear = $modcat->academicyear;
+        } else{
+            $info->modulecode = $modcat->modulecode;
+            $info->academicyear = $modcat->academicyear;
+        }
+        $info->timecreated = $modcat->timecreated;
+        $info->adminsupport = $modcat->adminsupport;
+        $info->adminsupportname = $modcat->adminsupportname;
+        
         // TODO: if $modcat->modulecode is empty, we could infer module code from $COURSE->idnumber
         // (i.e. splitting characters before the '-', if there are five of them in
         // pattern [A-Z][A-Z][A-Z0-9][A-Z0-9][A-Z0-9]
@@ -335,17 +327,15 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         if (isset($modcat->usedefault)){
             $usedefault = $modcat->usedefault;
         }
-      
                
-        if($modulecode != '') {
+        if($info->modulecode != '') {
 
           // Get data from API and store
-          get_modulecatalogue_data($modulecode, $academicyear, $adminname, $adminemail);
+          get_modulecatalogue_data($info->modulecode, $info->academicyear, $info->adminsupportname, $info->adminsupport);
 
           // Get data from DB
-          
           if ($moddata = $DB->get_records_menu('modulecatalogue_data',
-            array('modulecode' => $modulecode, 'academicyear' => $academicyear),'', 'labelkey, labelvalue')) { //MOO-1813: Modified get_records_menu to use newly added $academicyear
+            array('modulecode' => $info->modulecode, 'academicyear' => $info->academicyear),'', 'labelkey, labelvalue')) { //MOO-1813: Modified get_records_menu to use newly added $academicyear
 
             // Build data set ready for rendering
             $t = new \mod_modulecatalogue\output\cataloguedata($moddata, $modcat->template);
@@ -354,10 +344,10 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
             $catdisplay = $PAGE->get_renderer('mod_modulecatalogue');
             $info->content = $catdisplay->render($t);
 
-          } else {
+          } else {    
             // No catalogue data to retrieve
             // MOO-1813: Modified functionality to provide more meaningful information if no records exist.
-            $info->content = get_string('nocataloguedata', 'modulecatalogue') .' Course Code: ' .$modulecode ."Academic Year: " .$academicyear;
+            $info->content = get_string('nocataloguedata', 'modulecatalogue') .' Course Code: ' .$info->modulecode ."Academic Year: " .$info->academicyear;
           }
 
         } else {
@@ -400,4 +390,21 @@ function get_full_year($academic_year){
          $academicyear = '20' .substr($academic_year, 0, stripos($academic_year, '/'));
     }
     return $academicyear;
+}
+
+/*
+ * Get Current Academic Year used to determine current academic year as default
+ */
+function modulecatalogue_current_academic_year(){
+    $currentyear = date("y");
+    $currentmonth = date("m");
+    $nextyear = date("y")+1;
+    $prevyear = date("y")-1;
+    if ($currentmonth > 8){
+        $currentyear = ("$currentyear" ."/" ."$nextyear");
+    } else{
+        $currentyear = ("$prevyear" ."/" ."$currentyear");
+    }
+    
+    return $currentyear;
 }
