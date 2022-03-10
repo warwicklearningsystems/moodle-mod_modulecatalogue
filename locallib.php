@@ -55,7 +55,7 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
     //$curldata = download_file_content($url, array('Authorization' => 'Basic ' .
     //  (string)base64_encode( $username . ":" . $password )), false, true);
 
-    $curldata = download_file_content($url, null, false, true);
+    $curldata = download_file_content($url, null, $data, true, 300, 20, true, $stream); //MOO-2373 Modified to fix issue of licensing
 
     if($curldata->status == 200) {
       $cataloguedata = json_decode($curldata->results);
@@ -68,18 +68,6 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
        * MOO-1983 Added code to handle alertmessage.
        * need to extract alertmessage from settings.php then we need to extract any URL link in it.
        */
-      $alertmessage = get_config('mod_modulecatalogue', 'alertinformation');
-      $applyAlert = get_config('mod_modulecatalogue', 'applyAlert');
-      $all_urls = "";   //MOO-1983 initialize URL link extracted field.
-      
-      // MOO-1983 extract URL link from alertmessage
-      if ($alertmessage != ""){
-          $all_urls = rtrim(url_extract($alertmessage),'.');
-      }
-      
-      write_to_database('alertmessage', implode(expand_array(rtrim($alertmessage,$all_urls)),'<br />') , $modulecode, $academicyear);
-      write_to_database('urllink', $all_urls, $modulecode, $academicyear);
-      write_to_database('alert', $applyAlert, $modulecode, $academicyear);
 
       foreach($cataloguedata as $k => $v) {
         // MOO-1808 Insert new data from JSON into database: First deal with the Stdclass object as that throws exception errors
@@ -136,30 +124,41 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                 case ($k == 'assessmentGroups'):
                     $sectionName = $k;
                     $array = array();$subArray = array();
-                    if (is_array($v)){
+                                        if (is_array($v)){
                         foreach($cataloguedata->$sectionName as $k => $v){
                             if ($v instanceof stdClass){
-                                foreach($cataloguedata->assessmentGroups[0] as $k => $v){
+                                if ($k == 0){
+                                    $sectionName = "assesment";
+                                } else{
+                                    $sectionName = "resit";
+                                }
+                                foreach($cataloguedata->assessmentGroups[$k] as $k => $v){
                                     if(is_array($v)){
                                         if ($k == 'components'){
-                                            $array = $v;
-                                            for ($x = 0; $x <=  count($array)-1; $x++){
-                                                $subArray = get_object_vars($array[$x]);
-                                                foreach($subArray as $k => $v){
-                                                    $k = "assesmentGrp" .$k ."$x";
-                                                    write_to_database($k, $v, $modulecode, $academicyear);
+                                            for ($x = 0; $x <=  count($v)-1; $x++){
+                                                $subArray = $v[$x];
+                                                foreach($subArray as $key => $value){
+                                                    if (($key == 'assessmentPaperRequirements') && (is_array($value))){
+                                                        foreach($value as $val){
+                                                            $k = $sectionName .'GrpComments'."$x";
+                                                            write_to_database($k, $val, $modulecode, $academicyear);
+                                                        }
+                                                    } else{
+                                                        $k = $sectionName .'Grp' .$key ."$x";
+                                                        write_to_database($k, $value, $modulecode, $academicyear);
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                    else{
+                                    } else{
+                                        $k = $sectionName .$k ;
                                         write_to_database($k, $v, $modulecode, $academicyear);
                                     }
                                 }
-                            }
+                            }                            
                         }
                     }
-            }
+                }
           }
           // MOO-1808 Insert new data from JSON into database: logic to insert all root data in json file.
           else{
@@ -273,4 +272,37 @@ function url_extract($value){
     preg_match_all('!https?://\S+!', $value, $matches);
     $all_urls = $matches[0];
     return implode($all_urls);
+}
+
+/*
+ * MOO-2373 extract_course_weightings() to calculate the weights not added in JSON file
+ */
+function extract_course_weightings($v, $k, $totalVal){
+        
+    if (stripos($v, 'session')!= 0){
+        $numSess = intval(substr($v,0,stripos($v, 'session')-1));
+            if (stripos($v, 'hour')<>0){
+                if (stripos($v, 'minute')>0){
+                    $valSessHrs = intval(trim(substr($v, stripos($v, 'hour')-3,2),' '));
+                    $valSessMins = intval(trim(substr($v, stripos($v, 'minute')-3,2),' '));
+                    $valSess = ((($valSessHrs * 60) + $valSessMins)/60);
+                    $v = $v .' (' .(($numSess * $valSess)/ $totalVal)*100 .'%)';
+                } else{
+                    $valSess = intval(trim(substr($v, stripos($v, 'hour')-3,2),' '));
+                    $v = $v .' (' .round((($numSess * $valSess)/ $totalVal)*100) .'%)';
+                }               
+            } else{            
+                $v = $v .' (' .round((($numSess * $valSess)/ $totalVal)*100) .'%)';
+            }
+          
+            } else{
+                if (stripos($v, 'minute')>0){
+                    $valSess = intval(trim(substr($v, stripos($v, 'hour')-3,2),' '));
+                } else{
+                    $valSess = intval(trim(substr($v, 0, stripos($v, 'hour')),' '));
+                }
+                $v = $v .' (' .round(($valSess / $totalVal)*100) .'%)';               
+            }
+
+    return $v;
 }

@@ -16,133 +16,56 @@ and open the template in the editor.
     border-left: 1px solid rgba(0,0,0,.125);
     border-right: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem!important;
-    background:white;
     margin-bottom:6px;
-}
-
-.rounded{
-    background-color:#e2f3fb;
-    background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-tophead-bg.png');
-    background-repeat: no-repeat, no-repeat;
-    background-position:right top;
-    min-height: 320px;
-    overflow:auto;
-}
-
-.standard_rounded{
-    background-color:white;
-    min-height: 320px;
-    overflow:auto;
-}
-
-.tab-container-tabs{
+    min-width: 70vw;
     background-color: transparent;
-    min-height: 320px;
 }
 
 .tab_content_background{
-    background-color: darkblue;
-    min-height: 39px;
+    background-color: navy;
+    min-height: 25px;
     background-repeat: no-repeat;
     background-position:right top;
     background-size: cover;
     background-image: url("pix/banner.jpg");
-    padding-top: 10px;
+	padding-top: 10px;
 }
 
-.reset_width{
-    width: 95%;
+.background-set{
+    background-color: #e2f3fb;
 }
 
-.container{
-    padding-top: 10px;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    
-}
 .war-bot{
     background: url('https://warwick.ac.uk/study/cll/currentstudents/bot-w-white-bluerun-cll.png') no-repeat right bottom; 
     min-height: 50px;
 }
 
-.top-headbox{
+.rounded{
+    background-color:#e2f3fb;
+    background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-bot-bg.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position:right bottom, right top;
+    min-height: 320px;
+    overflow:auto;
+}
+
+.standard_rounded{
     background-color:transparent;
+    min-height: 220px;
+    overflow:auto;
+    min-width: 65vw;
 }
 
-.nav_tabs{
-    color: white;
-}
-
-.nav-link active show{
-    color:#fff;
-    margin-top:7px;
-    height:40px;
-    margin-left:3px;
-    font-size: .9375rem;
-    font-weight: 400;
-}
-
-.white_font {
-    color: white;
-}
-
-.nav-item_corners{
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-}
-
-.activated{
-    background-color: blue;
-}
-
-.nav-link{
-    display: block;
-    padding: .5rem 2rem;
-}
-
-.p-3 p-md-4{
-    background-color: transparent; 
-    padding-top: 2.0rem!important; 
-    padding-bottom: 1.2rem !important;
-    min-height:240px;
-}
-
-.contact{
-    width: auto;   
-    background-color: rgba(255,255,255,.8); 
-    padding: 3px; margin:3px; 
-    min-height:240px;
-    border-radius: 10px;
-    box-shadow: 7px 7px #d2edf9;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #86A5EC;
-}
-
-.contact-icon{
-    padding:10px 10px 0px 10px; 
-    letter-spacing:-1px;
-}
-
-.contact-info{
-    padding:0px 10px;
-    font-size: 1.1em;
-}
-
-.tabcolor{
-    width: auto;
-    padding: 15px;
-    margin: 15px;
-    min-height: 300px;
+.tab-container-tabs{
+    background-color: transparent;
+    min-height: 220px;
 }
 
 .paragraph-list{
     text-align: justify;
     font-size: 0.9em;
     padding: 0.02em;
-    line-height: 2 ;
+    line-height: 1.5 ;
     margin-top: 0 ;
     margin-bottom: 0 ;
 }
@@ -178,12 +101,12 @@ and open the template in the editor.
     color: #0A246A;
 }
 
-.normal-paragraph{
+.justified{
     text-align: justify;
 }
 
 .indented{
-    padding-left: 25px;
+    padding-left: 1em;
 }
 
 .alertinformation:empty {
@@ -207,54 +130,6 @@ and open the template in the editor.
 
 .font_small{
     font-size: 0.9em;
-}
-
-@media 
-only screen and (max-width: 500px),
-(min-device-width: 0px) and (max-device-width: 475px)  {
- 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-        
-        th {
-            padding-top: 3px;
-            padding-bottom: 3px;
-            text-align: justify;
-            background-color: #86A5EC;
-            color: white;
-            empty-cells:initial;
-        }
-	
-	tr { border: 1px solid #ddd; padding: 3px; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #ddd; 
-		position: relative;
-		padding-left: 50%;
-                font-size-adjust: 0.58;
-	}
-	
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}
 }
 
 /* MOO 1935 implementation see more*/
@@ -295,7 +170,7 @@ only screen and (max-width: 500px),
   content: "Less";
 }
 
-article {
+.article {
   border-bottom: 1px solid grey;
 }
 
@@ -326,43 +201,64 @@ article {
 }
 
 /* MOO 2019 made changes to table 2 columns on first tab*/
-.column {
-  float: left;
-  padding-right: 2px;
-  text-align: right;
-  color: grey;
-  padding: 5px;
+
+.head-img-inner{
+    max-width: 20%;
+    float: right;
+    margin-right: .3rem;
+    margin-left: .3rem;
 }
 
+.head-img-outer{
+    max-width: 50%;
+    float: left;
+    margin-right: .5rem;
+    margin-left: .5rem;
+}
+
+.imageposition{
+    padding: .5rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    -webkit-box-shadow: 0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%) inset;
+}
 .alertlink{
     color: white;
     text-decoration: underline;
 }
 
-.rightcolumn {
-  float: left;
-  padding-left: 20px;
-  padding: 5px;
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    word-wrap: break-word;
+}
+.leftcol {
+    color: navy;
+    font-weight: bold;
+    width: 40%
 }
 
-@media screen and (min-device-width: 0px) and (max-device-width: 470px) {
-    .column {
-        float: left;
-        padding-right: 2px;
-        color: grey;
-        padding: 5px;
-        font-size: 0.9em;
-    }
-    
-    .rightcolumn {
-        float: left;
-        padding-left: 2px;
-        padding: 5px;
-        font-size: 0.9em;
-    }
-    
+.font_large{
+    font-size: 15px;
 }
 
+.textcolumn{
+    padding-left: 30px; 
+    padding-right: 30px
+}
+
+.rightcol{
+    font-style: italic;
+    width: 60%
+}
+
+/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
@@ -383,14 +279,28 @@ article {
     border-collapse: collapse;
     width: 100%;
     font-size: small;
-    border-spacing: 0;
+    padding: 8px;
     empty-cells:initial;
     border: 1px solid #ddd;
     background-color: #def2f8;
 }
 
-.fancy-table td, fancy-table th {
+@media screen and (max-width:500px) {
+  .fancy-table { font-size: x-small; }
+  .indented{padding-left: 2px;}
+  .column {
+        width: 100%;
+        word-wrap: break-word;
+    }
+}
+
+.fancy-table td {
     border: 1px solid #ddd;
+    padding: inherit;
+}
+
+.fancy-table th{
+    border: 1px solid white;
     padding: inherit;
 }
 
@@ -406,7 +316,7 @@ article {
     padding-top: 3px;
     padding-bottom: 3px;
     text-align: left;
-    background-color: #00ccff;
+    background-color:#e2f3fb;
     color: darkblue;
 }
 
@@ -418,88 +328,63 @@ article {
   background-color: white;
 }
 
-.fancy-table tr:hover {background-color: #def2f8;}
+.fancy-table tr:hover {
+    background-color: #def2f8;
+}
 
 /* MOO 2162 introduce code for collapsible tabs */
-.wrap-collabsible {
-    margin-bottom: 1.0rem 0;
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }
 
-.lbl-toggle {
-    display: block;
-    
-    font-size: 1.3rem;
-    text-align: left;
-    
-    padding: 1.5px;
-    text-indent: 10px;
-    color: #000;
-    background: transparent;
-    
-    cursor: pointer;
-    border-width: 1px;
-    border-color: #3195ef;
-    border-style: solid;
-    
-    border-radius: 7px;
-    transition: all 0.25s ease-out;
+.card-header .fa {
+  transition: .3s transform ease-in-out;
+}
+.card-header .collapsed .fa {
+  transform: rotate(-90deg);
 }
 
-.toggle{
-    display: none;
+.card{
+    margin-top: 2px;
 }
 
-.lbl-toggle:hover {
-    color: #000;
+.mod-indent mod-indent{
+    width: 0px;
 }
 
-.lbl-toggle::before {
-    content: ' ';
-    display: inline-block;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid currentColor;
-    vertical-align: middle;
-    margin-right: .7rem;
-    transform: translateY(-2px);
-    
-    transition: transform .2s ease-out;
+/*MOO-2373 fixed more functionality to fix issue of multiple occurences*/
+#summary {
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-.toggle:checked + .lbl-toggle::before {
-    transform: rotate(90deg) translateX(-3px);
-}
-
-.normal-content{
-    padding-top: 1.2em;
-    padding-left: 2em;
-    padding-right: 1.2em;
-    padding-bottom: 1.2em;
-}
-
-.collapsible-content {
-    max-height: 0px;
+#summary p.collapse:not(.show) {
+    height: 42px !important;
     overflow: hidden;
-    transition: max-height .25s ease-in-out;
+  
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
 }
 
-.toggle:checked + .lbl-toggle + .collapsible-content {
-    max-height: 150vh;
+#summary p.collapsing {
+    min-height: 42px !important;
 }
 
-.toggle:checked + .lbl-toggle {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+#summary a.collapsed:after  {
+    content: '+ Read More';
+    background-color: navy;
 }
 
-.collapsible-content .content-inner {
-    background: transparent;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    padding: .5rem 0.7rem;
-    margin-bottom: 5px;
-}
-
-.content-inner{
-    border: none;
+#summary a:not(.collapsed):after {
+    content: '- Read Less';
+    background-color: navy;
 }
