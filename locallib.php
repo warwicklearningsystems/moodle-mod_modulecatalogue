@@ -276,6 +276,7 @@ function url_extract($value){
 
 /*
  * MOO-2373 extract_course_weightings() to calculate the weights not added in JSON file
+ * takes the parameter name, value and total value to express as percentage
  */
 function extract_course_weightings($v, $k, $totalVal){
         

@@ -108,6 +108,7 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addElement('select', 'academicyear', get_string('academicyear', 'modulecatalogue'), $ACADEMICYEAROPTIONS);      
         $mform->addHelpButton('academicyear', 'academicyear', 'modulecatalogue');
         
+        //Moo 2373 Modified to use default codes class 
 	if (((is_null($defaultCodes->moduleCode)) || (is_null($defaultCodes->academicYear))) || (!(isset($metadata)))){        
             $mform->setDefault('autoupdate',1);
             $mform->setDefault('defaultcodes', 0);

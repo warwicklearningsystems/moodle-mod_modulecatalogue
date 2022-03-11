@@ -307,6 +307,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         $adminname = $modcat->adminsupportname;
         
         //Moo 1826 set variables to that of the default codes.
+        //moo 2373 Modified code to use defaultcodes class structure
         if ($modcat->defaultcodes == 1){
             $academicyear = get_full_year($defaultCodes->academicYear);
             $modulecode = $defaultCodes->moduleCode;
