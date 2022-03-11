@@ -290,19 +290,19 @@ function extract_course_weightings($v, $k, $totalVal){
                     $v = $v .' (' .(($numSess * $valSess)/ $totalVal)*100 .'%)';
                 } else{
                     $valSess = intval(trim(substr($v, stripos($v, 'hour')-3,2),' '));
-                    $v = $v .' (' .round((($numSess * $valSess)/ $totalVal)*100) .'%)';
+                    $v = $v .' (' .round((($numSess * $valSess)/ $totalVal)*100,1) .'%)';  //round(ceil($number*100)/100,2);                   
                 }               
             } else{            
-                $v = $v .' (' .round((($numSess * $valSess)/ $totalVal)*100) .'%)';
+                $v = $v .' (' .round((($numSess * $valSess)/ $totalVal)*100,1) .'%)';
             }
           
             } else{
                 if (stripos($v, 'minute')>0){
                     $valSess = intval(trim(substr($v, stripos($v, 'hour')-3,2),' '));
                 } else{
-                    $valSess = intval(trim(substr($v, 0, stripos($v, 'hour')),' '));
+                    $valSess = intval(trim(substr($v, 0, stripos($v, 'hour')),' '));                    
                 }
-                $v = $v .' (' .round(($valSess / $totalVal)*100) .'%)';               
+                $v = $v .' (' .(($valSess / $totalVal)*100) .'%)';               
             }
 
     return $v;
