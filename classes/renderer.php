@@ -55,8 +55,7 @@ class cataloguedata implements \templatable, \renderable {
     foreach($validproperties as $p) {
       $this->$p = '';
     }
-     
-    
+  
   //  $learningOutcome = list();
     $results = array();
     $x = 0;
@@ -67,6 +66,7 @@ class cataloguedata implements \templatable, \renderable {
         $this->$k = $v;
       }
     }
+    
        
     foreach($cataloguedata as $k => $v) {
         if(substr($k, 1, 0) == 'assesmentGrpname'){
@@ -97,8 +97,8 @@ class cataloguedata implements \templatable, \renderable {
         'code' => $this->code,
         'name' => $this->title,
         'academicyear' => $this->academicYear,  /*MOO-1983 renamed to academicYear for consistency*/
-        'creditValue' => $this->creditValue,
-        'learningOutcomes' => explode(("<br />"),nl2br($this->learningOutcomes)),
+        'creditValue' => $this->creditValue,           
+        'learningOutcomes' => expand_array($this->learningOutcomes),
         'leadername' => $this->leadername,
         'leaderemail' => $this->leaderemail,
         'locationname' => $this->locationname,
