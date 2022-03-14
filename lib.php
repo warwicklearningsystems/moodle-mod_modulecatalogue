@@ -37,6 +37,7 @@ defined('MOODLE_INTERNAL') || die();
 define('MODULECATALOGUE_ULTIMATE_ANSWER', 42);
 
 require_once($CFG->dirroot . '/mod/modulecatalogue/classes/renderer.php');
+require_once($CFG->dirroot . '/mod/modulecatalogue/db/defaultcodes.php');
 
 /* Moodle core API */
 
@@ -281,22 +282,17 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
     global $DB, $COURSE, $PAGE;
     
     $metadata = get_course_metadata($COURSE->id);
-    
-    $academic_year = "";
-    $module_Code = "";
-    
     $usedefault = 0;
     
+    /*
+     * MOO-2373 use external files.
+     */
+    $defaultCodes =  new DefaultCodes();
+    
     if (isset($metadata)){
-            foreach($metadata as $k => $v){
-                switch ($k){
-                    case 'Module Code':
-                        $module_Code = $v;
-                    case 'Academic Year':
-                        $academic_year = $v;
-                }
-            } 
-        }
+        $defaultCodes->moduleCode = $metadata['Module Code'];
+        $defaultCodes->academicYear = $metadata['Academic Year'];
+    }
 
     // Retrieve details on this catalogue instance including template and module code
     // MOO-1813: modified query to DB method to now use the academicyear from the table mdl_modulecatalogue.
@@ -311,9 +307,10 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
         $adminname = $modcat->adminsupportname;
         
         //Moo 1826 set variables to that of the default codes.
+        //moo 2373 Modified code to use defaultcodes class structure
         if ($modcat->defaultcodes == 1){
-            $academicyear = get_full_year($academic_year);
-            $modulecode = $module_Code;
+            $academicyear = get_full_year($defaultCodes->academicYear);
+            $modulecode = $defaultCodes->moduleCode;
         } else{
             $modulecode = $modcat->modulecode;
             $academicyear = $modcat->academicyear;

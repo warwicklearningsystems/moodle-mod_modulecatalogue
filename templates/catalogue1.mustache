@@ -1,141 +1,315 @@
 <head>
     <link rel="stylesheet" type="text/css" />
+    
 </head>
 
 <div id="allwmshead" class="wms-head-cll">
     <div id="wmshead-content" class="p-3 p-md-4 view">
         <div id="head-temp-container" class="standard_rounded">
-            <div class="alertinformation">{{#alert}}
-                {{#alertmessage}}{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a>
-                {{/alert}}</div>
+            {{#alert}}<div class="alertinformation">
+                {{#alertmessage}}<i class="fa fa-info-circle"> &nbsp </i>{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a> 
+            </div>{{/alert}}
 
-            <h3 class="display-5">{{ code }}: {{ name }}</h3>
-            <div class="wrap-collabsible">
-                <input id="collapsible1" class="toggle" type="checkbox"> 
-                <label for="collapsible1" class="lbl-toggle" tabindex="0">Principal Aims </label>
-                <div class="collapsible-content">
-                     <div class="content-inner">
-                        <div class="indented">
-                            {{#principal_aims}} <p class="normal-paragraph italized"> {{.}} </p> {{/principal_aims}}
-                        </div>
-                     </div>
-                </div>
-            </div>
-            <div class="wrap-collabsible"> 
-                <input id="collapsible2" class="toggle" type="checkbox"> 
-                <label for="collapsible2" class="lbl-toggle" tabindex="1">Principal Learning Outcomes </label>
-                <div class="collapsible-content">   
-                    <div class="content-inner">
-                        <div class="indented">
-                            <p> By the end of the module, students should be able to:</p>
+            <h4 class="display-5">{{ code }}: {{ name }}</h4>
+            <h5 class="display-5"> Number of Credits: {{ creditValue }}</h5>
+            <h5 class="display-5"> Academic Year:  {{ academicyear }}</h5>
+            <hr>
+            <div class="accordion-toggle" id="accordionEx" role="tablist" aria-multiselectable="true">
+                <!-- Accordion card -->
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading1">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id1}}" aria-expanded="false" aria-controls="{{id1}}">
+                            <h6 class="mb-0">
+                                Module Aims <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+                    <div id="{{id1}}" class="collapse" role="tabpanel" aria-labelledby="heading1" data-parent="#accordionEx">
+                        <div class="card-body">
+                            <p class="display-5 bolded">Principle Aims</p>
                             <div class="indented">
-                                {{#learningOutcomes}} <p class="paragraph-list"> {{.}} </p> {{/learningOutcomes}}
+                                {{#principal_aims}} <p class="justified"> {{.}} </p> {{/principal_aims}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="wrap-collabsible"> 
-                <input id="collapsible3" class="toggle" type="checkbox"> 
-                <label for="collapsible3" class="lbl-toggle" tabindex="2">Indicative Reading List </label>
-                <div class="collapsible-content">   
-                    <div class="content-inner">
-                        <div class="row indented">
-                            <div class="col-sm-4 font_small italized">Please see Talis Aspire link for most up to date list.</div>
-                            <div class="col-sm-3 bolded_italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
-                            <hr>
+
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading2">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id2}}" aria-expanded="false" aria-controls="{{id2}}">
+                            <h6 class="mb-0">
+                                Principal Learning Outcomes <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+                    <div id="{{id2}}" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx">
+                        <div class="card-body">
+                            <p class="display-5 bolded">Principal Learning Outcomes</p>
+                            <p> By the end of the module, students should be able to:</p>
+                            <div class="indented">
+                                {{#learningOutcomes}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/learningOutcomes}}
+                            </div>
                         </div>
-                        <div class="indented">
-                            {{#indicativeReadingList}} <p class="paragraph-list"> {{.}} </p> {{/indicativeReadingList}}                                  
-                        </div>            
                     </div>
                 </div>
-            </div>
-            <div class="wrap-collabsible">
-                <input id="collapsible4" class="toggle" type="checkbox">
-                <label for="collapsible4" class="lbl-toggle" tabindex="3">Outline Syllabus</label>
-                <div class="collapsible-content">
-                    <article>
-                        <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabusShort}}</div>
-                        <input id="read-more-toggle-1" class="read-more-toggle" type="checkbox">
-                        <div class="read-more-content">
-                            <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</div>
+                
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading3">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id3}}" aria-expanded="false" aria-controls="{{id3}}">
+                            <h6 class="mb-0">
+                                Indicative Reading List <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+
+                    <div id="{{id3}}" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx">
+                        <div class="card-body">
+                            <p class="display-5 bolded">Indicative Reading List</p>
+                            <div class="indented">
+                                <article>
+                                    <div class="indented">{{#indicativeReadingListSummary}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingListSummary}}</div>
+                                        <input id="{{id4}}" class="read-more-toggle" type="checkbox">
+                                        <div class="read-more-content">
+                                        <div class="indented">{{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</div>
+                                    </div>
+                                </article>
+                                <label class="read-more-toggle-label" for="{{id4}}">Read </label>
+                                <div class="italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
+                            </div>
                         </div>
-                        <label class="read-more-toggle-label" for="read-more-toggle-1">Read </label>
-                    </article>
-                </div>
-            </div>
-            <div class="wrap-collabsible">
-                <input id="collapsible5" class="toggle" type="checkbox">
-                <label for="collapsible5" class="lbl-toggle" tabindex="4">Assessment Schedule</label>
-                <div class="collapsible-content">
-                    <div class="content-inner">
-                         <div class="indented">
-                            <section>
-                                <table class="fancy-table">
-                                    <tr>
-                                        <th> Assessment Name </th>
-                                        <th> Assessment Type </th>
-                                        <th> Duration </th>
-                                        <th> Weight </th>
-                                        <th> Description </th>
-                                    </tr>
-                                    <tr>{{#assesmentGrpname0}}
-                                        <td>{{ assesmentGrptype0 }}</<td>
-                                        <td>{{ assesmentGrpname0 }}</<td>
-                                        <td>{{ assesmentGrplength0 }}</<td>
-                                        <td>{{ assesmentGrpweighting0 }}</<td>
-                                        <td>{{ assesmentGrpdescription0 }}</<td>
-                                    {{/assesmentGrpname0}}</tr>
-                                    <tr>{{#assesmentGrpname1}}
-                                        <td>{{ assesmentGrptype1 }}</<td>
-                                        <td>{{ assesmentGrpname1 }}</<td>
-                                        <td>{{ assesmentGrplength1 }}</<td>
-                                        <td>{{ assesmentGrpweighting1 }}</<td>
-                                        <td>{{ assesmentGrpdescription1 }}</<td>
-                                    {{/assesmentGrpname1}}</tr>
-                                    <tr>{{#assesmentGrpname2}}
-                                        <td>{{ assesmentGrptype2 }}</<td>
-                                        <td>{{ assesmentGrpname2 }}</<td>
-                                        <td>{{ assesmentGrplength2 }}</<td>
-                                        <td>{{ assesmentGrpweighting2 }}</<td>
-                                        <td>{{ assesmentGrpdescription2 }}</<td>
-                                    {{/assesmentGrpname2}}</tr>
-                                    <tr>{{#assesmentGrpname3}}
-                                        <td>{{ assesmentGrptype3 }}</<td>
-                                        <td>{{ assesmentGrpname3 }}</<td>
-                                        <td>{{ assesmentGrplength3 }}</<td>
-                                        <td>{{ assesmentGrpweighting3 }}</<td>
-                                        <td>{{ assesmentGrpdescription3 }}</<td>
-                                    {{/assesmentGrpname3}}</tr>
-                                    <tr>{{#assesmentGrpname4}}
-                                        <td>{{ assesmentGrptype4 }}</<td>
-                                        <td>{{ assesmentGrpname4 }}</<td>
-                                        <td>{{ assesmentGrplength4 }}</<td>
-                                        <td>{{ assesmentGrpweighting4 }}</<td>
-                                        <td>{{ assesmentGrpdescription4 }}</<td>
-                                    {{/assesmentGrpname4}}</tr>
-                                </table>
-                                <div class="row">
-                                    <div class="col-sm-3 bolded_italized font_small">Total Exam Weight:</div>
-                                    <div class="col-sm-2 italized font_small">{{totalExamWeighting}} %</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3 bolded_italized font_small">Total Course Weight:</div>
-                                    <div class="col-sm-2 italized font_small ">{{totalCourseworkWeighting}} %</div>
-                                </div>
-                            </section>
-                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="wrap-collabsible"> 
-                <input id="collapsible6" class="toggle" type="checkbox">
-                <label for="collapsible6" class="lbl-toggle" tabindex="5">Subject Specific Skills</label>
-                <div class="collapsible-content">
-                    <div class="content-inner">
-                        <div class="indented">
-                            {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
+                
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading4">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id5}}" aria-expanded="false" aria-controls="{{id5}}">
+                            <h6 class="mb-0">
+                                Outline Syllabus <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+                    <div id="{{id5}}" class="collapse" role="tabpanel" aria-labelledby="heading4" data-parent="#accordionEx">
+                        <div class="card-body">
+                            <p class="display-5 bolded">Outline Syllabus</p>
+                            <div class="indented">
+                                <article>
+                                    <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabusShort}}</div>
+                                        <input id="{{id6}}" class="read-more-toggle" type="checkbox">
+                                        <div class="read-more-content">
+                                        <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabus}}</div>
+                                    </div>
+                                </article>
+                                <label class="read-more-toggle-label" for="{{id6}}">Read </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="heading5">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id7}}" aria-expanded="false" aria-controls="{{id7}}">
+                            <h6 class="mb-0">
+                                Assessment Schedule <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+
+                    <!-- Card body -->
+                    <div id="{{id7}}" class="collapse" role="tabpanel" aria-labelledby="heading5" data-parent="#accordionEx">
+                        <div class="card-body">
+                            <p class="display-5 bolded">Assessment Schedule</p>
+                            <div class="indented">
+                                <section>
+                                    <table class="fancy-table">
+                                        <tr>
+                                            <th> Assessment Name </th>
+                                            <th> Assessment Type </th>
+                                            <th> Duration </th>
+                                            <th> Weight </th>
+                                            <th> Description </th>
+                                        </tr>
+                                        <tr>{{#assesmentGrpname0}}
+                                            <td> {{ assesmentGrptype0 }} </<td>
+                                            <td> {{ assesmentGrpname0 }} </<td>
+                                            <td> {{ assesmentGrplength0 }} </<td>
+                                            <td> {{ assesmentGrpweighting0 }} </<td>
+                                            <td> {{ assesmentGrpdescription0 }} </td>
+                                        {{/assesmentGrpname0}}</tr>
+                                        <tr>{{#assesmentGrpname1}}
+                                            <td> {{assesmentGrptype1}} </td>
+                                            <td> {{ assesmentGrpname1 }} </td>
+                                            <td> {{ assesmentGrplength1 }} </td>
+                                            <td> {{ assesmentGrpweighting1 }} </td>
+                                            <td> {{ assesmentGrpdescription1 }} </td>
+                                        {{/assesmentGrpname1}}</tr>
+                                        <tr>{{#assesmentGrpname2}}
+                                            <td> {{assesmentGrptype2}} </td>
+                                            <td> {{ assesmentGrpname2 }} </td>
+                                            <td> {{ assesmentGrplength2 }} </td>
+                                            <td> {{ assesmentGrpweighting2 }} </td>
+                                            <td> {{ assesmentGrpdescription2 }}  </td>
+                                        {{/assesmentGrpname2}}</tr>
+                                        <tr>{{#assesmentGrpname3}}
+                                            <td> {{assesmentGrptype3}} </td>
+                                            <td> {{ assesmentGrpname3 }} </td>
+                                            <td> {{ assesmentGrplength3 }} </td>
+                                            <td> {{ assesmentGrpweighting3 }} </td>
+                                            <td> {{ assesmentGrpdescription3 }} </td>
+                                        {{/assesmentGrpname3}}</tr>
+                                        <tr>{{#assesmentGrpname4}}
+                                            <td> {{assesmentGrptype4}} </td>
+                                            <td> {{ assesmentGrpname4 }} </td>
+                                            <td> {{ assesmentGrplength4 }} </td>
+                                            <td> {{ assesmentGrpweighting4 }} </td>
+                                            <td> {{ assesmentGrpdescription4 }} </td>
+                                        {{/assesmentGrpname4}}</tr>
+                                        <tr>{{#assesmentGrpname5}}
+                                            <td>{{ assesmentGrptype5 }}</td>
+                                            <td>{{ assesmentGrpname5  }}</td>
+                                            <td>{{ assesmentGrplength5 }}</td>
+                                            <td>{{ assesmentGrpweighting5 }}</td>
+                                            <td>{{ assesmentGrpdescription5 }}  </td></td>
+                                        {{/assesmentGrpname5}}</tr>
+                                        <tr>{{#assesmentGrpname6}}
+                                            <td>{{ assesmentGrptype6 }}</td>
+                                            <td>{{ assesmentGrpname6  }}</td>
+                                            <td>{{ assesmentGrplength6 }}</td>
+                                            <td>{{ assesmentGrpweighting6 }}</td>
+                                            <td>{{ assesmentGrpdescription6 }} </td>
+                                        {{/assesmentGrpname6}}</tr>
+                                        <tr>{{#assesmentGrpname7}}
+                                            <td>{{ assesmentGrptype7 }}</td>
+                                            <td>{{ assesmentGrpname7  }}</td>
+                                            <td>{{ assesmentGrplength7 }}</td>
+                                            <td>{{ assesmentGrpweighting7 }}</td>
+                                            <td>{{ assesmentGrpdescription7 }}  </td>
+                                        {{/assesmentGrpname7}}</tr>
+                                        <tr>{{#assesmentGrpname8}}
+                                            <td>{{ assesmentGrptype8 }}</td>
+                                            <td>{{ assesmentGrpname8  }}</td>
+                                            <td>{{ assesmentGrplength8 }}</td>
+                                            <td>{{ assesmentGrpweighting8 }}</td>
+                                            <td>{{ assesmentGrpdescription8 }}</td>
+                                        {{/assesmentGrpname8}}</tr>
+                                        <tr>{{#assesmentGrpname9}}
+                                            <td>{{ assesmentGrptype9 }}</td>
+                                            <td>{{ assesmentGrpname9  }}</td>
+                                            <td>{{ assesmentGrplength9 }}</td>
+                                            <td>{{ assesmentGrpweighting9 }}</td>
+                                            <td>{{ assesmentGrpdescription9 }}</td>
+                                        {{/assesmentGrpname9}}</tr>
+                                        <tr>{{#assesmentGrpname10}}
+                                            <td>{{ assesmentGrptype10 }}</td>
+                                            <td>{{ assesmentGrpname10  }}</td>
+                                            <td>{{ assesmentGrplength10 }}</td>
+                                            <td>{{ assesmentGrpweighting10 }}</td>
+                                            <td>{{ assesmentGrpdescription10 }} </td>
+                                        {{/assesmentGrpname10}}</tr>
+                                        <tr>{{#assesmentGrpname11}}
+                                            <td>{{ assesmentGrptype11 }}</td>
+                                            <td>{{ assesmentGrpname11  }}</td>
+                                            <td>{{ assesmentGrplength11 }}</td>
+                                            <td>{{ assesmentGrpweighting11 }}</td>
+                                            <td>{{ assesmentGrpdescription11 }}</td>
+                                        {{/assesmentGrpname11}}</tr>
+                                        <tr>{{#assesmentGrpname12}}
+                                            <td>{{ assesmentGrptype12 }}</td>
+                                            <td>{{ assesmentGrpname12  }}</td>
+                                            <td>{{ assesmentGrplength12 }}</td>
+                                            <td>{{ assesmentGrpweighting12 }}</td>
+                                            <td>{{ assesmentGrpdescription12 }}</td>
+                                        {{/assesmentGrpname12}}</tr>
+                                        <tr>{{#assesmentGrpname13}}
+                                            <td>{{ assesmentGrptype13 }}</td>
+                                            <td>{{ assesmentGrpname13  }}</td>
+                                            <td>{{ assesmentGrplength13 }}</td>
+                                            <td>{{ assesmentGrpweighting13 }}</td>
+                                            <td>{{ assesmentGrpdescription13 }}</td>
+                                        {{/assesmentGrpname13}}</tr>
+                                    </table>
+                                    <p class="display-5 bolded">Assessment Resit Schedule</p>
+                                    <table class="fancy-table">
+                                        <tr>
+                                            <th> Assessment Name </th>
+                                            <th> Assessment Type </th>
+                                            <th> Duration </th>
+                                            <th> Weight </th>
+                                            <th> Description </th>
+                                        </tr>
+                                        <tr>{{#resitGrpname0}}
+                                            <td> {{ resitGrptype0 }} </td>
+                                            <td> {{ resitGrpname0 }} </td>
+                                            <td> {{ resitGrplength0 }} </td>
+                                            <td> {{ resitGrpweighting0 }} </<td>
+                                            <td> {{ resitGrpdescription0 }} {{#resitGrpComments0}} - {{resitGrpComments0}} {{/resitGrpComments0}} </td>
+                                            {{/resitGrpname0}}</tr>
+                                        <tr>{{#resitGrpname1}}
+                                            <td> {{resitGrptype1}} </td>
+                                            <td> {{ resitGrpname1 }} </td>
+                                            <td> {{ resitGrpname1 }} </td>
+                                            <td> {{ resitGrpname1 }} </td>
+                                            <td> {{ resitGrpdescription1 }} {{#resitGrpComments1}} - {{resitGrpComments1}} {{/resitGrpComments1}} </td>
+                                        {{/resitGrpname1}}</tr>
+                                        <tr>{{#resitGrpname2}}
+                                            <td> {{ resitGrptype2 }} </td>
+                                            <td> {{ resitGrpname2 }} </td>
+                                            <td> {{ resitGrplength2 }} </td>
+                                            <td> {{ resitGrpweighting2 }} </td>
+                                            <td> {{ resitGrpdescription2 }} {{#resitGrpComments2}} - {{resitGrpComments2}} {{/resitGrpComments2}} </td>
+                                        {{/resitGrpname2}}</tr>
+                                        <tr>{{#resitGrpname3}}
+                                            <td> {{ resitGrptype3 }} </<d>
+                                            <td> {{ resitGrpname3 }} </td>
+                                            <td> {{ resitGrplength3 }} </td>
+                                            <td> {{ resitGrpweighting3}} </td>
+                                            <td> {{ resitGrpdescription3 }} {{#resitGrpComments3}} - {{resitGrpComments3}} {{/resitGrpComments3}} </td>
+                                        {{/resitGrpname3}}</tr>
+                                        <tr>{{#resitGrpname4}}
+                                            <td> {{ resitGrptype4 }} </td>
+                                            <td> {{ resitGrpname4 }} </td>
+                                            <td> {{ resitGrplength4 }} </td>
+                                            <td> {{ resitGrpweighting4}} </td>
+                                            <td> {{ resitGrpdescription4 }} {{#resitGrpComments4}} - {{resitGrpComments4}} {{/resitGrpComments4}} </td>
+                                        {{/resitGrpname4}}</tr>
+                                    </table>
+                                    <p class="display-5 bolded">Assessment Summary</p>
+                                    {{#assesmenttotalExamWeighting}}<div class="row">
+                                        <div class="col-sm-2 bolded_italized font_small">Total Exam Weight:</div>
+                                            <div class="col-sm-2 italized font_small">{{assesmenttotalExamWeighting}} %</div>
+                                        </div>{{/assesmenttotalExamWeighting}}
+                                    {{#assesmenttotalCourseworkWeighting}}<div class="row">
+                                        <div class="col-sm-2 bolded_italized font_small">Total Course Weight:</div>
+                                            <div class="col-sm-2 italized font_small ">{{assesmenttotalCourseworkWeighting}} %</div>
+                                        </div>{{/assesmenttotalCourseworkWeighting}}
+                                    {{#resittotalExamWeighting}}<div class="row">
+                                        <div class="col-sm-2 bolded_italized font_small">Total Resit Exam Weight:</div>
+                                            <div class="col-sm-2 italized font_small ">{{resittotalExamWeighting}} %</div>
+                                        </div>{{/resittotalExamWeighting}}
+                                    {{#resittotalCourseworkWeighting}}<div class="row">
+                                        <div class="col-sm-2 bolded_italized font_small">Total Resit Course Weight:</div>
+                                            <div class="col-sm-2 italized font_small ">{{resittotalCourseworkWeighting}} %</div>
+                                        </div>{{/resittotalCourseworkWeighting}}
+                                </section>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading4">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id8}}" aria-expanded="false" aria-controls="{{id8}}">
+                            <h6 class="mb-0">
+                                Subject Specific Skills <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+                    <div id="{{id8}}" class="collapse" role="tabpanel" aria-labelledby="heading4" data-parent="#accordionEx">
+                        <div class="card-body">
+                            <p class="display-5 bolded">Module Aims</p>
+                            <div class="indented">
+                                {{#subjectSpecificSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/subjectSpecificSkills}}
+                            </div>
                         </div>
                     </div>
                 </div>

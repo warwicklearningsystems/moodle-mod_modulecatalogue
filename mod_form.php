@@ -28,6 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot. '/mod/modulecatalogue/db/DefaultCodes.php'); //MOO2373 use defaultcodes 
 
 /**
  * Module instance settings form
@@ -45,11 +46,7 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         global $CFG, $COURSE; 
 
         $mform = $this->_form;
-        $module_Code = "";
-        $academic_year = "";
-        
-        $checkdisable = true;
-        
+               
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
@@ -65,21 +62,18 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         
         //MOO-1826 get course metadata to retrieve current default codes;
         $metadata = get_course_metadata($COURSE->id);
+        /*
+         * MOO2373 use defaultcodes
+         */
         if (isset($metadata)){
-            
-            foreach($metadata as $k => $v){
-                switch ($k){
-                    case 'Module Code':
-                        $module_Code = $v;
-                    case 'Academic Year':
-                        $academic_year = $v;
-                }
+            if (!(isset($metadata["Academic Year"]))) {
+                $metadata["Academic Year"] = modulecatalogue_current_academic_year();
             }
+            $defaultCodes =  new DefaultCodes();
+            $defaultCodes->moduleCode = $metadata['Module Code'];
+            $defaultCodes->academicYear = $metadata['Academic Year'];
         }
-        
-        $moduleCode = $module_Code;
-        $academicYear = $academic_year;
-        
+                
         //MOO-1888: Added text box for adminsupport name to hold name of admin support.
         $options = ['size' => 80, 'maxlength' => 80, 'pattern'=>"[a-zA-Z][a-zA-Z\s]*", 'title'=>"Please use only Alphabetic characters"];
         $mform->addElement('text', 'adminsupportname', get_string('adminsupportname', 'modulecatalogue'), $options);
@@ -114,12 +108,13 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addElement('select', 'academicyear', get_string('academicyear', 'modulecatalogue'), $ACADEMICYEAROPTIONS);      
         $mform->addHelpButton('academicyear', 'academicyear', 'modulecatalogue');
         
-	if (((is_null($module_Code)) || (is_null($academic_year))) || (!(isset($metadata)))){        
+        //Moo 2373 Modified to use default codes class 
+	if (((is_null($defaultCodes->moduleCode)) || (is_null($defaultCodes->academicYear))) || (!(isset($metadata)))){        
             $mform->setDefault('autoupdate',1);
             $mform->setDefault('defaultcodes', 0);
         } else{
-            $mform->setDefault('modulecode', $moduleCode);
-            $key = array_search($academicYear, $ACADEMICYEAROPTIONS);
+            $mform->setDefault('modulecode', $defaultCodes->moduleCode);
+            $key = array_search($defaultCodes->academicYear, $ACADEMICYEAROPTIONS);
             $mform->setDefault('academicyear', $key);
             $mform->setDefault('defaultcodes', 1);
         }
