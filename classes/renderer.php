@@ -22,20 +22,20 @@ class cataloguedata implements \templatable, \renderable {
         'learningOutcomes', 'leadername', 'leaderemail', 'outlineSyllabus','locationname', 'duration', 
         'indicativeReadingList', 'readingListUrl', 'subjectSpecificSkills','levelname','transferableSkills',
         'totalStudyHours', 'adminname', 'adminemail','privateStudyDescription','introductoryDescription',   
-        'assesmentGrpname0', 'assesmentGrpweighting0', 'assesmentGrpexam0','assesmentGrpdescription0', 'assesmentGrplength0', 'assesmentGrptype0',
-        'assesmentGrpname1', 'assesmentGrpweighting1', 'assesmentGrpexam1', 'assesmentGrpdescription1', 'assesmentGrplength1', 'assesmentGrptype1',
-        'assesmentGrpname2', 'assesmentGrpweighting2', 'assesmentGrpexam2','assesmentGrpdescription2', 'assesmentGrplength2', 'assesmentGrptype2',
-        'assesmentGrpname3', 'assesmentGrpweighting3', 'assesmentGrpexam3','assesmentGrpdescription3', 'assesmentGrplength3', 'assesmentGrptype3',
-        'assesmentGrpname4', 'assesmentGrpweighting4', 'assesmentGrpexam4','assesmentGrpdescription4', 'assesmentGrplength4', 'assesmentGrptype4',
-        'assesmentGrpname5', 'assesmentGrpweighting5', 'assesmentGrpexam5','assesmentGrpdescription5', 'assesmentGrplength5', 'assesmentGrptype5',
-        'assesmentGrpname6', 'assesmentGrpweighting6', 'assesmentGrpexam6','assesmentGrpdescription6', 'assesmentGrplength6', 'assesmentGrptype6',
-        'assesmentGrpname7', 'assesmentGrpweighting7', 'assesmentGrpexam7','assesmentGrpdescription7', 'assesmentGrplength7', 'assesmentGrptype7',
-        'assesmentGrpname8', 'assesmentGrpweighting8', 'assesmentGrpexam8','assesmentGrpdescription8', 'assesmentGrplength8', 'assesmentGrptype8',
-        'assesmentGrpname9', 'assesmentGrpweighting9', 'assesmentGrpexam9','assesmentGrpdescription9', 'assesmentGrplength9', 'assesmentGrptype9',
-        'assesmentGrpname10', 'assesmentGrpweighting10', 'assesmentGrpexam10','assesmentGrpdescription10', 'assesmentGrplength10', 'assesmentGrptype10',
-        'assesmentGrpname11', 'assesmentGrpweighting11', 'assesmentGrpexam11','assesmentGrpdescription11', 'assesmentGrplength11', 'assesmentGrptype11',
-        'assesmentGrpname12', 'assesmentGrpweighting12', 'assesmentGrpexam12','assesmentGrpdescription12', 'assesmentGrplength12', 'assesmentGrptype12',
-        'assesmentGrpname13', 'assesmentGrpweighting13', 'assesmentGrpexam13','assesmentGrpdescription13', 'assesmentGrplength13', 'assesmentGrptype13',
+        'assesmentGrpname0', 'assesmentGrpweighting0', 'assesmentGrpexam0','assesmentGrpdescription0', 'assesmentGrplength0', 'assesmentGrptype0', 'assesmentGrpComments0',
+        'assesmentGrpname1', 'assesmentGrpweighting1', 'assesmentGrpexam1', 'assesmentGrpdescription1', 'assesmentGrplength1', 'assesmentGrptype1', 'assesmentGrpComments1',
+        'assesmentGrpname2', 'assesmentGrpweighting2', 'assesmentGrpexam2','assesmentGrpdescription2', 'assesmentGrplength2', 'assesmentGrptype2', 'assesmentGrpComments2',
+        'assesmentGrpname3', 'assesmentGrpweighting3', 'assesmentGrpexam3','assesmentGrpdescription3', 'assesmentGrplength3', 'assesmentGrptype3', 'assesmentGrpComments3',
+        'assesmentGrpname4', 'assesmentGrpweighting4', 'assesmentGrpexam4','assesmentGrpdescription4', 'assesmentGrplength4', 'assesmentGrptype4', 'assesmentGrpComments4',
+        'assesmentGrpname5', 'assesmentGrpweighting5', 'assesmentGrpexam5','assesmentGrpdescription5', 'assesmentGrplength5', 'assesmentGrptype5', 'assesmentGrpComments5',
+        'assesmentGrpname6', 'assesmentGrpweighting6', 'assesmentGrpexam6','assesmentGrpdescription6', 'assesmentGrplength6', 'assesmentGrptype6', 'assesmentGrpComments6',
+        'assesmentGrpname7', 'assesmentGrpweighting7', 'assesmentGrpexam7','assesmentGrpdescription7', 'assesmentGrplength7', 'assesmentGrptype7', 'assesmentGrpComments7',
+        'assesmentGrpname8', 'assesmentGrpweighting8', 'assesmentGrpexam8','assesmentGrpdescription8', 'assesmentGrplength8', 'assesmentGrptype8', 'assesmentGrpComments8',
+        'assesmentGrpname9', 'assesmentGrpweighting9', 'assesmentGrpexam9','assesmentGrpdescription9', 'assesmentGrplength9', 'assesmentGrptype9', 'assesmentGrpComments9',
+        'assesmentGrpname10', 'assesmentGrpweighting10', 'assesmentGrpexam10','assesmentGrpdescription10', 'assesmentGrplength10', 'assesmentGrptype10', 'assesmentGrpComments10', 
+        'assesmentGrpname11', 'assesmentGrpweighting11', 'assesmentGrpexam11','assesmentGrpdescription11', 'assesmentGrplength11', 'assesmentGrptype11', 'assesmentGrpComments11', 
+        'assesmentGrpname12', 'assesmentGrpweighting12', 'assesmentGrpexam12','assesmentGrpdescription12', 'assesmentGrplength12', 'assesmentGrptype12', 'assesmentGrpComments12' ,
+        'assesmentGrpname13', 'assesmentGrpweighting13', 'assesmentGrpexam13','assesmentGrpdescription13', 'assesmentGrplength13', 'assesmentGrptype13','assesmentGrpComments13',
         'assesmenttotalExamWeighting','assesmenttotalCourseworkWeighting',
         'studyAmounttype0', 'studyAmountrequiredDescription0', 'studyAmountrequiredDuration0',
         'studyAmounttype1', 'studyAmountrequiredDescription1', 'studyAmountrequiredDuration1',
@@ -48,7 +48,7 @@ class cataloguedata implements \templatable, \renderable {
         'totalExamWeighting','totalCourseworkWeighting','url', 'isprivate','resittotalExamWeighting','resittotalCourseworkWeighting',
         'resitGrpname0','resitGrptype0','resitGrpweighting0','resitGrpdescription0','resitGrplength0','resitGrpComments0',
         'resitGrpname1','resitGrptype1','resitGrpweighting1','resitGrpdescription1','resitGrplength1','resitGrpComments1',
-        'resitGrpname2','resitGrptype2','resitGrpweighting2','resitGrpdescription2','resitGrplength2','resitGrpComments2',
+        'resitGrpname2','resitGrptype2','resitGrpweighting2','resitGrpdescription2','resitGrplength2','resitGrpComments2','alert','alertmessage','urllink'
         );
     
 
@@ -108,7 +108,7 @@ class cataloguedata implements \templatable, \renderable {
         /*MOO-2143 Indicative reading list fix to implement as expanding button*/
         'indicativeReadingList' => array_slice(explode(($delimiter), $this->indicativeReadingList), 4),
         'indicativeReadingListSummary' => array_slice(explode(($delimiter), $this->indicativeReadingList), 0, 4),
-        'indexReadingList' => count($this->indicativeReadingList),
+        
         'readingListUrl' => $this->readingListUrl,
         'introductoryDescription' => explode(($delimiter), $this->introductoryDescription),
         'totalStudyHours' => $this->totalStudyHours,
@@ -117,7 +117,7 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpname0' => $this->assesmentGrpname0,
         'assesmentGrpweighting0' => $this->assesmentGrpweighting0 .'%',
         'assesmentGrpexam0' => $this->assesmentGrpexam0,
-        'assesmentGrpdescription0' => $this->assesmentGrpdescription0 .' ' .$this->assesmentGrpComments0,
+        'assesmentGrpdescription0' => $this->assesmentGrpdescription0,
         'assesmentGrplength0' => $this->assesmentGrplength0,
         'assesmentGrpComments0' => $this->assesmentGrpComments0,
         
@@ -125,7 +125,7 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpname1' => $this->assesmentGrpname1,
         'assesmentGrpweighting1' => $this->assesmentGrpweighting1 .'%',
         'assesmentGrpexam1' => $this->assesmentGrpexam1,
-        'assesmentGrpdescription1' => $this->assesmentGrpdescription1 .' ' .$this->assesmentGrpComments1,
+        'assesmentGrpdescription1' => $this->assesmentGrpdescription1,
         'assesmentGrplength1' => $this->assesmentGrplength1,
         'assesmentGrpComments1' => $this->assesmentGrpComments1,
         
@@ -133,7 +133,7 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpname2' => $this->assesmentGrpname2,
         'assesmentGrpweighting2' => $this->assesmentGrpweighting2 .'%',
         'assesmentGrpexam2' => $this->assesmentGrpexam2,
-        'assesmentGrpdescription2' => $this->assesmentGrpdescription2 .' ' .$this->assesmentGrpComments2,
+        'assesmentGrpdescription2' => $this->assesmentGrpdescription2,
         'assesmentGrplength2' => $this->assesmentGrplength2,
         'assesmentGrpComments2' => $this->assesmentGrpComments2,
         
@@ -141,7 +141,7 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpname3' => $this->assesmentGrpname3,
         'assesmentGrpweighting3' => $this->assesmentGrpweighting3 .'%',
         'assesmentGrpexam3' => $this->assesmentGrpexam3,
-        'assesmentGrpdescription3' => $this->assesmentGrpdescription3 .' ' .$this->assesmentGrpComments3,
+        'assesmentGrpdescription3' => $this->assesmentGrpdescription3,
         'assesmentGrplength3' => $this->assesmentGrplength3,
         'assesmentGrpComments3' => $this->assesmentGrpComments3,
         
@@ -149,7 +149,7 @@ class cataloguedata implements \templatable, \renderable {
         'assesmentGrpname4' => $this->assesmentGrpname4,
         'assesmentGrpweighting4' => $this->assesmentGrpweighting4 .'%',
         'assesmentGrpexam4' => $this->assesmentGrpexam4,
-        'assesmentGrpdescription4' => $this->assesmentGrpdescription4 .' ' .$this->assesmentGrpComments4,
+        'assesmentGrpdescription4' => $this->assesmentGrpdescription4,
         'assesmentGrplength4' => $this->assesmentGrplength4,
         'assesmentGrpComments4' => $this->assesmentGrpComments4,
         
@@ -260,37 +260,37 @@ class cataloguedata implements \templatable, \renderable {
         'adminname' => $this->adminname,
         /*MOO 2143 Changes to Study Hours: incorporated as these where not properly displayed*/
         'studyAmounttype0' => $this->studyAmounttype0,
-        'studyAmountrequiredDescription0' =>extract_course_weightings($this->studyAmountrequiredDescription0, $k, $this->totalStudyHours),
+        'studyAmountrequiredDescription0' =>extract_course_weightings($this->studyAmountrequiredDescription0, $this->totalStudyHours),
         
         'studyAmountrequiredDuration0' =>$this->studyAmountrequiredDuration0,  
         'studyAmounttype1' => $this->studyAmounttype1,
-        'studyAmountrequiredDescription1' =>extract_course_weightings($this->studyAmountrequiredDescription1, $k, $this->totalStudyHours),
+        'studyAmountrequiredDescription1' =>extract_course_weightings($this->studyAmountrequiredDescription1, $this->totalStudyHours),
         'studyAmountrequiredDuration1' =>$this->studyAmountrequiredDuration1,
 
         'studyAmounttype2' => $this->studyAmounttype2,
-        'studyAmountrequiredDescription2' =>extract_course_weightings($this->studyAmountrequiredDescription2, $k, $this->totalStudyHours) ,
+        'studyAmountrequiredDescription2' =>extract_course_weightings($this->studyAmountrequiredDescription2, $this->totalStudyHours) ,
         'studyAmountrequiredDuration2' =>$this->studyAmountrequiredDuration2,
   
         'studyAmounttype3' => $this->studyAmounttype3,
-        'studyAmountrequiredDescription3' =>extract_course_weightings($this->studyAmountrequiredDescription3, $k, $this->totalStudyHours),
+        'studyAmountrequiredDescription3' =>extract_course_weightings($this->studyAmountrequiredDescription3, $this->totalStudyHours),
         'studyAmountrequiredDuration3' =>$this->studyAmountrequiredDuration3,
 
         'studyAmounttype4' => $this->studyAmounttype4,
-        'studyAmountrequiredDescription4' =>extract_course_weightings($this->studyAmountrequiredDescription4, $k, $this->totalStudyHours),
+        'studyAmountrequiredDescription4' =>extract_course_weightings($this->studyAmountrequiredDescription4, $this->totalStudyHours),
         'studyAmountrequiredDuration4' =>$this->studyAmountrequiredDuration4,
 
         'studyAmounttype5' => $this->studyAmounttype5,
-        'studyAmountrequiredDescription5' =>extract_course_weightings($this->studyAmountrequiredDescription5, $k, $this->totalStudyHours),
+        'studyAmountrequiredDescription5' =>extract_course_weightings($this->studyAmountrequiredDescription5, $this->totalStudyHours),
         'studyAmountrequiredDuration5' =>$this->studyAmountrequiredDuration5,
         /*MOO-1983 Added alert message, alert and urlink */
-        'alertmessage' => implode(expand_array(rtrim($alertmessage,$all_urls)),'<br />'), 
+        'alertmessage' => explode(($delimiter), $this->alertmessage), 
         'urllink' => $all_urls,
         'alert' => $applyAlert,
         /*MOO-1983 added duration, transferableskills, and exam weighting not added previously*/
         'duration' => $this->duration,
         /* MOO-2373 added resit information*/
         'isTranfereable' => $this->transferableSkills,
-      
+        'alert' => $this->alert,
         'transferableSkills' => explode(($delimiter), $this->transferableSkills),
         'assesmenttotalExamWeighting' => $this->assesmenttotalExamWeighting,
         'assesmenttotalCourseworkWeighting' => $this->assesmenttotalCourseworkWeighting,

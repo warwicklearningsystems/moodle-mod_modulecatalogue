@@ -54,7 +54,7 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
 
     //$curldata = download_file_content($url, array('Authorization' => 'Basic ' .
     //  (string)base64_encode( $username . ":" . $password )), false, true);
-
+    
     $curldata = download_file_content($url, null, $data, true, 300, 20, true, $stream); //MOO-2373 Modified to fix issue of licensing
 
     if($curldata->status == 200) {
@@ -68,6 +68,19 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
        * MOO-1983 Added code to handle alertmessage.
        * need to extract alertmessage from settings.php then we need to extract any URL link in it.
        */
+
+      $alertmessage = get_config('mod_modulecatalogue', 'alertinformation');
+      $applyAlert = get_config('mod_modulecatalogue', 'applyAlert');
+      $all_urls = "";   //MOO-1983 initialize URL link extracted field.
+      
+      // MOO-1983 extract URL link from alertmessage
+      if ($alertmessage != ""){
+          $all_urls = rtrim(url_extract($alertmessage),'.');
+      }
+      
+      write_to_database('alertmessage', implode(expand_array(rtrim($alertmessage,$all_urls)),'<br />') , $modulecode, $academicyear);
+      write_to_database('urllink', $all_urls, $modulecode, $academicyear);
+      write_to_database('alert', $applyAlert, $modulecode, $academicyear);
 
       foreach($cataloguedata as $k => $v) {
         // MOO-1808 Insert new data from JSON into database: First deal with the Stdclass object as that throws exception errors
@@ -89,7 +102,7 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
             switch ($k){
                 case "learningOutcomes" :
                     $sectionName = $k;
-                    $value = implode($v, '<br />');
+                    $value = implode('<br />', $v);
                     write_to_database($sectionName, $value, $modulecode, $academicyear);
                     
                 case "locations":
@@ -167,7 +180,7 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                */
               if (($k == "outlineSyllabus") || ($k == "indicativeReadingList") || ($k == "aims") || ($k == "transferableSkills") || ($k == "introductoryDescription") || ($k == "subjectSpecificSkills") || ($k == "privateStudyDescription")){
                   if (!(is_null($v))){  /* MOO 2019 remove any null values */
-                      $value = implode(expand_array($v),'<br />');
+                      $value = implode('<br />', expand_array($v));
                       write_to_database($k, $value, $modulecode, $academicyear);                     
                   } else{
                       $value = "No skills defined for this module.";
@@ -278,7 +291,7 @@ function url_extract($value){
  * MOO-2373 extract_course_weightings() to calculate the weights not added in JSON file
  * takes the parameter name, value and total value to express as percentage
  */
-function extract_course_weightings($v, $k, $totalVal){
+function extract_course_weightings($v, $totalVal){
         
     if (stripos($v, 'session')!= 0){
         $numSess = intval(substr($v,0,stripos($v, 'session')-1));
