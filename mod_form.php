@@ -28,7 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
-require_once($CFG->dirroot. '/mod/modulecatalogue/db/DefaultCodes.php'); //MOO2373 use defaultcodes 
+require_once($CFG->dirroot. '/mod/modulecatalogue/db/defaultcodes.php'); //MOO2373 use defaultcodes 
 
 /**
  * Module instance settings form
