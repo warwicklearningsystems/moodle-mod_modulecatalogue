@@ -9,9 +9,13 @@
                 {{#alertmessage}}<i class="fa fa-info-circle"> &nbsp </i>{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a> 
             </div>{{/alert}}
 
+            
             <h4 class="display-5">{{ code }}: {{ name }}</h3>
+            <p class='urllinks'>See Module Catalogue  <a href='{{catalogueurl }}'>{{catalogueurl}}</a></p>
+
             <h5 class="display-5"> Number of Credits: {{ creditValue }}</h5>
             <h5 class="display-5"> Academic Year:  {{ academicyear }}</h5>
+            
             <hr>
 
             <div class="accordion-toggle" id="accordionEx" role="tablist" aria-multiselectable="true">
@@ -49,7 +53,7 @@
                     <!-- Card body -->
                     <div id="{{id2}}" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx">
                         <div class="card-body">
-                            <p> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
+                            <p class="display-5 bolded">Study Requirements</p>
                             <table class="fancy-table">
                             <tr>
                                 <th>Type</th>
@@ -109,6 +113,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Outline Syllabus</p>
                             <div class="indented">
+                                <p> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
                                 <article>
                                     <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabusShort}}</div>
                                         <input id="{{id4}}" class="read-more-toggle" type="checkbox">
@@ -132,7 +137,7 @@
                     </div>
                     <div id="{{id5}}" class="collapse" role="tabpanel" aria-labelledby="heading4" data-parent="#accordionEx">
                         <div class="card-body">
-                            <p class="display-5 bolded">Module Aims</p>
+                            <p class="display-5 bolded">Subject Specific Skills</p>
                             <div class="indented">
                                 {{#subjectSpecificSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/subjectSpecificSkills}}
                             </div>
@@ -310,70 +315,55 @@
                                             <td>{{ assesmentGrpweighting13 }}</td>
                                             <td>{{ assesmentGrpdescription13 }}</td>
                                         {{/assesmentGrpname13}}</tr>
-                                    </table>
-                                    <p class="display-5 bolded">Assessment Resit Schedule</p>
-                                    <table class="fancy-table">
-                                        <tr>
-                                            <th> Assessment Name </th>
-                                            <th> Assessment Type </th>
-                                            <th> Duration </th>
-                                            <th> Weight </th>
-                                            <th> Description </th>
-                                        </tr>
-                                        <tr>{{#resitGrpname0}}
-                                            <td> {{ resitGrptype0 }} </td>
-                                            <td> {{ resitGrpname0 }} </td>
-                                            <td> {{ resitGrplength0 }} </td>
-                                            <td> {{ resitGrpweighting0 }} </<td>
-                                            <td> {{ resitGrpdescription0 }} {{#resitGrpComments0}} - {{resitGrpComments0}} {{/resitGrpComments0}} </td>
-                                            {{/resitGrpname0}}</tr>
-                                        <tr>{{#resitGrpname1}}
-                                            <td> {{resitGrptype1}} </td>
-                                            <td> {{ resitGrpname1 }} </td>
-                                            <td> {{ resitGrpname1 }} </td>
-                                            <td> {{ resitGrpname1 }} </td>
-                                            <td> {{ resitGrpdescription1 }} {{#resitGrpComments1}} - {{resitGrpComments1}} {{/resitGrpComments1}} </td>
-                                        {{/resitGrpname1}}</tr>
-                                        <tr>{{#resitGrpname2}}
-                                            <td> {{ resitGrptype2 }} </td>
-                                            <td> {{ resitGrpname2 }} </td>
-                                            <td> {{ resitGrplength2 }} </td>
-                                            <td> {{ resitGrpweighting2 }} </td>
-                                            <td> {{ resitGrpdescription2 }} {{#resitGrpComments2}} - {{resitGrpComments2}} {{/resitGrpComments2}} </td>
-                                        {{/resitGrpname2}}</tr>
-                                        <tr>{{#resitGrpname3}}
-                                            <td> {{ resitGrptype3 }} </<d>
-                                            <td> {{ resitGrpname3 }} </td>
-                                            <td> {{ resitGrplength3 }} </td>
-                                            <td> {{ resitGrpweighting3}} </td>
-                                            <td> {{ resitGrpdescription3 }} {{#resitGrpComments3}} - {{resitGrpComments3}} {{/resitGrpComments3}} </td>
-                                        {{/resitGrpname3}}</tr>
-                                        <tr>{{#resitGrpname4}}
-                                            <td> {{ resitGrptype4 }} </td>
-                                            <td> {{ resitGrpname4 }} </td>
-                                            <td> {{ resitGrplength4 }} </td>
-                                            <td> {{ resitGrpweighting4}} </td>
-                                            <td> {{ resitGrpdescription4 }} {{#resitGrpComments4}} - {{resitGrpComments4}} {{/resitGrpComments4}} </td>
-                                        {{/resitGrpname4}}</tr>
-                                    </table>
-                                    <p class="display-5 bolded">Assessment Summary</p>
-                                    {{#assesmenttotalExamWeighting}}<div class="row">
-                                        <div class="col-sm-2 bolded_italized font_small">Total Exam Weight:</div>
-                                            <div class="col-sm-2 italized font_small">{{assesmenttotalExamWeighting}} %</div>
-                                        </div>{{/assesmenttotalExamWeighting}}
-                                    {{#assesmenttotalCourseworkWeighting}}<div class="row">
-                                        <div class="col-sm-2 bolded_italized font_small">Total Course Weight:</div>
-                                            <div class="col-sm-2 italized font_small ">{{assesmenttotalCourseworkWeighting}} %</div>
-                                        </div>{{/assesmenttotalCourseworkWeighting}}
-                                    {{#resittotalExamWeighting}}<div class="row">
-                                        <div class="col-sm-2 bolded_italized font_small">Total Resit Exam Weight:</div>
-                                            <div class="col-sm-2 italized font_small ">{{resittotalExamWeighting}} %</div>
-                                        </div>{{/resittotalExamWeighting}}
-                                    {{#resittotalCourseworkWeighting}}<div class="row">
-                                        <div class="col-sm-2 bolded_italized font_small">Total Resit Course Weight:</div>
-                                            <div class="col-sm-2 italized font_small ">{{resittotalCourseworkWeighting}} %</div>
-                                        </div>{{/resittotalCourseworkWeighting}}
+                                    </table>                                 
                                 </section>
+                            </div>
+                            <p class="display-5 bolded">Assessment Resit Schedule</p>
+                            <div class="indented">
+                                <table class="fancy-table">
+                                    <tr>{{#resitGrpname0}}
+                                        <th> Assessment Name </th>
+                                        <th> Assessment Type </th>
+                                        <th> Duration </th>
+                                        <th> Weight </th>
+                                        <th> Description </th>
+                                    {{/resitGrpname0}}</tr>
+                                    <tr>{{#resitGrpname0}}
+                                        <td> {{ resitGrptype0 }} </td>
+                                        <td> {{ resitGrpname0 }} </td>
+                                        <td> {{ resitGrplength0 }} </td>
+                                        <td> {{ resitGrpweighting0 }} </<td>
+                                        <td> {{ resitGrpdescription0 }} {{#resitGrpComments0}} - {{resitGrpComments0}} {{/resitGrpComments0}} </td>
+                                    {{/resitGrpname0}}</tr>
+                                    <tr>{{#resitGrpname1}}
+                                        <td> {{resitGrptype1}} </td>
+                                        <td> {{ resitGrpname1 }} </td>
+                                        <td> {{ resitGrpname1 }} </td>
+                                        <td> {{ resitGrpname1 }} </td>
+                                        <td> {{ resitGrpdescription1 }} {{#resitGrpComments1}} - {{resitGrpComments1}} {{/resitGrpComments1}} </td>
+                                    {{/resitGrpname1}}</tr>
+                                    <tr>{{#resitGrpname2}}
+                                        <td> {{ resitGrptype2 }} </td>
+                                        <td> {{ resitGrpname2 }} </td>
+                                        <td> {{ resitGrplength2 }} </td>
+                                        <td> {{ resitGrpweighting2 }} </td>
+                                        <td> {{ resitGrpdescription2 }} {{#resitGrpComments2}} - {{resitGrpComments2}} {{/resitGrpComments2}} </td>
+                                    {{/resitGrpname2}}</tr>
+                                    <tr>{{#resitGrpname3}}
+                                        <td> {{ resitGrptype3 }} </<d>
+                                        <td> {{ resitGrpname3 }} </td>
+                                        <td> {{ resitGrplength3 }} </td>
+                                        <td> {{ resitGrpweighting3}} </td>
+                                        <td> {{ resitGrpdescription3 }} {{#resitGrpComments3}} - {{resitGrpComments3}} {{/resitGrpComments3}} </td>
+                                    {{/resitGrpname3}}</tr>
+                                    <tr>{{#resitGrpname4}}
+                                        <td> {{ resitGrptype4 }} </td>
+                                        <td> {{ resitGrpname4 }} </td>
+                                        <td> {{ resitGrplength4 }} </td>
+                                        <td> {{ resitGrpweighting4}} </td>
+                                        <td> {{ resitGrpdescription4 }} {{#resitGrpComments4}} - {{resitGrpComments4}} {{/resitGrpComments4}} </td>
+                                    {{/resitGrpname4}}</tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -410,7 +400,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Introductory Description</p>
                             <div class="indented">
-                                {{#introductoryDescription}} <p class="justified"> {{.}} </p> {{/introductoryDescription}}
+                                {{#introductoryDescription}} <p class="paragraph-list"> {{.}} </p> {{/introductoryDescription}}
                             </div>
                         </div>
                     </div>
@@ -428,7 +418,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Transferable Skills</p>
                             <div class="indented">
-                                {{#transferableSkills}} <p class="justified"> {{.}} </p> {{/transferableSkills}}
+                                <div class="indented">{{#transferableSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/transferableSkills}}</div>
                             </div>
                         </div>
                     </div>

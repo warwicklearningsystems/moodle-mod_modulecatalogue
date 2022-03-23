@@ -48,7 +48,7 @@ class cataloguedata implements \templatable, \renderable {
         'totalExamWeighting','totalCourseworkWeighting','url', 'isprivate','resittotalExamWeighting','resittotalCourseworkWeighting',
         'resitGrpname0','resitGrptype0','resitGrpweighting0','resitGrpdescription0','resitGrplength0','resitGrpComments0',
         'resitGrpname1','resitGrptype1','resitGrpweighting1','resitGrpdescription1','resitGrplength1','resitGrpComments1',
-        'resitGrpname2','resitGrptype2','resitGrpweighting2','resitGrpdescription2','resitGrplength2','resitGrpComments2','alert','alertmessage','urllink'
+        'resitGrpname2','resitGrptype2','resitGrpweighting2','resitGrpdescription2','resitGrplength2','resitGrpComments2','alert','alertmessage','urllink','catalogueurl'
         );
     
 
@@ -286,6 +286,7 @@ class cataloguedata implements \templatable, \renderable {
         'alertmessage' => explode(($delimiter), $this->alertmessage), 
         'urllink' => $all_urls,
         'alert' => $applyAlert,
+        'catalogueurl' => $this->catalogueurl,
         /*MOO-1983 added duration, transferableskills, and exam weighting not added previously*/
         'duration' => $this->duration,
         /* MOO-2373 added resit information*/

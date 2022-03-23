@@ -50,12 +50,15 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
   if($modulecode != '') {
 
     $url = 'https://courses.warwick.ac.uk/modules/' .$academicyear ."/" .$modulecode . '.json'; //MOO-1813 Modified URL to use new parameter added
+    
+    $modulecaturl = 'https://courses.warwick.ac.uk/modules/' .$academicyear ."/" .$modulecode;
+    
     // $url = 'https://courses-dev.warwick.ac.uk/modules/' .'20/21' ."/" .$modulecode . '.json';
 
     //$curldata = download_file_content($url, array('Authorization' => 'Basic ' .
     //  (string)base64_encode( $username . ":" . $password )), false, true);
     
-    $curldata = download_file_content($url, null, $data, true, 300, 20, true, $stream); //MOO-2373 Modified to fix issue of licensing
+    $curldata = download_file_content($url, null, null, true, 300, 20, true, null); //MOO-2373 Modified to fix issue of licensing
 
     if($curldata->status == 200) {
       $cataloguedata = json_decode($curldata->results);
@@ -78,9 +81,10 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
           $all_urls = rtrim(url_extract($alertmessage),'.');
       }
       
-      write_to_database('alertmessage', implode(expand_array(rtrim($alertmessage,$all_urls)),'<br />') , $modulecode, $academicyear);
+      write_to_database('alertmessage', implode('<br />', expand_array(rtrim($alertmessage,$all_urls))), $modulecode, $academicyear);
       write_to_database('urllink', $all_urls, $modulecode, $academicyear);
       write_to_database('alert', $applyAlert, $modulecode, $academicyear);
+      write_to_database('catalogueurl', $modulecaturl, $modulecode, $academicyear);
 
       foreach($cataloguedata as $k => $v) {
         // MOO-1808 Insert new data from JSON into database: First deal with the Stdclass object as that throws exception errors

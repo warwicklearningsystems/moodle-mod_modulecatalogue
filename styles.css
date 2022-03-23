@@ -64,7 +64,8 @@ and open the template in the editor.
 .paragraph-list{
     text-align: justify;
     font-size: 0.9em;
-    padding: 0.02em;
+    padding-left: 1em;
+    padding: 0.06em;
     line-height: 1.5 ;
     margin-top: 0 ;
     margin-bottom: 0 ;
@@ -107,6 +108,7 @@ and open the template in the editor.
 
 .indented{
     padding-left: 1em;
+    padding-right: 1em;
 }
 
 .alertinformation:empty {
@@ -129,7 +131,7 @@ and open the template in the editor.
 }
 
 .font_small{
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
 /* MOO 1935 implementation see more*/
@@ -387,4 +389,9 @@ and open the template in the editor.
 #summary a:not(.collapsed):after {
     content: '- Read Less';
     background-color: navy;
+}
+
+.urllinks{
+    font-size: small;
+    font-style: italic;
 }

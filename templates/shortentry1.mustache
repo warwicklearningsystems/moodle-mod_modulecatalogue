@@ -9,6 +9,7 @@
             </div>{{/alert}}
 
             <h4 class="display-5">{{ code }}: {{ name }}</h4>
+            <p class='urllinks'>See Module Catalogue  <a href='{{catalogueurl }}'>{{catalogueurl}}</a></p>
             <h5 class="display-5"> Number of Credits: {{ creditValue }}</h5>
             <h5 class="display-5"> Academic Year: {{ academicyear }}</h5>
 
@@ -165,53 +166,60 @@
                                             <td>{{ assesmentGrpdescription13 }}</td>
                                         {{/assesmentGrpname13}}</tr>                                        
                                     </table>
-                                    <p class="display-5 bolded">Assessment Resit Schedule</p>
-                                    <table class="fancy-table">
-                                        <tr>
-                                            <th> Assessment Name </th>
-                                            <th> Assessment Type </th>
-                                            <th> Duration </th>
-                                            <th> Weight </th>
-                                            <th> Description </th>
-                                        </tr>
-                                        <tr>{{#resitGrpname0}}
-                                            <td> {{ resitGrptype0 }} </td>
-                                            <td> {{ resitGrpname0 }} </td>
-                                            <td> {{ resitGrplength0 }} </td>
-                                            <td> {{ resitGrpweighting0 }} </<td>
-                                            <td> {{ resitGrpdescription0 }} {{#resitGrpComments0}} - {{resitGrpComments0}} {{/resitGrpComments0}} </td>
-                                            {{/resitGrpname0}}</tr>
-                                        <tr>{{#resitGrpname1}}
-                                            <td> {{resitGrptype1}} </td>
-                                            <td> {{ resitGrpname1 }} </td>
-                                            <td> {{ resitGrpname1 }} </td>
-                                            <td> {{ resitGrpname1 }} </td>
-                                            <td> {{ resitGrpdescription1 }} {{#resitGrpComments1}} - {{resitGrpComments1}} {{/resitGrpComments1}} </td>
-                                        {{/resitGrpname1}}</tr>
-                                        <tr>{{#resitGrpname2}}
-                                            <td> {{ resitGrptype2 }} </td>
-                                            <td> {{ resitGrpname2 }} </td>
-                                            <td> {{ resitGrplength2 }} </td>
-                                            <td> {{ resitGrpweighting2 }} </td>
-                                            <td> {{ resitGrpdescription2 }} {{#resitGrpComments2}} - {{resitGrpComments2}} {{/resitGrpComments2}} </td>
-                                        {{/resitGrpname2}}</tr>
-                                        <tr>{{#resitGrpname3}}
-                                            <td> {{ resitGrptype3 }} </<d>
-                                            <td> {{ resitGrpname3 }} </td>
-                                            <td> {{ resitGrplength3 }} </td>
-                                            <td> {{ resitGrpweighting3}} </td>
-                                            <td> {{ resitGrpdescription3 }} {{#resitGrpComments3}} - {{resitGrpComments3}} {{/resitGrpComments3}} </td>
-                                        {{/resitGrpname3}}</tr>
-                                        <tr>{{#resitGrpname4}}
-                                            <td> {{ resitGrptype4 }} </td>
-                                            <td> {{ resitGrpname4 }} </td>
-                                            <td> {{ resitGrplength4 }} </td>
-                                            <td> {{ resitGrpweighting4}} </td>
-                                            <td> {{ resitGrpdescription4 }} {{#resitGrpComments4}} - {{resitGrpComments4}} {{/resitGrpComments4}} </td>
-                                        {{/resitGrpname4}}</tr>
-                                    </table>
-                                    <p class="display-5 bolded">Assessment Summary</p>
-                                    {{#assesmenttotalExamWeighting}}<div class="row">
+                                </section>
+                                <p class="paragraph-list"> You do not need to pass all assessment components to pass the module.</p>
+                                <p class="paragraph-list"> Students can register for this module without taking any assessment.</p>
+                            </div>
+                            <p class="display-5 bolded">Assessment Resit Schedule</p>
+                            <div class="indented">
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th> Assessment Name </th>
+                                        <th> Assessment Type </th>
+                                        <th> Duration </th>
+                                        <th> Weight </th>
+                                        <th> Description </th>
+                                    </tr>
+                                    <tr>{{#resitGrpname0}}
+                                        <td> {{ resitGrptype0 }} </td>
+                                        <td> {{ resitGrpname0 }} </td>
+                                        <td> {{ resitGrplength0 }} </td>
+                                        <td> {{ resitGrpweighting0 }} </<td>
+                                        <td> {{ resitGrpdescription0 }} {{#resitGrpComments0}} - {{resitGrpComments0}} {{/resitGrpComments0}} </td>
+                                    {{/resitGrpname0}}</tr>
+                                    <tr>{{#resitGrpname1}}
+                                        <td> {{ resitGrptype1 }} </td>
+                                        <td> {{ resitGrpname1 }} </td>
+                                        <td> {{ resitGrplength1 }} </td>
+                                        <td> {{ resitGrpweighting1 }} </<td>
+                                        <td> {{ resitGrpdescription1 }} {{#resitGrpComments1}} - {{resitGrpComments1}} {{/resitGrpComments1}} </td>
+                                    {{/resitGrpname1}}</tr>
+                                    <tr>{{#resitGrpname2}}
+                                        <td> {{ resitGrptype2 }} </td>
+                                        <td> {{ resitGrpname2 }} </td>
+                                        <td> {{ resitGrplength2 }} </td>
+                                        <td> {{ resitGrpweighting2 }} </<td>
+                                        <td> {{ resitGrpdescription2 }} {{#resitGrpComments2}} - {{resitGrpComments2}} {{/resitGrpComments2}} </td>
+                                    {{/resitGrpname2}}</tr>
+                                    <tr>{{#resitGrpname3}}
+                                        <td> {{ resitGrptype3 }} </td>
+                                        <td> {{ resitGrpname3 }} </td>
+                                        <td> {{ resitGrplength3 }} </td>
+                                        <td> {{ resitGrpweighting3 }} </<td>
+                                        <td> {{ resitGrpdescription3 }} {{#resitGrpComments3}} - {{resitGrpComments3}} {{/resitGrpComments3}} </td>
+                                    {{/resitGrpname3}}</tr>
+                                    <tr>{{#resitGrpname4}}
+                                        <td> {{ resitGrptype4 }} </td>
+                                        <td> {{ resitGrpname4 }} </td>
+                                        <td> {{ resitGrplength4 }} </td>
+                                        <td> {{ resitGrpweighting4 }} </<td>
+                                        <td> {{ resitGrpdescription4 }} {{#resitGrpComments4}} - {{resitGrpComments4}} {{/resitGrpComments4}} </td>
+                                    {{/resitGrpname4}}</tr>
+                                </table>
+                            </div>
+                            <p class="display-5 bolded">Assessment Summary</p>
+                            <div class="indented">
+                                {{#assesmenttotalExamWeighting}}<div class="row">
                                         <div class="col-sm-2 bolded_italized font_small">Total Exam Weight:</div>
                                             <div class="col-sm-2 italized font_small">{{assesmenttotalExamWeighting}} %</div>
                                         </div>{{/assesmenttotalExamWeighting}}
@@ -226,12 +234,11 @@
                                     {{#resittotalCourseworkWeighting}}<div class="row">
                                         <div class="col-sm-2 bolded_italized font_small">Total Resit Course Weight:</div>
                                             <div class="col-sm-2 italized font_small ">{{resittotalCourseworkWeighting}} %</div>
-                                        </div>{{/resittotalCourseworkWeighting}}
-                                </section>
+                                </div>{{/resittotalCourseworkWeighting}}
                             </div>
                         </div>
                     </div>
-
+                    
                 </div>
                 <!-- Accordion card -->
 
@@ -250,54 +257,56 @@
                     <!-- Card body -->
                     <div id="{{id4}}" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
                         <div class="card-body">
-                            <p> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
-                            <table class="fancy-table">
-                            <tr>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Duration</th>
-                            </tr>
-                            <tr>{{#studyAmounttype0}}
-                                <td> {{ studyAmounttype0 }} </td>
-                                <td> {{ studyAmountrequiredDescription0 }} </td>
-                                <td> {{ studyAmountrequiredDuration0 }}</td>
-                            {{/studyAmounttype0}}</tr>
-                            <tr>{{#studyAmounttype1}}
-                                <td> {{ studyAmounttype1 }} </td>
-                                <td> {{ studyAmountrequiredDescription1 }} </td>
-                                <td> {{ studyAmountrequiredDuration1 }}</td>
-                            {{/studyAmounttype1}}</tr>
-                            <tr>{{#studyAmounttype2}}
-                                <td> {{ studyAmounttype2 }} </td>
-                                <td> {{ studyAmountrequiredDescription2 }} </td>
-                                <td> {{ studyAmountrequiredDuration2 }}</td>
-                            {{/studyAmounttype2}}</tr>
-                            <tr>{{#studyAmounttype3}}
-                                <td> {{ studyAmounttype3 }} </td>
-                                <td> {{ studyAmountrequiredDescription3 }} </td>
-                                <td> {{ studyAmountrequiredDuration3 }}</td>
-                            {{/studyAmounttype3}}</tr>
-                            <tr>{{#studyAmounttype4}}
-                                <td> {{ studyAmounttype4 }} </td>
-                                <td> {{ studyAmountrequiredDescription4 }} </td>
-                                <td> {{ studyAmountrequiredDuration4 }}</td>
-                            {{/studyAmounttype4}}</tr>
-                            <tr>{{#studyAmounttype5}}
-                                <td> {{ studyAmounttype5 }} </td>
-                                <td> {{ studyAmountrequiredDescription5 }} </td>
-                                <td> {{ studyAmountrequiredDuration5 }}</td>
-                            {{/studyAmounttype5}}</tr>
-                            <tfoot>
-                                <tr>
-                                    <td> Total Study Hours </td>
-                                    <td> {{ totalStudyHours }} Hours </td>
-                                    <td> PT{{ totalStudyHours }} </td> 
-                                </tr>
-                            </tfoot>
-                        </table>
+                            <p class="display-5 bolded">Study</p>
+                            <div class="indented">
+                                <table class="fancy-table">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                    <tr>{{#studyAmounttype0}}
+                                        <td> {{ studyAmounttype0 }} </td>
+                                        <td> {{ studyAmountrequiredDescription0 }} </td>
+                                        <td> {{ studyAmountrequiredDuration0 }}</td>
+                                    {{/studyAmounttype0}}</tr>
+                                    <tr>{{#studyAmounttype1}}
+                                        <td> {{ studyAmounttype1 }} </td>
+                                        <td> {{ studyAmountrequiredDescription1 }} </td>
+                                        <td> {{ studyAmountrequiredDuration1 }}</td>
+                                    {{/studyAmounttype1}}</tr>
+                                    <tr>{{#studyAmounttype2}}
+                                        <td> {{ studyAmounttype2 }} </td>
+                                        <td> {{ studyAmountrequiredDescription2 }} </td>
+                                        <td> {{ studyAmountrequiredDuration2 }}</td>
+                                    {{/studyAmounttype2}}</tr>
+                                    <tr>{{#studyAmounttype3}}
+                                        <td> {{ studyAmounttype3 }} </td>
+                                        <td> {{ studyAmountrequiredDescription3 }} </td>
+                                        <td> {{ studyAmountrequiredDuration3 }}</td>
+                                    {{/studyAmounttype3}}</tr>
+                                    <tr>{{#studyAmounttype4}}
+                                        <td> {{ studyAmounttype4 }} </td>
+                                        <td> {{ studyAmountrequiredDescription4 }} </td>
+                                        <td> {{ studyAmountrequiredDuration4 }}</td>
+                                    {{/studyAmounttype4}}</tr>
+                                    <tr>{{#studyAmounttype5}}
+                                        <td> {{ studyAmounttype5 }} </td>
+                                        <td> {{ studyAmountrequiredDescription5 }} </td>
+                                        <td> {{ studyAmountrequiredDuration5 }}</td>
+                                    {{/studyAmounttype5}}</tr>
+                                    <tfoot>
+                                        <tr>
+                                            <td> Total Study Hours </td>
+                                            <td> {{ totalStudyHours }} Hours </td>
+                                            <td> PT{{ totalStudyHours }} </td> 
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
