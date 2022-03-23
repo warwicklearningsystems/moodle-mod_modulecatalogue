@@ -290,8 +290,18 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
     $defaultCodes =  new DefaultCodes();
     
     if (isset($metadata)){
-        $defaultCodes->moduleCode = $metadata['Module Code'];
-        $defaultCodes->academicYear = $metadata['Academic Year'];
+        if (!(isset($metadata['Module Code']))){
+            $defaultCodes->moduleCode = '';
+        } else{
+            $defaultCodes->moduleCode = $metadata['Module Code'];
+        }
+
+        if (!(isset($metadata['Academic Year']))){
+            $defaultCodes->academicYear = modulecatalogue_current_academic_year();
+        } else{
+            $defaultCodes->academicYear = $metadata['Academic Year'];
+        }
+        
     }
 
     // Retrieve details on this catalogue instance including template and module code
@@ -354,7 +364,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
           } else {
             // No catalogue data to retrieve
             // MOO-1813: Modified functionality to provide more meaningful information if no records exist.
-            $info->content = get_string('nocataloguedata', 'modulecatalogue') .' Course Code: ' .$modulecode ."Academic Year: " .$academicyear;
+            $info->content = get_string('nocataloguedata', 'modulecatalogue') .' Course Code: ' .$modulecode ." Academic Year: " .$academicyear;
           }
 
         } else {
@@ -397,4 +407,21 @@ function get_full_year($academic_year){
          $academicyear = '20' .substr($academic_year, 0, stripos($academic_year, '/'));
     }
     return $academicyear;
+}
+
+/*
+ * MOD 2404 Get Current Academic Year used to determine current academic year as default
+ */
+function modulecatalogue_current_academic_year(){
+    $currentyear = date("y");
+    $currentmonth = date("m");
+    $nextyear = date("y")+1;
+    $prevyear = date("y")-1;
+    if ($currentmonth >= 8){
+        $currentyear = ("$currentyear" ."/" ."$nextyear");
+    } else{
+        $currentyear = ("$prevyear" ."/" ."$currentyear");
+    }
+    
+    return $currentyear;
 }

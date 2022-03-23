@@ -69,6 +69,9 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
             if (!(isset($metadata["Academic Year"]))) {
                 $metadata["Academic Year"] = modulecatalogue_current_academic_year();
             }
+            if (!(isset($metadata["Module Code"]))){
+                $metadata["Module Code"] = '';
+            }
             $defaultCodes =  new DefaultCodes();
             $defaultCodes->moduleCode = $metadata['Module Code'];
             $defaultCodes->academicYear = $metadata['Academic Year'];
