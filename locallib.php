@@ -108,7 +108,8 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                     $sectionName = $k;
                     $value = implode('<br />', $v);
                     write_to_database($sectionName, $value, $modulecode, $academicyear);
-                    
+                    break;
+                
                 case "locations":
                     $sectionName = $k;
                     foreach($cataloguedata->$sectionName as $k => $v){
@@ -120,61 +121,110 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                             }
                         }
                     }
-                    
-                case ($k == 'postRequisiteModules') || ($k == 'preRequisiteModules') || ($k == 'studyAmounts') :
+                    break;
+                
+                case 'availability':            //MOO-2415 Made changes for inclusion availability
                     $sectionName = $k;
+                    $section = '';
                     if (is_array($v)){
-                        $array_size= count($v);     // MOO-1808 determine size of array
-                        //MOO-1808 code to parse through an Array of data structures
-                        foreach($cataloguedata->$sectionName as $k => $v){
-                            $index = $k;
-                            if ($v instanceof stdClass){
-                                $stdClass = json_decode(json_encode($v));
-                                foreach($stdClass as $k => $v){
-                                    $k = Substr($sectionName,0,-1) .$k .$index;
-                                    write_to_database($k, $v, $modulecode, $academicyear);
+                        if (empty($v)){
+                            write_to_database($sectionName, 0, $modulecode, $academicyear);
+                        } else{
+                            write_to_database($sectionName, 1, $modulecode, $academicyear);
+                        }                      
+                        $array = json_decode(json_encode($v), true);               
+                                       
+                        foreach($array as $index => $value){                          
+                            $subarray = json_decode(json_encode($value), true);
+                            
+                            if ((count($subarray['second']['courses'])) > 0){
+                                foreach($subarray as $k => $v){
+                                    $section = $subarray['first'];
+                                    if (is_array($v)){
+                                        foreach($v as $key => $val){                                          
+                                            if (!(empty($val))){
+                                                if($key == 'courses'){
+                                                    foreach($val as &$value){   
+                                                        if ((count($value['routes'])) == 1){                                                          
+                                                            $value['courseName'] = 'Year ' . $value['routes'][0]['block'] .' of ' .$value['courseName'];
+                                                            unset($value['routes']);                                                                                                                     
+                                                        }
+                                                        write_to_database($section, serialize($val), $modulecode, $academicyear);
+                                                    }
+                                                } else{
+                                                   $section = $section .$key;
+                                                    foreach($subarray['second']['comments'] as $k => $v){
+                                                        write_to_database($section, $v, $modulecode, $academicyear);
+                                                    }                                                   
+                                                }                                            
+                                            }
+                                        }
+                                    }                                   
                                 }
+                            }
+                            else{
+                                $section = $subarray['first'];
+                                foreach($subarray['second']['comments'] as $k => $v){
+                                    $newArray = array();
+                                    $newArray[0]['courseName'] = $v;
+                                    $newArray[0]['courseCode'] = '';
+                                }
+                                write_to_database($section, serialize($newArray), $modulecode, $academicyear);
                             }
                         }
                     }
+                    break;
+                
+                case 'preRequisiteModules':
+                case 'studyAmounts':
+                case 'postRequisiteModules': 
+                case 'antiRequisiteModules':
                     
-                case ($k == 'assessmentGroups'):
+                    $sectionName = $k;
+                    if (is_array($v)){
+                        //MOO-1808 code to parse through an Array of data structures
+                        $array = json_decode(json_encode($v), true);
+                        
+                        foreach($array as &$value){
+                            
+                            if (isset($value['requiredDescription'])){
+                                $value['requiredDescription'] = extract_course_weightings($value['requiredDescription'], $cataloguedata->totalStudyHours); 
+                            }                          
+                        }
+  
+                        $encoded_serialized_string = serialize($array); 
+                        
+                        write_to_database($sectionName, $encoded_serialized_string, $modulecode, $academicyear);
+                    }   
+                    break;
+                    
+                case 'assessmentGroups':
                     $sectionName = $k;
                     $array = array();$subArray = array();
-                                        if (is_array($v)){
+                        if (is_array($v)){
                         foreach($cataloguedata->$sectionName as $k => $v){
                             if ($v instanceof stdClass){
                                 if ($k == 0){
-                                    $sectionName = "assesment";
+                                    $sectionName = "assessments";                                         
                                 } else{
                                     $sectionName = "resit";
                                 }
-                                foreach($cataloguedata->assessmentGroups[$k] as $k => $v){
-                                    if(is_array($v)){
-                                        if ($k == 'components'){
-                                            for ($x = 0; $x <=  count($v)-1; $x++){
-                                                $subArray = $v[$x];
-                                                foreach($subArray as $key => $value){
-                                                    if (($key == 'assessmentPaperRequirements') && (is_array($value))){
-                                                        foreach($value as $val){
-                                                            $k = $sectionName .'GrpComments'."$x";
-                                                            write_to_database($k, $val, $modulecode, $academicyear);
-                                                        }
-                                                    } else{
-                                                        $k = $sectionName .'Grp' .$key ."$x";
-                                                        write_to_database($k, $value, $modulecode, $academicyear);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    } else{
-                                        $k = $sectionName .$k ;
-                                        write_to_database($k, $v, $modulecode, $academicyear);
-                                    }
-                                }
+                                if($v instanceof stdClass){
+                                    $array = json_decode(json_encode($v), true);
+                                    foreach($array as $k => $val){
+                                        if (is_array($val)){                                          
+                                            $encoded_serialized_string = serialize($val);
+                                            write_to_database($sectionName, $encoded_serialized_string, $modulecode, $academicyear);                                          
+                                        } else{                                  
+                                            write_to_database($sectionName .$k, $val, $modulecode, $academicyear);                                          
+                                        } 
+                                    } 
+                                    
+                                }                          
                             }                            
                         }
                     }
+                    break;
                 }
           }
           // MOO-1808 Insert new data from JSON into database: logic to insert all root data in json file.
@@ -183,7 +233,9 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                * MOO 1935 Modified else code to fix presentation of information as separated paragraphs.
                */
               if (($k == "outlineSyllabus") || ($k == "indicativeReadingList") || ($k == "aims") || ($k == "transferableSkills") || ($k == "introductoryDescription") || ($k == "subjectSpecificSkills") || ($k == "privateStudyDescription")){
-                  if (!(is_null($v))){  /* MOO 2019 remove any null values */
+                  
+                  if ((!(is_null($v))) && (strlen($v) >= 2)){  /* MOO 2019 remove any null values */
+                      
                       $value = implode('<br />', expand_array($v));
                       write_to_database($k, $value, $modulecode, $academicyear);                     
                   } else{
@@ -296,9 +348,9 @@ function url_extract($value){
  * takes the parameter name, value and total value to express as percentage
  */
 function extract_course_weightings($v, $totalVal){
-        
+    
     if (stripos($v, 'session')!= 0){
-        $numSess = intval(substr($v,0,stripos($v, 'session')-1));
+        $numSess = intval(substr($v,0, stripos($v, 'session')-1));
             if (stripos($v, 'hour')<>0){
                 if (stripos($v, 'minute')>0){
                     $valSessHrs = intval(trim(substr($v, stripos($v, 'hour')-3,2),' '));
@@ -325,3 +377,11 @@ function extract_course_weightings($v, $totalVal){
 
     return $v;
 }
+function stdToArray($obj){
+  $reaged = (array)$obj;
+  foreach($reaged as $key => &$field){
+    if(is_object($field))$field = stdToArray($field);
+  }
+  return $reaged;
+}
+

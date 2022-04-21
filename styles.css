@@ -76,6 +76,12 @@ and open the template in the editor.
     list-style-type: disc; 
     display: list-item; 
 }
+
+.bulletcircle{
+    list-style-position: outside;
+    list-style-type: circle;
+    display: list-item;
+}
 .italized{
     font-style: italic;
 }
@@ -83,6 +89,10 @@ and open the template in the editor.
 .bolded_italized{
     font-style: italic;
     color: #002f8f;
+}
+
+.normal_paragraph{
+    line-height: 1.0;
 }
 
 .bolded{
@@ -107,8 +117,8 @@ and open the template in the editor.
 }
 
 .indented{
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
 
 .alertinformation:empty {
@@ -116,9 +126,6 @@ and open the template in the editor.
     visibility: hidden; 
 }
 
-.italized{
-    font-style: italic;
-}
 
 .bolded_italized{
     font-style: italic;
@@ -394,4 +401,12 @@ and open the template in the editor.
 .urllinks{
     font-size: small;
     font-style: italic;
+}
+
+.par_small{
+    line-height: 2 ;
+    margin-top: 0 ;
+    margin-bottom: 0 ;
+    color: darkblue;
+    font-weight: bold;
 }

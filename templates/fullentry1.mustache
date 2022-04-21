@@ -16,7 +16,7 @@
             <h5 class="display-5"> Number of Credits: {{ creditValue }}</h5>
             <h5 class="display-5"> Academic Year:  {{ academicyear }}</h5>
             
-            <hr>
+            <hr>           
 
             <div class="accordion-toggle" id="accordionEx" role="tablist" aria-multiselectable="true">
                 <!-- Accordion card -->
@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Module Aims</p>
                             <div class="indented">
-                                {{#principal_aims}} <p class="justified"> {{.}} </p> {{/principal_aims}}
+                                {{#principal_aims}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/principal_aims}}
                             </div>
                         </div>
                     </div>
@@ -55,60 +55,41 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Study Requirements</p>
                             <table class="fancy-table">
-                            <tr>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Duration</th>
-                            </tr>
-                            <tr>{{#studyAmounttype0}}
-                                <td> {{ studyAmounttype0 }} </td>
-                                <td> {{ studyAmountrequiredDescription0 }} </td>
-                                <td> {{ studyAmountrequiredDuration0 }}</td>
-                            {{/studyAmounttype0}}</tr>
-                            <tr>{{#studyAmounttype1}}
-                                <td> {{ studyAmounttype1 }} </td>
-                                <td> {{ studyAmountrequiredDescription1 }} </td>
-                                <td> {{ studyAmountrequiredDuration1 }}</td>
-                            {{/studyAmounttype1}}</tr>
-                            <tr>{{#studyAmounttype2}}
-                                <td> {{ studyAmounttype2 }} </td>
-                                <td> {{ studyAmountrequiredDescription2 }} </td>
-                                <td> {{ studyAmountrequiredDuration2 }}</td>
-                            {{/studyAmounttype2}}</tr>
-                            <tr>{{#studyAmounttype3}}
-                                <td> {{ studyAmounttype3 }} </td>
-                                <td> {{ studyAmountrequiredDescription3 }} </td>
-                                <td> {{ studyAmountrequiredDuration3 }}</td>
-                            {{/studyAmounttype3}}</tr>
-                            <tr>{{#studyAmounttype4}}
-                                <td> {{ studyAmounttype4 }} </td>
-                                <td> {{ studyAmountrequiredDescription4 }} </td>
-                                <td> {{ studyAmountrequiredDuration4 }}</td>
-                            {{/studyAmounttype4}}</tr>
-                            <tr>{{#studyAmounttype5}}
-                                <td> {{ studyAmounttype5 }} </td>
-                                <td> {{ studyAmountrequiredDescription5 }} </td>
-                                <td> {{ studyAmountrequiredDuration5 }}</td>
-                            {{/studyAmounttype5}}</tr>
-                            <tfoot>
                                 <tr>
-                                    <td> Total Study Hours </td>
-                                    <td> {{ totalStudyHours }} Hours </td>
-                                    <td> PT{{ totalStudyHours }} </td> 
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Duration</th>
                                 </tr>
-                            </tfoot>
-                        </table>
+                                {{#studyAmounts}}<tr>
+                                    <td> {{ type }} </td>
+                                    <td> {{ requiredDescription }} </td>
+                                    <td> {{ requiredDuration }}</td>
+                                </tr>{{/studyAmounts}}
+                            
+                            
+                                <tfoot>
+                                    <tr>
+                                        <td> Total Study Hours </td>
+                                        <td> {{ totalStudyHours }} Hours </td>
+                                        <td> PT{{ totalStudyHours }} </td> 
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <p class="display-5 bolded">Private Study:</p>
+                            <div class="indented">
+                                {{#privateStudyDescription}} <p class="paragraph-list"> {{.}} </p> {{/privateStudyDescription}}
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-header" role="tab" id="heading3">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id3}}" aria-expanded="false" aria-controls="{{id3}}">
-                            <h6 class="mb-0">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="heading3">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id3}}" aria-expanded="false" aria-controls="{{id3}}">
+                                <h6 class="mb-0">
                                 Outline Syllabus <i class="fa fa-chevron-down pull-right"></i>
-                            </h6>
-                        </a>
-                    </div>
+                                </h6>
+                            </a>
+                        </div>
                     <div id="{{id3}}" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx">
                         <div class="card-body">
                             <p class="display-5 bolded">Outline Syllabus</p>
@@ -217,186 +198,68 @@
                                             <th> Weight </th>
                                             <th> Description </th>
                                         </tr>
-                                        <tr>{{#assesmentGrpname0}}
-                                            <td> {{ assesmentGrptype0 }} </<td>
-                                            <td> {{ assesmentGrpname0 }} </<td>
-                                            <td> {{ assesmentGrplength0 }} </<td>
-                                            <td> {{ assesmentGrpweighting0 }} </<td>
-                                            <td> {{ assesmentGrpdescription0 }} </td>
-                                        {{/assesmentGrpname0}}</tr>
-                                        <tr>{{#assesmentGrpname1}}
-                                            <td> {{assesmentGrptype1}} </td>
-                                            <td> {{ assesmentGrpname1 }} </td>
-                                            <td> {{ assesmentGrplength1 }} </td>
-                                            <td> {{ assesmentGrpweighting1 }} </td>
-                                            <td> {{ assesmentGrpdescription1 }} </td>
-                                        {{/assesmentGrpname1}}</tr>
-                                        <tr>{{#assesmentGrpname2}}
-                                            <td> {{assesmentGrptype2}} </td>
-                                            <td> {{ assesmentGrpname2 }} </td>
-                                            <td> {{ assesmentGrplength2 }} </td>
-                                            <td> {{ assesmentGrpweighting2 }} </td>
-                                            <td> {{ assesmentGrpdescription2 }}  </td>
-                                        {{/assesmentGrpname2}}</tr>
-                                        <tr>{{#assesmentGrpname3}}
-                                            <td> {{assesmentGrptype3}} </td>
-                                            <td> {{ assesmentGrpname3 }} </td>
-                                            <td> {{ assesmentGrplength3 }} </td>
-                                            <td> {{ assesmentGrpweighting3 }} </td>
-                                            <td> {{ assesmentGrpdescription3 }} </td>
-                                        {{/assesmentGrpname3}}</tr>
-                                        <tr>{{#assesmentGrpname4}}
-                                            <td> {{assesmentGrptype4}} </td>
-                                            <td> {{ assesmentGrpname4 }} </td>
-                                            <td> {{ assesmentGrplength4 }} </td>
-                                            <td> {{ assesmentGrpweighting4 }} </td>
-                                            <td> {{ assesmentGrpdescription4 }} </td>
-                                        {{/assesmentGrpname4}}</tr>
-                                        <tr>{{#assesmentGrpname5}}
-                                            <td>{{ assesmentGrptype5 }}</td>
-                                            <td>{{ assesmentGrpname5  }}</td>
-                                            <td>{{ assesmentGrplength5 }}</td>
-                                            <td>{{ assesmentGrpweighting5 }}</td>
-                                            <td>{{ assesmentGrpdescription5 }}  </td></td>
-                                        {{/assesmentGrpname5}}</tr>
-                                        <tr>{{#assesmentGrpname6}}
-                                            <td>{{ assesmentGrptype6 }}</td>
-                                            <td>{{ assesmentGrpname6  }}</td>
-                                            <td>{{ assesmentGrplength6 }}</td>
-                                            <td>{{ assesmentGrpweighting6 }}</td>
-                                            <td>{{ assesmentGrpdescription6 }} </td>
-                                        {{/assesmentGrpname6}}</tr>
-                                        <tr>{{#assesmentGrpname7}}
-                                            <td>{{ assesmentGrptype7 }}</td>
-                                            <td>{{ assesmentGrpname7  }}</td>
-                                            <td>{{ assesmentGrplength7 }}</td>
-                                            <td>{{ assesmentGrpweighting7 }}</td>
-                                            <td>{{ assesmentGrpdescription7 }}  </td>
-                                        {{/assesmentGrpname7}}</tr>
-                                        <tr>{{#assesmentGrpname8}}
-                                            <td>{{ assesmentGrptype8 }}</td>
-                                            <td>{{ assesmentGrpname8  }}</td>
-                                            <td>{{ assesmentGrplength8 }}</td>
-                                            <td>{{ assesmentGrpweighting8 }}</td>
-                                            <td>{{ assesmentGrpdescription8 }}</td>
-                                        {{/assesmentGrpname8}}</tr>
-                                        <tr>{{#assesmentGrpname9}}
-                                            <td>{{ assesmentGrptype9 }}</td>
-                                            <td>{{ assesmentGrpname9  }}</td>
-                                            <td>{{ assesmentGrplength9 }}</td>
-                                            <td>{{ assesmentGrpweighting9 }}</td>
-                                            <td>{{ assesmentGrpdescription9 }}</td>
-                                        {{/assesmentGrpname9}}</tr>
-                                        <tr>{{#assesmentGrpname10}}
-                                            <td>{{ assesmentGrptype10 }}</td>
-                                            <td>{{ assesmentGrpname10  }}</td>
-                                            <td>{{ assesmentGrplength10 }}</td>
-                                            <td>{{ assesmentGrpweighting10 }}</td>
-                                            <td>{{ assesmentGrpdescription10 }} </td>
-                                        {{/assesmentGrpname10}}</tr>
-                                        <tr>{{#assesmentGrpname11}}
-                                            <td>{{ assesmentGrptype11 }}</td>
-                                            <td>{{ assesmentGrpname11  }}</td>
-                                            <td>{{ assesmentGrplength11 }}</td>
-                                            <td>{{ assesmentGrpweighting11 }}</td>
-                                            <td>{{ assesmentGrpdescription11 }}</td>
-                                        {{/assesmentGrpname11}}</tr>
-                                        <tr>{{#assesmentGrpname12}}
-                                            <td>{{ assesmentGrptype12 }}</td>
-                                            <td>{{ assesmentGrpname12  }}</td>
-                                            <td>{{ assesmentGrplength12 }}</td>
-                                            <td>{{ assesmentGrpweighting12 }}</td>
-                                            <td>{{ assesmentGrpdescription12 }}</td>
-                                        {{/assesmentGrpname12}}</tr>
-                                        <tr>{{#assesmentGrpname13}}
-                                            <td>{{ assesmentGrptype13 }}</td>
-                                            <td>{{ assesmentGrpname13  }}</td>
-                                            <td>{{ assesmentGrplength13 }}</td>
-                                            <td>{{ assesmentGrpweighting13 }}</td>
-                                            <td>{{ assesmentGrpdescription13 }}</td>
-                                        {{/assesmentGrpname13}}</tr>
+                                        {{#assessments}}<tr>
+                                            <td> {{ type }} </<td>
+                                            <td> {{ name }} </<td>
+                                            <td> {{ length }} </<td>
+                                            <td> {{ weighting }} </<td>
+                                            <td> {{ description }} </td>
+                                        </tr>{{/assessments}} 
                                     </table>                                 
                                 </section>
                             </div>
                             <p class="display-5 bolded">Assessment Resit Schedule</p>
                             <div class="indented">
                                 <table class="fancy-table">
-                                    <tr>{{#resitGrpname0}}
+                                    <tr>
                                         <th> Assessment Name </th>
                                         <th> Assessment Type </th>
                                         <th> Duration </th>
                                         <th> Weight </th>
                                         <th> Description </th>
-                                    {{/resitGrpname0}}</tr>
-                                    <tr>{{#resitGrpname0}}
-                                        <td> {{ resitGrptype0 }} </td>
-                                        <td> {{ resitGrpname0 }} </td>
-                                        <td> {{ resitGrplength0 }} </td>
-                                        <td> {{ resitGrpweighting0 }} </<td>
-                                        <td> {{ resitGrpdescription0 }} {{#resitGrpComments0}} - {{resitGrpComments0}} {{/resitGrpComments0}} </td>
-                                    {{/resitGrpname0}}</tr>
-                                    <tr>{{#resitGrpname1}}
-                                        <td> {{resitGrptype1}} </td>
-                                        <td> {{ resitGrpname1 }} </td>
-                                        <td> {{ resitGrpname1 }} </td>
-                                        <td> {{ resitGrpname1 }} </td>
-                                        <td> {{ resitGrpdescription1 }} {{#resitGrpComments1}} - {{resitGrpComments1}} {{/resitGrpComments1}} </td>
-                                    {{/resitGrpname1}}</tr>
-                                    <tr>{{#resitGrpname2}}
-                                        <td> {{ resitGrptype2 }} </td>
-                                        <td> {{ resitGrpname2 }} </td>
-                                        <td> {{ resitGrplength2 }} </td>
-                                        <td> {{ resitGrpweighting2 }} </td>
-                                        <td> {{ resitGrpdescription2 }} {{#resitGrpComments2}} - {{resitGrpComments2}} {{/resitGrpComments2}} </td>
-                                    {{/resitGrpname2}}</tr>
-                                    <tr>{{#resitGrpname3}}
-                                        <td> {{ resitGrptype3 }} </<d>
-                                        <td> {{ resitGrpname3 }} </td>
-                                        <td> {{ resitGrplength3 }} </td>
-                                        <td> {{ resitGrpweighting3}} </td>
-                                        <td> {{ resitGrpdescription3 }} {{#resitGrpComments3}} - {{resitGrpComments3}} {{/resitGrpComments3}} </td>
-                                    {{/resitGrpname3}}</tr>
-                                    <tr>{{#resitGrpname4}}
-                                        <td> {{ resitGrptype4 }} </td>
-                                        <td> {{ resitGrpname4 }} </td>
-                                        <td> {{ resitGrplength4 }} </td>
-                                        <td> {{ resitGrpweighting4}} </td>
-                                        <td> {{ resitGrpdescription4 }} {{#resitGrpComments4}} - {{resitGrpComments4}} {{/resitGrpComments4}} </td>
-                                    {{/resitGrpname4}}</tr>
+                                    </tr>
+                                    <tr>{{#resit}}
+                                        <td> {{ type }} </td>
+                                        <td> {{ name }} </td>
+                                        <td> {{ length }} </td>
+                                        <td> {{ weighting }} </<td>
+                                        <td> {{ description }} </td>
+                                    {{/resit}}</tr>                                  
                                 </table>
+                            </div>
+                            <p class="display-5 bolded">Assessment Summary</p>
+                            <div class="indented">
+                                {{#assessmentstotalExamWeighting}}<div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Exam Weight:</div>
+                                    <div class="col-sm-2 italized font_small">{{assessmentstotalExamWeighting}} %</div>
+                                    </div>{{/assessmentstotalExamWeighting}}
+                                     {{#assessmentstotalCourseworkWeighting}}<div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Course Weight:</div>
+                                    <div class="col-sm-2 italized font_small ">{{assessmentstotalCourseworkWeighting}} %</div>
+                                    </div>{{/assessmentstotalCourseworkWeighting}}
+                                    {{#resittotalExamWeighting}}<div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Resit Exam Weight:</div>
+                                    <div class="col-sm-2 italized font_small ">{{resittotalExamWeighting}} %</div>
+                                </div>{{/resittotalExamWeighting}}
+                                {{#resittotalCourseworkWeighting}}<div class="row">
+                                    <div class="col-sm-2 bolded_italized font_small">Total Resit Course Weight:</div>
+                                    <div class="col-sm-2 italized font_small ">{{resittotalCourseworkWeighting}} %</div>
+                                </div>{{/resittotalCourseworkWeighting}}
                             </div>
                         </div>
                     </div>
-
+                    
                 </div>
 
                 <div class="card">
                     <div class="card-header" role="tab" id="heading8">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id10}}" aria-expanded="false" aria-controls="{{id10}}">
                             <h6 class="mb-0">
-                                Private Study Description <i class="fa fa-chevron-down pull-right"></i>
-                            </h6>
-                        </a>
-                    </div>
-                    <div id="{{id10}}" class="collapse" role="tabpanel" aria-labelledby="heading8" data-parent="#accordionEx">
-                        <div class="card-body">
-                            <p class="display-5 bolded">Private Study Description</p>
-                            <div class="indented">
-                                {{#privateStudyDescription}} <p class="paragraph-list"> {{.}} </p> {{/privateStudyDescription}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" role="tab" id="heading9">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id11}}" aria-expanded="false" aria-controls="{{id11}}">
-                            <h6 class="mb-0">
                                 Introductory Description <i class="fa fa-chevron-down pull-right"></i>
                             </h6>
                         </a>
                     </div>
-                    <div id="{{id11}}" class="collapse" role="tabpanel" aria-labelledby="heading9" data-parent="#accordionEx">
+                    <div id="{{id10}}" class="collapse" role="tabpanel" aria-labelledby="heading9" data-parent="#accordionEx">
                         <div class="card-body">
                             <p class="display-5 bolded">Introductory Description</p>
                             <div class="indented">
@@ -405,6 +268,223 @@
                         </div>
                     </div>
                 </div>
+
+                {{#availability}}<div class="card">
+                    <div class="card-header" role="tab" id="heading9">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id11}}" aria-expanded="false" aria-controls="{{id11}}">
+                            <h6 class="mb-0">
+                                Availability <i class="fa fa-chevron-down pull-right"></i>
+                            </h6>
+                        </a>
+                    </div>
+                    <div id="{{id11}}" class="collapse" role="tabpanel" aria-labelledby="heading9" data-parent="#accordionEx">
+                        <div class="card-body">
+
+                            {{! Pre-requisite modules: }}
+                            {{#ispreRequisiteModules}}<div class="indented">
+                                <h6 class="display-5 bolded">Pre-requisite modules</h6>
+                                <div class="indented">
+                                    <p>To take this module, you must have passed: </p>
+                                    <p>Any of </p>
+                                    <p class="paragraph-list bulletlist">  {{code}} </p> 
+                                </div>
+                            </div>{{/ispreRequisiteModules}}
+
+                            {{! Other-prerequisite modules: }}
+                            {{#otherPreRequisites}}<div class="indented">
+                                <h6 class="display-5 bolded">Other Prerequisite modules</h6>
+                                <div class="indented">
+                                    <p class="paragraph-list bulletlist"> {{otherPreRequisites}} </p> 
+                                </div>
+                            </div>{{/otherPreRequisites}}
+
+                            {{! Post-requisite modules: }}
+                            <div class="indented">
+                                {{#ispostRequisiteModules}}<p class="display-5 bolded">Post-requisite modules</p>
+                                <p class="indented">If you pass this module, you can take:</p>{{/ispostRequisiteModules}}
+                                <div class="indented">
+                                    {{#postRequisiteModules}} <p class="paragraph-list bulletlist"> {{code}} {{title}} </p> {{/postRequisiteModules}}
+                                </div>
+                            </div>
+
+                            {{! Anti Requisite Modules }}
+                            {{#isantiRequisiteModules}}<div class="indented">
+                                <p class="display-5 bolded">Anti Requisite Modules</p>
+                                <div class="indented">
+                                    <p class="indented">If you take this module, you cannot also take: </p>
+                                    {{#antiRequisiteModules}} <p class="paragraph-list bulletlist"> {{code}} {{title}} </p> {{/antiRequisiteModules}}
+                                </div>
+                            </div>{{/isantiRequisiteModules}}
+
+                            {{! Courses }}
+                            
+                            {{#isCore}}<div class="indented">
+                                <p class='display-5 bolded'>Courses</p>
+                                <h6 class='display-5'>This module is Core for</h6>
+                                <div class="indented">
+                                    {{#Core}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} : {{ courseName }} </p>
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/Core}}
+                                </div>
+                            </div>{{/isCore}}
+
+                            {{! This module is Core optional for: }}
+                            {{#isCoreOptional}}<div class='indented'>
+                                <h6 class='display-5'>This module is Core Optional for:</h6>
+                                <div class="indented">
+                                    {{#CoreOption}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/CoreOption}}
+                                </div>
+                            </div>{{/isCoreOptional}}
+
+                            {{! This module is Optional for }}
+                            {{#isOptional}}<div class='indented'>
+                                <h6 class='display-5'>This module is Optional for:</h6>
+                                <div class="indented">
+                                    {{#Optional}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/Optional}}
+                                </div>
+                            </div>{{/isOptional}} 
+
+                            {{! This module is Core Option list A for: }}
+                            {{#isCoreOptionListA}}<div class='indented'>
+                                <h6 class='display-5'>This module is Core Option list A for:</h6>
+                                <div class="indented">
+                                    {{#CoreOptionListA}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/CoreOptionListA}}
+                                </div>
+                            </div>{{/isCoreOptionListA}}
+
+                            {{! This module is Core Option list B for: }}
+                            {{#isCoreOptionListB}}<div class='indented'>
+                                <h6 class='display-5'>This module is Core Option list B for:</h6>
+                                <div class="indented">
+                                    {{#CoreOptionListB}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/CoreOptionListB}}
+                                </div>
+                            </div>{{/isCoreOptionListB}}
+
+                            {{! This module is Core Option list C for: }}
+                            {{#isCoreOptionListC}}<div class='indented'>
+                                <h6 class='display-5'>This module is Core Option list C for:</h6>
+                                <div class="indented">
+                                    {{#CoreOptionListC}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/CoreOptionListC}}
+                                </div>
+                            </div>{{/isCoreOptionListC}}
+
+                            {{! This module is Core Option list D for: }}
+                            {{#isCoreOptionListD}}<div class='indented'>
+                                <h6 class='display-5'>This module is Core Option list D for:</h6>
+                                <div class="indented">
+                                    {{#CoreOptionListD}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/CoreOptionListD}}
+                                </div>
+                            </div>{{/isCoreOptionListD}}
+
+                           {{! This module is Option list A for }}
+                           {{#isOptionalA}}<div class='indented'>
+                                <h6 class='display-5'>This module is Option list A for:</h6>
+                                <div class="indented">
+                                    {{#OptionListA}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/OptionListA}}
+                                </div>
+                            </div>{{/isOptionalA}}
+
+                            {{! This module is Option list B for }}
+                            {{#isOptionalB}}<div class='indented'>
+                                <h6 class='display-5'>This module is Option list B for:</h6>
+                                <div class="indented">
+                                    {{#OptionListB}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/OptionListB}}
+                                </div>
+                            </div>{{/isOptionalB}}
+
+                            {{! This module is Option list C for }}
+                            {{#isOptionListC}}<div class='indented'>
+                                <h6 class='display-5'>This module is Option list C for:</h6>
+                                <div class="indented">
+                                    {{#OptionListC}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/OptionListC}}
+                                </div>
+                            </div>{{/isOptionListC}}
+
+                            {{! This module is Option list G for }}
+                            {{#isOptionListG}}<div class='indented'>
+                                <h6 class='display-5'>This module is Option list G for:</h6>
+                                <div class="indented">
+                                    {{#OptionListG}}
+                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                        {{#routes}}
+                                            <div class="indented">
+                                                {{> mod_modulecatalogue/pagerow}}
+                                            </div>
+                                        {{/routes}}
+                                    {{/OptionListG}}
+                                </div>
+                            </div>{{/isOptionListG}}
+                        </div>
+                    </div>
+                </div>{{/availability}}
 
                 <div class="card">
                     <div class="card-header" role="tab" id="heading10">
