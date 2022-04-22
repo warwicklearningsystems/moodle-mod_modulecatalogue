@@ -189,7 +189,12 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                             
                             if (isset($value['requiredDescription'])){
                                 $value['requiredDescription'] = extract_course_weightings($value['requiredDescription'], $cataloguedata->totalStudyHours); 
-                            }                          
+                            } 
+                            if (($k == 'preRequisiteModules') || ($k == 'postRequisiteModules')){
+                                $urlLink = "https://courses.warwick.ac.uk/modules/" .$academicyear .'/' .$value['code'] ;
+                                $value['courseURL'] = $urlLink;
+                            }
+                            
                         }
   
                         $encoded_serialized_string = serialize($array); 

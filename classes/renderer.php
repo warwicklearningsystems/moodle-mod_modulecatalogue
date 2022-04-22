@@ -48,6 +48,7 @@ class cataloguedata implements \templatable, \renderable {
     
        
     foreach($cataloguedata as $k => $v) {
+        
         if(substr($k, 1, 0) == 'assesmentGrpname'){
             $x = $x + 1;
         }
@@ -154,7 +155,6 @@ class cataloguedata implements \templatable, \renderable {
       $all_urls = "";   //MOO-1983 initialize URL link extracted field.
       
     $data = array(
-        'classes'     => '',
         'principal_aims' => explode(($delimiter), $this->aims),
         'department' => $this->departmentname,
         'facultyname' => $this->facultyname,
