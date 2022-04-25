@@ -126,17 +126,6 @@ and open the template in the editor.
     visibility: hidden; 
 }
 
-
-.bolded_italized{
-    font-style: italic;
-    color: #002f8f;
-}
-
-.bolded{
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
 .font_small{
     font-size: 0.85em;
 }
@@ -404,9 +393,5 @@ and open the template in the editor.
 }
 
 .par_small{
-    line-height: 2 ;
-    margin-top: 0 ;
-    margin-bottom: 0 ;
-    color: darkblue;
-    font-weight: bold;
+    margin-top: 0.8em;
 }

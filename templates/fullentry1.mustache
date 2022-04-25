@@ -280,30 +280,35 @@
                     <div id="{{id11}}" class="collapse" role="tabpanel" aria-labelledby="heading9" data-parent="#accordionEx">
                         <div class="card-body">
 
+                            {{! Other-prerequisite modules: }}
+                            {{#otherPreRequisites}}<div class="indented">
+                                <h6 class="display-5 bolded">Pre-requisites</h6>
+                                <div class="indented">
+                                    <div class="indented">
+                                        <p class="paragraph-list bulletlist"> {{otherPreRequisites}} </p> 
+                                    </div>
+                                </div>
+                            </div>{{/otherPreRequisites}}
+
                             {{! Pre-requisite modules: }}
                             {{#ispreRequisiteModules}}<div class="indented">
                                 <h6 class="display-5 bolded">Pre-requisite modules</h6>
                                 <div class="indented">
-                                    <p>To take this module, you must have passed: </p>
-                                    <p>Any of </p>
-                                    <p class="paragraph-list bulletlist">  {{code}} </p> 
+                                    <div style='italized'>To take this module, you must have passed: <Br> All of</div>
+                                    <div class="indented">
+                                        {{#preRequisiteModules}} 
+                                            <a href= {{courseURL}} > <p class="paragraph-list bulletlist">  {{code}} {{title}}  </p> </a>                                          
+                                        {{/preRequisiteModules}} 
+                                    </div>
                                 </div>
                             </div>{{/ispreRequisiteModules}}
-
-                            {{! Other-prerequisite modules: }}
-                            {{#otherPreRequisites}}<div class="indented">
-                                <h6 class="display-5 bolded">Other Prerequisite modules</h6>
-                                <div class="indented">
-                                    <p class="paragraph-list bulletlist"> {{otherPreRequisites}} </p> 
-                                </div>
-                            </div>{{/otherPreRequisites}}
 
                             {{! Post-requisite modules: }}
                             <div class="indented">
                                 {{#ispostRequisiteModules}}<p class="display-5 bolded">Post-requisite modules</p>
                                 <p class="indented">If you pass this module, you can take:</p>{{/ispostRequisiteModules}}
                                 <div class="indented">
-                                    {{#postRequisiteModules}} <p class="paragraph-list bulletlist"> {{code}} {{title}} </p> {{/postRequisiteModules}}
+                                    {{#postRequisiteModules}} <div class="indented"> <p class="paragraph-list bulletlist"> {{code}} {{title}} </p> </div> {{/postRequisiteModules}}
                                 </div>
                             </div>
 
@@ -312,177 +317,157 @@
                                 <p class="display-5 bolded">Anti Requisite Modules</p>
                                 <div class="indented">
                                     <p class="indented">If you take this module, you cannot also take: </p>
-                                    {{#antiRequisiteModules}} <p class="paragraph-list bulletlist"> {{code}} {{title}} </p> {{/antiRequisiteModules}}
+                                    {{#antiRequisiteModules}} <div class="indented"> <p class="paragraph-list bulletlist"> {{code}} {{title}} </p> </div> {{/antiRequisiteModules}}
                                 </div>
                             </div>{{/isantiRequisiteModules}}
 
                             {{! Courses }}
-                            
-                            {{#isCore}}<div class="indented">
+                            <div class="indented">
                                 <p class='display-5 bolded'>Courses</p>
-                                <h6 class='display-5'>This module is Core for</h6>
-                                <div class="indented">
-                                    {{#Core}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} : {{ courseName }} </p>
-                                        {{#routes}}
-                                            <div class="indented">
+                               
+                                {{#isCore}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Core for:</h6>
+                                    <div class="indented">
+                                        {{#Core}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/Core}}
-                                </div>
-                            </div>{{/isCore}}
+                                            </div>{{/routes}}
+                                        {{/Core}}
+                                    </div>
+                                </div>{{/isCore}}
 
-                            {{! This module is Core optional for: }}
-                            {{#isCoreOptional}}<div class='indented'>
-                                <h6 class='display-5'>This module is Core Optional for:</h6>
-                                <div class="indented">
-                                    {{#CoreOption}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Core optional for: }}
+                                {{#isCoreOptional}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Core Optional for:</h6>
+                                    <div class="indented">
+                                        {{#CoreOption}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/CoreOption}}
-                                </div>
-                            </div>{{/isCoreOptional}}
+                                            </div>{{/routes}}
+                                        {{/CoreOption}}
+                                    </div>
+                                </div>{{/isCoreOptional}}
 
-                            {{! This module is Optional for }}
-                            {{#isOptional}}<div class='indented'>
-                                <h6 class='display-5'>This module is Optional for:</h6>
-                                <div class="indented">
-                                    {{#Optional}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Optional for }}
+                                {{#isOptional}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Optional for:</h6>
+                                    <div class="indented">
+                                        {{#Optional}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/Optional}}
-                                </div>
-                            </div>{{/isOptional}} 
+                                            </div>{{/routes}}
+                                        {{/Optional}}
+                                    </div>
+                                </div>{{/isOptional}}
 
-                            {{! This module is Core Option list A for: }}
-                            {{#isCoreOptionListA}}<div class='indented'>
-                                <h6 class='display-5'>This module is Core Option list A for:</h6>
-                                <div class="indented">
-                                    {{#CoreOptionListA}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Core Option list A for: }}
+                                {{#isCoreOptionListA}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Core Option list A for:</h6>
+                                    <div class="indented">
+                                        {{#CoreOptionListA}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/CoreOptionListA}}
-                                </div>
-                            </div>{{/isCoreOptionListA}}
+                                            </div>{{/routes}}
+                                        {{/CoreOptionListA}}
+                                    </div>
+                                </div>{{/isCoreOptionListA}}
 
-                            {{! This module is Core Option list B for: }}
-                            {{#isCoreOptionListB}}<div class='indented'>
-                                <h6 class='display-5'>This module is Core Option list B for:</h6>
-                                <div class="indented">
-                                    {{#CoreOptionListB}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Core Option list B for: }}
+                                {{#isCoreOptionListB}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Core Option list B for:</h6>
+                                    <div class="indented">
+                                        {{#CoreOptionListB}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/CoreOptionListB}}
-                                </div>
-                            </div>{{/isCoreOptionListB}}
+                                            </div>{{/routes}}
+                                        {{/CoreOptionListB}}
+                                    </div>
+                                </div>{{/isCoreOptionListB}}
 
-                            {{! This module is Core Option list C for: }}
-                            {{#isCoreOptionListC}}<div class='indented'>
-                                <h6 class='display-5'>This module is Core Option list C for:</h6>
-                                <div class="indented">
-                                    {{#CoreOptionListC}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Core Option list C for: }}
+                                {{#isCoreOptionListC}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Core Option list C for:</h6>
+                                    <div class="indented">
+                                        {{#CoreOptionListC}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/CoreOptionListC}}
-                                </div>
-                            </div>{{/isCoreOptionListC}}
+                                            </div>{{/routes}}
+                                        {{/CoreOptionListC}}
+                                    </div>
+                                </div>{{/isCoreOptionListC}}
 
-                            {{! This module is Core Option list D for: }}
-                            {{#isCoreOptionListD}}<div class='indented'>
-                                <h6 class='display-5'>This module is Core Option list D for:</h6>
-                                <div class="indented">
-                                    {{#CoreOptionListD}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Core Option list D for: }}
+                                {{#isCoreOptionListD}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Core Option list D for:</h6>
+                                    <div class="indented">
+                                        {{#CoreOptionListD}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/CoreOptionListD}}
-                                </div>
-                            </div>{{/isCoreOptionListD}}
+                                            </div>{{/routes}}
+                                        {{/CoreOptionListD}}
+                                    </div>
+                                </div>{{/isCoreOptionListD}}
 
-                           {{! This module is Option list A for }}
-                           {{#isOptionalA}}<div class='indented'>
-                                <h6 class='display-5'>This module is Option list A for:</h6>
-                                <div class="indented">
-                                    {{#OptionListA}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Option list A for }}
+                                {{#isOptionalA}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Option list A for:</h6>
+                                    <div class="indented">
+                                        {{#OptionListA}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/OptionListA}}
-                                </div>
-                            </div>{{/isOptionalA}}
+                                            </div>{{/routes}}
+                                        {{/OptionListA}}
+                                    </div>
+                                </div>{{/isOptionalA}}
 
-                            {{! This module is Option list B for }}
-                            {{#isOptionalB}}<div class='indented'>
-                                <h6 class='display-5'>This module is Option list B for:</h6>
-                                <div class="indented">
-                                    {{#OptionListB}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Option list B for }}
+                                {{#isOptionalB}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Option list B for:</h6>
+                                    <div class="indented">
+                                        {{#OptionListB}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/OptionListB}}
-                                </div>
-                            </div>{{/isOptionalB}}
+                                            </div>{{/routes}}
+                                        {{/OptionListB}}
+                                    </div>
+                                </div>{{/isOptionalB}}
 
-                            {{! This module is Option list C for }}
-                            {{#isOptionListC}}<div class='indented'>
-                                <h6 class='display-5'>This module is Option list C for:</h6>
-                                <div class="indented">
-                                    {{#OptionListC}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Option list C for }}
+                                {{#isOptionalC}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Option list C for:</h6>
+                                    <div class="indented">
+                                        {{#OptionListC}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/OptionListC}}
-                                </div>
-                            </div>{{/isOptionListC}}
+                                            </div>{{/routes}}
+                                        {{/OptionListC}}
+                                    </div>
+                                </div>{{/isOptionalC}}
 
-                            {{! This module is Option list G for }}
-                            {{#isOptionListG}}<div class='indented'>
-                                <h6 class='display-5'>This module is Option list G for:</h6>
-                                <div class="indented">
-                                    {{#OptionListG}}
-                                        <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
-                                        {{#routes}}
-                                            <div class="indented">
+                                {{! This module is Option list G for }}
+                                {{#isOptionalG}}<div class='indented'>
+                                    <h6 class='display-5'>This module is Option list G for:</h6>
+                                    <div class="indented">
+                                        {{#OptionListG}}
+                                            <p class="paragraph-list bulletlist"> {{courseCode}} {{ courseName }} </p> 
+                                            {{#routes}}<div class="indented">
                                                 {{> mod_modulecatalogue/pagerow}}
-                                            </div>
-                                        {{/routes}}
-                                    {{/OptionListG}}
-                                </div>
-                            </div>{{/isOptionListG}}
-                        </div>
+                                            </div>{{/routes}}
+                                        {{/OptionListG}}
+                                    </div>
+                                </div>{{/isOptionalG}}
+                            </div>
+                        </div>        
                     </div>
                 </div>{{/availability}}
 
