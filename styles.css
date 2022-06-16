@@ -17,18 +17,18 @@ and open the template in the editor.
     border-right: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem!important;
     margin-bottom:6px;
-    min-width: 70vw;
+    width: 70vw;
     background-color: transparent;
 }
 
 .tab_content_background{
     background-color: navy;
     min-height: 25px;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-position:right top;
     background-size: cover;
     background-image: url("pix/banner.jpg");
-	padding-top: 10px;
+    padding-top: 3px;
 }
 
 .background-set{
@@ -42,7 +42,6 @@ and open the template in the editor.
 
 .rounded{
     background-color:#e2f3fb;
-    background-image:url('https://warwick.ac.uk/study/cll/currentstudents/headtemp1-bot-bg.png');
     background-repeat: no-repeat, no-repeat;
     background-position:right bottom, right top;
     min-height: 320px;
@@ -53,7 +52,6 @@ and open the template in the editor.
     background-color:transparent;
     min-height: 220px;
     overflow:auto;
-    min-width: 65vw;
 }
 
 .tab-container-tabs{
@@ -127,10 +125,50 @@ and open the template in the editor.
 }
 
 .font_small{
-    font-size: 0.85em;
+    font-size: 0.90em;
 }
 
 /* MOO 1935 implementation see more*/
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked~.read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state~.read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked~.read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  color: white;
+  background: #00407A;
+  font-size: .9em;
+  line-height: 1.5;
+  border: 1px solid rgba(0, 162, 38, 0.55);
+  border-radius: .25em;
+  width: 100px;
+  text-align: center;
+}
+
+
 .read-more-content {
   max-height: 0;
   overflow: hidden;
@@ -150,6 +188,7 @@ and open the template in the editor.
   font-size: .8em;
   background: #000080;
   color: white;
+  
 }
 
 .read-more-toggle-label:after {
@@ -185,17 +224,16 @@ and open the template in the editor.
 
 .alertinformation {
     font-size: 0.88em;
-    background-color: #330099;
+    background-color: #00407A;
     text-align: justify;
     padding: 15px; 
     border-radius: 10px;
-    box-shadow: 7px 7px #acece8;
     border-width: 1px;
     border-style: solid;
     border-color: #86A5EC;
     margin-bottom: 10px;
     color: white;
-    width: 99%;
+    width: 98%;
 }
 
 /* MOO 2019 made changes to table 2 columns on first tab*/
@@ -283,12 +321,35 @@ and open the template in the editor.
     background-color: #def2f8;
 }
 
-@media screen and (max-width:500px) {
-  .fancy-table { font-size: x-small; }
+
+@media screen and (max-width: 500px) {
+    
+  .fancy-table {
+      font-size: x-small;
+      width: 150px;
+      overflow-x: scroll;
+  }
   .indented{padding-left: 2px;}
+  
   .column {
-        width: 100%;
+        width: 80%;
         word-wrap: break-word;
+    }
+      
+    .fancy-table th {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        text-align: left;
+        background-color: #000066;
+        color: white;
+    }
+/*MOO 2163 Introduced footer row table*/
+    .fancy-table tfoot{
+        padding-top: 3px;
+        padding-bottom: 3px;
+        text-align: left;
+        background-color:#e2f3fb;
+        color: darkblue;
     }
 }
 
@@ -387,6 +448,7 @@ and open the template in the editor.
     background-color: navy;
 }
 
+
 .urllinks{
     font-size: small;
     font-style: italic;
@@ -395,3 +457,6 @@ and open the template in the editor.
 .par_small{
     margin-top: 0.8em;
 }
+
+
+/*MOO-2419 changes for table to be rendered in mobile devices */

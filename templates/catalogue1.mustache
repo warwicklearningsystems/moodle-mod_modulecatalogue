@@ -3,22 +3,67 @@
     
 </head>
 
-<div id="allwmshead" class="wms-head-cll">
+<style>
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr {
+			display: block;
+		}
+
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+
+    		tr {
+      			margin: 0 0 1rem 0;
+    		}
+      
+    		tr:nth-child(odd) {
+      			background: #ccc;
+    		}
+    
+		td {
+			/* Behave  like a "row" */
+			border: none;
+			position: relative;
+			padding-left: 50%;
+		}
+
+		td:before {
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 0;
+			left: 6px;
+			width: 45%;
+			padding-right: 10px;
+			white-space: nowrap;
+		}	
+	}
+</style>
+
+<div id="allwmshead" class="wms-head-cll rounded">
     <div id="wmshead-content" class="p-3 p-md-4 view">
         <div id="head-temp-container" class="standard_rounded">
             {{#alert}}<div class="alertinformation">
                 {{#alertmessage}}<i class="fa fa-info-circle"> &nbsp </i>{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a> 
             </div>{{/alert}}
 
-            <h4 class="display-5">{{ code }}: {{ name }}</h4>
-            <p class='urllinks'>See Module Catalogue  <a href='{{catalogueurl }}'>{{catalogueurl}}</a></p>
+            <h2 class="course-cde">{{ code }}: {{ name }}</h2>
+            <p class='urllinks'> <a href= '{{catalogueurl }}'>See full module catalogue entry</a></p>
+
+            <hr>
             <h5 class="display-5"> Number of Credits: {{ creditValue }}</h5>
             <h5 class="display-5"> Academic Year:  {{ academicyear }}</h5>
-            <hr>
-
-            
 
             <div class="accordion-toggle" id="accordionEx" role="tablist" aria-multiselectable="true">
+            
+
                 <!-- Accordion card -->
                 <div class="card">
                     <div class="card-header" role="tab" id="heading1">
@@ -56,33 +101,29 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card">
-                    <div class="card-header" role="tab" id="heading3">
+                    <div class="card-header" role="tab" id="heading2">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id3}}" aria-expanded="false" aria-controls="{{id3}}">
                             <h6 class="mb-0">
                                 Indicative Reading List <i class="fa fa-chevron-down pull-right"></i>
                             </h6>
                         </a>
                     </div>
-
-                    <div id="{{id3}}" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx">
+                    <div id="{{id3}}" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx">
                         <div class="card-body">
-                            <p class="display-5 bolded">Indicative Reading List</p>
-                            <div class="indented">
-                                <article>
-                                    <div class="indented">{{#indicativeReadingListSummary}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingListSummary}}</div>
-                                        <input id="{{id4}}" class="read-more-toggle" type="checkbox">
-                                        <div class="read-more-content">
-                                        <div class="indented">{{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</div>
+                            <p class="display-5 bolded">Indicative Reading List</p>                        
+                            <div class="indented">                             
+                                <input type="checkbox" class="read-more-state" id="{{id4}}">
+                                    <div class="read-more-wrap " style="text-align: left"> {{#indicativeReadingListSummary}} <p class='paragraph-list bulletlist'>{{.}}</p> {{/indicativeReadingListSummary}}
+                                        <span class="read-more-target"> {{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</span>
                                     </div>
-                                </article>
-                                <label class="read-more-toggle-label" for="{{id4}}">Read </label>
-                                <div class="italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
+                                {{#indicativeReadingListQty}}<label for="{{id4}}" class="read-more-trigger"></label>{{/indicativeReadingListQty}}
                             </div>
                         </div>
                     </div>
                 </div>
+                               
                 
                 <div class="card">
                     <div class="card-header" role="tab" id="heading4">
@@ -97,16 +138,13 @@
                             <p class="display-5 bolded">Outline Syllabus</p>
                             <p class="paragraph-list"> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
                             <div class="indented">
-                                <article>
-                                    <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabusShort}}</div>
-                                        <input id="{{id6}}" class="read-more-toggle" type="checkbox">
-                                        <div class="read-more-content">
-                                        <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabus}}</div>
+                                 <input type="checkbox" class="read-more-state" id="{{id6}}">
+                                    <div class="read-more-wrap " style="text-align: left"> {{#outlineSyllabusShort}} <p class='paragraph-list'>{{.}}</p> {{/outlineSyllabusShort}}
+                                        <span class="read-more-target"> {{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</span>
                                     </div>
-                                </article>
-                                <label class="read-more-toggle-label" for="{{id6}}">Read </label>
+                                {{#outlineSyllabusQty}}<label for="{{id6}}" class="read-more-trigger"></label>{{/outlineSyllabusQty}}
                             </div>
-                        </div>
+                        </div>    
                     </div>
                 </div>
 
@@ -136,8 +174,8 @@
                                             <th> Description </th>
                                         </tr>
                                         {{#assessments}}<tr>
-                                            <td> {{type}} </<td>
-                                            <td> {{name}} </<td>
+                                            <td> {{ type }} </<td>
+                                            <td> {{ name }} </<td>
                                             <td> {{ length }} </<td>
                                             <td> {{ weighting }} </<td>
                                             <td> {{ description }} </td>
@@ -148,6 +186,8 @@
                                 </section>
                             </div>
                             <p class="display-5 bolded">Assessment Resit Schedule</p>
+                            
+
                             <div class="indented">
                                 <table class="fancy-table">
                                     <tr>
@@ -201,7 +241,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Subject Specific Skills</p>
                             <div class="indented">
-                                {{#subjectSpecificSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/subjectSpecificSkills}}
+                                {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
                             </div>
                         </div>
                     </div>
@@ -210,3 +250,4 @@
         </div>
     </div>
 </div>
+

@@ -50,15 +50,15 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        $TEMPLATEOPTIONS = array('fullentry1' => 'Official module content description',
-            'shortentry1' => 'Short module catalogue summary', 
-            'fancyentry' => 'Fancy summary',
-            'catalogue1' => 'Catalogue 1 entry');
+        $TEMPLATEOPTIONS = array('fancyentry' => 'Tabbed summary',
+            'fullentry1' => 'Full collapsed summary',
+            'catalogue1' => 'Short collapsed summary');
 
        // MOO-1813: list of options in dropdown list box. user presented in format xx/xx as in 20/21 but stored as xxxx as in 2020 as JSON data uses 4 digit years.
         $ACADEMICYEAROPTIONS = array(2019 => "19/20", 2020 => "20/21", 2021 => "21/22", 2022 => "22/23", 2023 => "23/24", 2024 => "24/25", 2025 => "25/26", 2026 => "26/27", 2027 => "27/28", 2028 => "28/29",2029 => "29/30", 2030 => "30/31");
         $mform->addElement('select', 'template', get_string('template', 'modulecatalogue'), $TEMPLATEOPTIONS);
         $mform->addHelpButton('template', 'template', 'modulecatalogue');
+        $mform->addRule('template', null, 'required', null, 'template');
         
         //MOO-1826 get course metadata to retrieve current default codes;
         $metadata = get_course_metadata($COURSE->id);
@@ -84,7 +84,7 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
         $mform->addHelpButton('adminsupportname', 'adminsupportname', 'modulecatalogue');
         
         //MOO-1888: Modified existing text box for adminsupport to hold email address and validation.
-        $options = ['size' => 80, 'maxlength' => 80, 'pattern'=>"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", 'title'=>"Please include the '@' in the e-Mail address."];
+        $options = ['size' => 80, 'maxlength' => 80, 'pattern'=>"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$", 'title'=>"Please include the '@' in the e-Mail address."];
         $mform->addElement('text', 'adminsupport', get_string('adminsupport', 'modulecatalogue'), $options);
         $mform->setType('adminsupport', core_user::get_property_type('email'));
         $mform->addHelpButton('adminsupport', 'adminsupport', 'modulecatalogue');
@@ -95,21 +95,24 @@ class mod_modulecatalogue_mod_form extends moodleform_mod {
                 1 => get_string('yes'),
             ); 
         
-        $mform->addElement('select', 'defaultcodes', get_string('defaultcodes', 'modulecatalogue'), $autopopulateoptions);
-        $mform->addHelpButton('defaultcodes', 'defaultcodes', 'modulecatalogue');
+       // $mform->addElement('select', 'defaultcodes', get_string('defaultcodes', 'modulecatalogue'), $autopopulateoptions);
+       // $mform->addHelpButton('defaultcodes', 'defaultcodes', 'modulecatalogue');
+        
         
         //MOO-1826 customize module code to prevent unwanted entries been entered and force users to enter right format;
         $str = 'autoupdate';
         $options = ['size' => 8, 'maxlength' => 8, 'pattern'=>"[A-Za-z]{2}[0-9A-Za-z]{3}[-]{1}[0-9]{1,2}", 'title'=>"Please enter the course code as in AANNN-NN", 'required']; //MOO-1983 removed space not needed
         $mform->addElement('text', 'modulecode', get_string('modulecode', 'modulecatalogue'), $options);
         $mform->addHelpButton('modulecode', 'modulecode', 'modulecatalogue');
-       
+        $mform->addRule('modulecode', null, 'required', null, 'modulecode');
+        
         //MOO-1826 Inserted options for default codes 
         
         $mform->setType('modulecode', PARAM_ALPHANUMEXT);
         //MOO-1813: New dropdown list box for user to enter academic year.
         $mform->addElement('select', 'academicyear', get_string('academicyear', 'modulecatalogue'), $ACADEMICYEAROPTIONS);      
         $mform->addHelpButton('academicyear', 'academicyear', 'modulecatalogue');
+        $mform->addRule('academicyear', null, 'required', null, 'academicyear');
         
         //Moo 2373 Modified to use default codes class 
 	if (((is_null($defaultCodes->moduleCode)) || (is_null($defaultCodes->academicYear))) || (!(isset($metadata)))){        
