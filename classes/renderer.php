@@ -137,10 +137,25 @@ class cataloguedata implements \templatable, \renderable {
             }
         }
         
+        if($k == 'outlineSyllabus'){
+            if (count(explode(('<br />'),$this->outlineSyllabus)) >= 6){
+                $this->outlineSyllabusQty = true;
+            } else{
+                $this->outlineSyllabusQty = false;
+            }
+        }
+               
+        if($k == 'indicativeReadingList'){
+            if(count(explode(('<br />'), $this->indicativeReadingList)) >= 6){
+                $this->indicativeReadingListQty = true;             
+            }
+            else{
+                $this->indicativeReadingListQty = false;
+            }
+        }
+        
     }
-    
-    //'alertmessage','urllink','alert', 
-    
+
     $this->template = $template;
   }
 
@@ -152,7 +167,7 @@ class cataloguedata implements \templatable, \renderable {
       
       $alertmessage = get_config('mod_modulecatalogue', 'alertinformation');
       $applyAlert = get_config('mod_modulecatalogue', 'applyAlert');
-      $all_urls = "";   //MOO-1983 initialize URL link extracted field.
+     // $all_urls = "";   //MOO-1983 initialize URL link extracted field.
       
     $data = array(
         'principal_aims' => explode(($delimiter), $this->aims),
@@ -168,11 +183,13 @@ class cataloguedata implements \templatable, \renderable {
         'leaderemail' => $this->leaderemail,
         'locationname' => $this->locationname,
         'url' => $this->url,
-        'outlineSyllabus' => array_slice(explode(($delimiter), $this->outlineSyllabus), 4),
-        'outlineSyllabusShort' => array_slice(explode(($delimiter), $this->outlineSyllabus), 0, 4),
+        'outlineSyllabus' => array_slice(explode(($delimiter), $this->outlineSyllabus), 6),
+        'outlineSyllabusShort' => array_slice(explode(($delimiter), $this->outlineSyllabus), 0, 6),
+        'outlineSyllabusQty' => $this->outlineSyllabusQty,
+        'indicativeReadingListQty' => $this->indicativeReadingListQty,
         /*MOO-2143 Indicative reading list fix to implement as expanding button*/
-        'indicativeReadingList' => array_slice(explode(($delimiter), $this->indicativeReadingList), 4),
-        'indicativeReadingListSummary' => array_slice(explode(($delimiter), $this->indicativeReadingList), 0, 4),
+        'indicativeReadingList' => array_slice(explode(($delimiter), $this->indicativeReadingList), 6),
+        'indicativeReadingListSummary' => array_slice(explode(($delimiter), $this->indicativeReadingList), 0, 6),
         
         'readingListUrl' => $this->readingListUrl,
         'introductoryDescription' => explode(($delimiter), $this->introductoryDescription),
@@ -188,7 +205,7 @@ class cataloguedata implements \templatable, \renderable {
         
         /*MOO-1983 Added alert message, alert and urlink */
         'alertmessage' => explode(($delimiter), $this->alertmessage), 
-        'urllink' => $all_urls,
+        'urllink' => $this->urllink,
         'alert' => $applyAlert,
         'catalogueurl' => $this->catalogueurl,
         /*MOO-1983 added duration, transferableskills, and exam weighting not added previously*/
@@ -248,7 +265,7 @@ class cataloguedata implements \templatable, \renderable {
         'isCoreOptionListD' => $this->isCoreOptionListD,
         'OptionListG' => unserialize($this->OptionListG),
         'isOptionListG' => unserialize($this->OptionListG),
-    );  
+    );
     
     return $data;
     

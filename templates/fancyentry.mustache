@@ -1,6 +1,56 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
+<style>
+@media screen and (min-width: 500px){
+      
+    .nav-tabs .nav-link {
+        color: white;
+    }
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr {
+			display: block;
+		}
+
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+
+    		tr {
+      			margin: 0 0 1rem 0;
+    		}
+      
+    		tr:nth-child(odd) {
+      			background: #ccc;
+    		}
+    
+		td {
+			/* Behave  like a "row" */
+			border: none;
+			position: relative;
+			padding-left: 50%;
+		}
+
+		td:before {
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 0;
+			left: 6px;
+			width: 45%;
+			padding-right: 10px;
+			white-space: nowrap;
+		}	
+	}
+</style>
+
 <body>
 <div id="allwmshead" class="wms-head-cll background-set" >
     <div id="head-temp-container" class="rounded"  >
@@ -12,13 +62,13 @@
                         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false" tabindex="-1">Description</a>
+                        <a class="nav-link " id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false" tabindex="-1">Description</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false" tabindex="-1">Assessment / Study Requirements</a>
+                        <a class="nav-link " id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false" tabindex="-1">Assessment / Study Requirements</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
+                        <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
                     </li>
                     
                 </ul>
@@ -26,9 +76,12 @@
                     <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
                         <div id="wmshead-content" class="p-3 p-md-4 view">                          
-                            {{#alert}} <div class="alertinformation">{{#alertmessage}}<i class="fa fa-info-circle"> &nbsp </i>{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a></div>{{/alert}}
-                            <p class='urllinks'>See Module Catalogue  <a href='{{catalogueurl }}'>{{catalogueurl}}</a></p>
+                            {{#alert}}<div class="alertinformation">
+                                {{#alertmessage}}<i class="fa fa-info-circle"> &nbsp </i>{{.}}{{/alertmessage}} <a class="alertlink" href= {{ urllink }} > {{ urllink }} </a> 
+                                </div>{{/alert}}
+
                             <h2 class="course-cde">{{ code }}: {{ name }}</h2>
+                            <p class='urllinks'> <a href= '{{catalogueurl }}'>See full module catalogue entry </a></p>
                             <hr>
                                                       
                             <div class="container-fluid">
@@ -71,10 +124,7 @@
                                                 <div class="column leftcol">Location:</div>
                                                 <div class="column rightcol">{{locationname}}</div>
                                             </div>
-                                            {{#url}}<div class="row">
-                                                <div class="column leftcol">Course URL:</div>
-                                                <div class="column rightcol"><a href='{{ url }}'>{{url}}</a></div>
-                                            </div>{{/url}}
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +153,7 @@
                                         <div class="card-body">
                                             <p class="display-5 bolded">Module Aims</p>
                                                 <div class="indented">
-                                                    {{#principal_aims}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/principal_aims}}
+                                                    {{#principal_aims}} <p class="paragraph-list"> {{.}} </p> {{/principal_aims}}
                                                 </div>
                                         </div>
                                     </div>
@@ -142,14 +192,11 @@
                                         <div class="card-body">
                                             <p class="display-5 bolded">Indicative Reading List</p>
                                             <div class="indented">
-                                                <article>
-                                                    <div class="indented">{{#indicativeReadingListSummary}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingListSummary}}</div>
-                                                    <input id="{{id4}}" class="read-more-toggle" type="checkbox">
-                                                    <div class="read-more-content">
-                                                        <div class="indented">{{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</div>
-                                                    </div>
-                                                </article>
-                                                <label class="read-more-toggle-label" for="{{id4}}">Read </label>
+                                                <input type="checkbox" class="read-more-state" id="{{id4}}">
+                                                    <div class="read-more-wrap " style="text-align: left"> {{#indicativeReadingListSummary}} <p class='paragraph-list bulletlist'>{{.}}</p> {{/indicativeReadingListSummary}}
+                                                    <span class="read-more-target"> {{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</span>
+                                                </div>
+                                                {{#indicativeReadingListQty}}<label for="{{id4}}" class="read-more-trigger"></label>{{/indicativeReadingListQty}}
                                                 <div class="italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
                                             </div>
                                         </div>
@@ -169,7 +216,7 @@
                                         <div class="card-body">
                                             <p class="display-5 bolded">Subject Specific Skills</p>
                                             <div class="indented">
-                                                <div class="indented">{{#subjectSpecificSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/subjectSpecificSkills}}</div>
+                                                <div class="indented">{{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +234,7 @@
                                         <div class="card-body">
                                             <p class="display-5 bolded">Transferable Skills</p>
                                             <div class="indented">
-                                                <div class="indented">{{#transferableSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/transferableSkills}}</div>
+                                                <div class="indented">{{#transferableSkills}} <p class="paragraph-list"> {{.}} </p> {{/transferableSkills}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -331,19 +378,19 @@
                                 <div class="indented">
                                 <table class="fancy-table">
                                     <tr>
-                                        <td class="bolded"> Course Tutor: </td>
+                                        <td class="bolded"> Module leader: </td>
                                             <td class="italized">{{ leadername }} </td>
                                         </tr>
                                         <tr>
-                                            <td class="bolded"> Course Tutor e_Mail address:</td>
+                                            <td class="bolded"> Module leader email:</td>
                                             <td class="italized"> <a href="mailto:{{ leaderemail }}"> {{ leaderemail }} </a> </td>
                                         </tr>
                                         {{#adminname}}<tr>
-                                            <td class="bolded"> Student Administrator Name:  </td>
+                                            <td class="bolded"> Course contact:  </td>
                                             <td class="italized"> {{adminname}} </td>
                                         </tr>{{/adminname}}
                                         {{#adminemail}}<tr>
-                                            <td class="bolded">Student Administration e-Mail:  </td>
+                                            <td class="bolded">Course contact email:  </td>
                                             <td class="italized"> <a href="mailto:{{ adminemail }}">{{ adminemail }} </a> </td>
                                         </tr>{{/adminemail}}
                                         <tr>

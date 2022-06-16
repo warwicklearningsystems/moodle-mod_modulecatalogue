@@ -1,8 +1,46 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
 </head>
+
+<style>
+
+@media only screen and (max-width: 500px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr {
+             display: block;
+	}
+
+        .fancy-table {
+            width: 190px;
+        }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+	}
+
+    	tr {
+            margin: 0 0 1rem 0;
+    	}
+      
+    	tr:nth-child(odd) {
+            background: #ccc;
+    	}
+    
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            position: relative;
+	}
+
+			
+}
+</style>
    
-<div id="allwmshead" class="wms-head-cll">
+<div id="allwmshead" class="wms-head-cll rounded">
     <div id="wmshead-content" class="p-3 p-md-4 view">
         <div id="head-temp-container" class="standard_rounded">
             {{#alert}}<div class="alertinformation">
@@ -10,14 +48,13 @@
             </div>{{/alert}}
 
             
-            <h4 class="display-5">{{ code }}: {{ name }}</h3>
-            <p class='urllinks'>See Module Catalogue  <a href='{{catalogueurl }}'>{{catalogueurl}}</a></p>
+            <h2 class="course-cde">{{ code }}: {{ name }}</h2>
+            <p class='urllinks'> <a href= '{{catalogueurl }}'>See full module catalogue entry </a></p>
+            <hr>
 
             <h5 class="display-5"> Number of Credits: {{ creditValue }}</h5>
             <h5 class="display-5"> Academic Year:  {{ academicyear }}</h5>
-            
-            <hr>           
-
+                                
             <div class="accordion-toggle" id="accordionEx" role="tablist" aria-multiselectable="true">
                 <!-- Accordion card -->
                 
@@ -33,7 +70,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Module Aims</p>
                             <div class="indented">
-                                {{#principal_aims}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/principal_aims}}
+                                {{#principal_aims}} <p class="paragraph-list"> {{.}} </p> {{/principal_aims}}
                             </div>
                         </div>
                     </div>
@@ -65,8 +102,7 @@
                                     <td> {{ requiredDescription }} </td>
                                     <td> {{ requiredDuration }}</td>
                                 </tr>{{/studyAmounts}}
-                            
-                            
+                                                       
                                 <tfoot>
                                     <tr>
                                         <td> Total Study Hours </td>
@@ -81,28 +117,28 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card">
-                        <div class="card-header" role="tab" id="heading3">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id3}}" aria-expanded="false" aria-controls="{{id3}}">
-                                <h6 class="mb-0">
+                <div class="card">
+                    <div class="card-header" role="tab" id="heading3">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#{{id3}}" aria-expanded="false" aria-controls="{{id3}}">
+                            <h6 class="mb-0">
                                 Outline Syllabus <i class="fa fa-chevron-down pull-right"></i>
-                                </h6>
-                            </a>
-                        </div>
+                            </h6>
+                        </a>
+                    </div>
                     <div id="{{id3}}" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx">
                         <div class="card-body">
                             <p class="display-5 bolded">Outline Syllabus</p>
                             <div class="indented">
                                 <p> This is an indicative module outline only to give an indication of the sort of topics that may be covered. Actual sessions held may differ:</p>
-                                <article>
-                                    <div class="indented">{{#outlineSyllabusShort}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabusShort}}</div>
-                                        <input id="{{id4}}" class="read-more-toggle" type="checkbox">
-                                        <div class="read-more-content">
-                                        <div class="indented">{{#outlineSyllabus}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/outlineSyllabus}}</div>
+                                <div class="indented">
+                                 <input type="checkbox" class="read-more-state" id="{{id4}}">
+                                    <div class="read-more-wrap " style="text-align: left"> {{#outlineSyllabusShort}} <p class='paragraph-list'>{{.}}</p> {{/outlineSyllabusShort}}
+                                        <span class="read-more-target"> {{#outlineSyllabus}} <p class="paragraph-list"> {{.}} </p> {{/outlineSyllabus}}</span>
                                     </div>
-                                </article>
-                                <label class="read-more-toggle-label" for="{{id4}}">Read </label>
+                                    {{#outlineSyllabusQty}}<label for="{{id4}}" class="read-more-trigger"></label>{{/outlineSyllabusQty}}
+                                </div>                            
                             </div>
                         </div>
                     </div>
@@ -120,7 +156,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Subject Specific Skills</p>
                             <div class="indented">
-                                {{#subjectSpecificSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/subjectSpecificSkills}}
+                                {{#subjectSpecificSkills}} <p class="paragraph-list"> {{.}} </p> {{/subjectSpecificSkills}}
                             </div>
                         </div>
                     </div>
@@ -146,7 +182,7 @@
                                         <div class="indented">{{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</div>
                                     </div>
                                 </article>
-                                <label class="read-more-toggle-label" for="{{id7}}">Read </label>
+                                {{#indicativeReadingListQty}}<label class="read-more-toggle-label" for="{{id7}}">Read </label>{{/indicativeReadingListQty}}
                                 <div class="italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
                             </div>
                         </div>
@@ -483,7 +519,7 @@
                         <div class="card-body">
                             <p class="display-5 bolded">Transferable Skills</p>
                             <div class="indented">
-                                <div class="indented">{{#transferableSkills}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/transferableSkills}}</div>
+                                <div class="indented">{{#transferableSkills}} <p class="paragraph-list"> {{.}} </p> {{/transferableSkills}}</div>
                             </div>
                         </div>
                     </div>
