@@ -345,7 +345,7 @@ function modulecatalogue_get_coursemodule_info($coursemodule) {
       
                
         if($modulecode != '') {
-
+            $modulecode = strtoupper($modulecode);
           // Get data from API and store
           get_modulecatalogue_data($modulecode, $academicyear, $adminname, $adminemail);
 
