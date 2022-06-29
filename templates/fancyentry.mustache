@@ -7,7 +7,9 @@
     .nav-tabs .nav-link {
         color: white;
     }
+
 }
+
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
 
@@ -62,13 +64,13 @@
                         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false" tabindex="-1">Description</a>
+                        <a class="nav-link" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-selected="false" tabindex="-1">Description</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false" tabindex="-1">Assessment / Study Requirements</a>
+                        <a class="nav-link" id="pills-Assessment-tab" data-toggle="pill" href="#pills-Assessment" role="tab" aria-controls="pills-Assessment" aria-selected="false" tabindex="-1">Assessment / Study Requirements</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Contacts</a>
                     </li>
                     
                 </ul>
@@ -197,7 +199,7 @@
                                                     <span class="read-more-target"> {{#indicativeReadingList}} <p class="paragraph-list bulletlist"> {{.}} </p> {{/indicativeReadingList}}</span>
                                                 </div>
                                                 {{#indicativeReadingListQty}}<label for="{{id4}}" class="read-more-trigger"></label>{{/indicativeReadingListQty}}
-                                                <div class="italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>
+                                                {{#readingListUrl}}<div class="italized"><a href='{{ readingListUrl }}'>View reading list on Talis Aspire</a></div>{{/readingListUrl}}
                                             </div>
                                         </div>
                                     </div>

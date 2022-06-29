@@ -239,8 +239,7 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                */
               if (($k == "outlineSyllabus") || ($k == "indicativeReadingList") || ($k == "aims") || ($k == "transferableSkills") || ($k == "introductoryDescription") || ($k == "subjectSpecificSkills") || ($k == "privateStudyDescription")){
                   
-                  if ((!(is_null($v))) && (strlen($v) >= 2)){  /* MOO 2019 remove any null values */
-                      
+                  if ((!(is_null($v))) && (strlen($v) >= 2)){  /* MOO 2019 remove any null values */                      
                       $value = implode('<br />', expand_array($v));
                       write_to_database($k, $value, $modulecode, $academicyear);                     
                   } else{
@@ -251,7 +250,6 @@ function get_modulecatalogue_data($modulecode, $academicyear, $adminname, $admin
                   write_to_database($k, $v, $modulecode, $academicyear);
               }    
           }
-
         }
       }
     }

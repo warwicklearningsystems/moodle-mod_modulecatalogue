@@ -146,7 +146,7 @@ class cataloguedata implements \templatable, \renderable {
         }
                
         if($k == 'indicativeReadingList'){
-            if(count(explode(('<br />'), $this->indicativeReadingList)) >= 6){
+            if(count(explode(('<br />'), $this->indicativeReadingList)) > 6){
                 $this->indicativeReadingListQty = true;             
             }
             else{

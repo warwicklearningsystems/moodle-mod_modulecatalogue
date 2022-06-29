@@ -54,7 +54,7 @@ $string['adminsupportname'] = 'Course support contact';
 $string['adminsupportname_help'] = 'Please enter name of the appropriate support contact staff or team';
 
 $string['template'] = 'Template';
-$string['template_help'] = 'Please select which template to use, depending on the amount of information required: <br /> Official Module is a complete breakdown of course information <bR /> Short Module only provides assessment information and outline syllabus <br> catalogue entry only contains a summary of the catalogue <br />  Tabbed entry provides information arranged in 4 different sections or tabs';
+$string['template_help'] = 'Please select which template to use, depending on the amount of information required: <br />  "Tabbed summary" provides most information arranged neatly in 4 different sections or tabs <br /> "Full collapsed Summary" is a complete breakdown of course information <bR /> "Short collapsed summary" is a summary of the full, providing assessment information and outline syllabus ';
 $string['academicyear'] = 'Academic Year'; //MOO-1813 Added legend for dropdown list box in parameter entry screen
 $string['academicyear_help'] = 'Please select Academic Year from the list. <br /> Default will be current academic year';
 
