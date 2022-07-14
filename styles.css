@@ -17,7 +17,7 @@ and open the template in the editor.
     border-right: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem!important;
     margin-bottom:6px;
-    width: 55vw;
+    width: 50vw;
     background-color: transparent;
 }
 
@@ -276,21 +276,16 @@ and open the template in the editor.
 .leftcol {
     color: navy;
     font-weight: bold;
-    width: 40%
+    width: 40%;
 }
 
 .font_large{
     font-size: 15px;
 }
 
-.textcolumn{
-    padding-left: 30px; 
-    padding-right: 30px
-}
-
 .rightcol{
     font-style: italic;
-    width: 60%
+    width: 60%;
 }
 
 /* Clear floats after the columns */
@@ -320,7 +315,6 @@ and open the template in the editor.
     background-color: #def2f8;
 }
 
-
 @media screen and (max-width: 500px) {
     
   .fancy-table {
@@ -329,10 +323,11 @@ and open the template in the editor.
       overflow-x: scroll;
   }
   .indented{padding-left: 2px;}
-  
+   
   .column {
-        width: 80%;
+        width: 48vw;
         word-wrap: break-word;
+        margin-left: 10px;
     }
       
     .fancy-table th {
@@ -349,6 +344,13 @@ and open the template in the editor.
         text-align: left;
         background-color:#e2f3fb;
         color: darkblue;
+    }
+    
+    .leftcol{
+        font-size: small;
+    }
+    .rightcol{
+        font-size: small;
     }
 }
 
